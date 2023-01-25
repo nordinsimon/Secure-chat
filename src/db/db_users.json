@@ -1,0 +1,22 @@
+[
+  {
+    "uuid": 1,
+    "username": "Peter",
+    "password": "password_Peter"
+  },
+  {
+    "uuid": 2,
+    "username": "Catarina",
+    "password": "password_Catarina"
+  },
+  {
+    "uuid": 3,
+    "username": "Elin",
+    "password": "password_Elin"
+  },
+  {
+    "uuid": 4,
+    "username": "Thea",
+    "password": "password_Thea"
+  }
+]

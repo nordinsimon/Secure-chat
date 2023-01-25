@@ -1,0 +1,46 @@
+[
+  {
+    "chanel_name": "Public",
+    "secure_status": "public",
+    "chat": [
+      {
+        "user": "Peter",
+        "message": "Hej",
+        "timestamp": "tid",
+        "ischanged": "no",
+        "iddeleted": "no",
+        "changedtime": ""
+      },
+      {
+        "user": "Catarina",
+        "message": "Hej på dej",
+        "timestamp": "tid",
+        "ischanged": "no",
+        "iddeleted": "no",
+        "changedtime": ""
+      }
+    ]
+  },
+  {
+    "chanel_name": "Private",
+    "secure_status": "private",
+    "chat": [
+      {
+        "user": "Peter",
+        "message": "Hemligt medelande",
+        "timestamp": "tid",
+        "ischanged": "no",
+        "iddeleted": "no",
+        "changedtime": ""
+      },
+      {
+        "user": "Catarina",
+        "message": "Superhemligt",
+        "timestamp": "tid",
+        "ischanged": "no",
+        "iddeleted": "no",
+        "changedtime": ""
+      }
+    ]
+  }
+]
