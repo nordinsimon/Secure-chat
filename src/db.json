@@ -1,0 +1,95 @@
+[
+  [
+    {
+      "nextuuid": 12
+    }
+  ],
+  [
+    {
+      "uuid": 1,
+      "username": "Peter",
+      "password": "password_Peter"
+    },
+    {
+      "uuid": 2,
+      "username": "Catarina",
+      "password": "password_Catarina"
+    },
+    {
+      "uuid": 3,
+      "username": "Elin",
+      "password": "password_Elin"
+    },
+    {
+      "uuid": 4,
+      "username": "Thea",
+      "password": "password_Thea"
+    },
+    {
+      "uuid": 8,
+      "username": "Simon",
+      "password": "Simonlösenord"
+    },
+    {
+      "uuid": 9,
+      "username": "Simon",
+      "password": "Simonlösenord"
+    },
+    {
+      "uuid": 10,
+      "username": "Simon",
+      "password": "Simonlösenord"
+    },
+    {
+      "uuid": 11,
+      "username": "Simon",
+      "password": "Simonlösenord"
+    }
+  ],
+  [
+    {
+      "chanel_name": "Public",
+      "secure_status": "public",
+      "chat": [
+        {
+          "user": "Peter",
+          "message": "Hej",
+          "timestamp": "tid",
+          "ischanged": "no",
+          "iddeleted": "no",
+          "changedtime": ""
+        },
+        {
+          "user": "Catarina",
+          "message": "Hej på dej",
+          "timestamp": "tid",
+          "ischanged": "no",
+          "iddeleted": "no",
+          "changedtime": ""
+        }
+      ]
+    },
+    {
+      "chanel_name": "Private",
+      "secure_status": "private",
+      "chat": [
+        {
+          "user": "Peter",
+          "message": "Hemligt medelande",
+          "timestamp": "tid",
+          "ischanged": "no",
+          "iddeleted": "no",
+          "changedtime": ""
+        },
+        {
+          "user": "Catarina",
+          "message": "Superhemligt",
+          "timestamp": "tid",
+          "ischanged": "no",
+          "iddeleted": "no",
+          "changedtime": ""
+        }
+      ]
+    }
+  ]
+]
