@@ -2,21 +2,21 @@
   {
     "uuid": 1,
     "username": "Peter",
-    "password": "password_Peter"
+    "password": "$2a$10$QI5DADycsSNMvGRDHZI3GeUy0I.i.xq8RK/p82QY2n7ywiDdCEHjC"
   },
   {
     "uuid": 2,
-    "username": "Catarina",
-    "password": "password_Catarina"
+    "username": "Ask",
+    "password": "$2a$10$QI5DADycsSNMvGRDHZI3GeodvmRvcbD2xOhNcPXpRsd.3keQpl.FC"
   },
   {
     "uuid": 3,
     "username": "Elin",
-    "password": "password_Elin"
+    "password": "$2a$10$QI5DADycsSNMvGRDHZI3Gej.c7s0wH9JEEXmH3BSjJnToywvUH6o6"
   },
   {
     "uuid": 4,
-    "username": "Thea",
-    "password": "password_Thea"
+    "username": "Rasmus",
+    "password": "$2a$10$QI5DADycsSNMvGRDHZI3GeNm60rIL9XF4c7iQpS4IMd1PBPERDN76"
   }
 ]

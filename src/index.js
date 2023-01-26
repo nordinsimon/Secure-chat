@@ -1,7 +1,7 @@
 import express from "express";
 import * as url from "url";
 import usersRoute from "./routes/users.js";
-import chanelsRoute from "./routes/chanels.js";
+import channelsRoute from "./routes/channels.js";
 
 // Konfiguration
 const app = express();
@@ -19,8 +19,8 @@ app.use(logger);
 app.use(express.static(staticPath));
 
 // Routes
-app.use("/api/users", usersRoute);
-app.use("/api/chanels", chanelsRoute);
+app.use("/api/users/", usersRoute);
+app.use("/api/channels/", channelsRoute);
 
 app.get("/", (req, res) => {
   let path = staticPath + "/index.html";
