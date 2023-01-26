@@ -4,7 +4,7 @@
     "secure_status": "public",
     "chat": [
       {
-        "user": "Peter",
+        "uuid": 1,
         "message": "Hej",
         "timestamp": "tid",
         "ischanged": "no",
@@ -12,7 +12,7 @@
         "changedtime": ""
       },
       {
-        "user": "Catarina",
+        "uuid": 3,
         "message": "Hej på dej",
         "timestamp": "tid",
         "ischanged": "no",
@@ -26,7 +26,7 @@
     "secure_status": "private",
     "chat": [
       {
-        "user": "Peter",
+        "uuid": 2,
         "message": "Hemligt medelande",
         "timestamp": "tid",
         "ischanged": "no",
@@ -34,7 +34,7 @@
         "changedtime": ""
       },
       {
-        "user": "Catarina",
+        "uuid": 4,
         "message": "Superhemligt",
         "timestamp": "tid",
         "ischanged": "no",
