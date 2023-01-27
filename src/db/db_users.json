@@ -18,10 +18,5 @@
     "uuid": 4,
     "username": "Rasmus",
     "password": "$2a$10$QI5DADycsSNMvGRDHZI3GeNm60rIL9XF4c7iQpS4IMd1PBPERDN76"
-  },
-  {
-    "uuid": 5,
-    "username": "Simon",
-    "password": "$2a$10$QI5DADycsSNMvGRDHZI3Ge30170XVZfywu3Dh5QqH24bNroNZrcxq"
   }
 ]
