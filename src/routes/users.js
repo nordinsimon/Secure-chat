@@ -36,14 +36,45 @@ router.get("/nextuuid/", (req, res) => {
 });
 
 router.post("/", (req, res) => {
-  if (usernameExists(req.body.username) !== false) {
+  const username = req.body.username;
+  const password = req.body.password;
+  if (
+    correctUsernameInput(username) === false ||
+    correctPasswordInput(password) === false ||
+    usernameExists(username) !== false
+  ) {
     res.sendStatus(400);
     return;
   }
-  addUser(req.body.username, req.body.password);
+  addUser(username, password);
   res.sendStatus(201);
 });
-
+function usernameExists(username) {
+  let findUser = db_users.data.findIndex((user) => user.username === username);
+  if (findUser >= 0) {
+    return findUser;
+  } else {
+    return false;
+  }
+}
+function correctUsernameInput(username) {
+  if (username === undefined) {
+    console.log("username is undefined");
+    return false;
+  } else {
+    console.log("correctUsernameInput");
+    return true;
+  }
+}
+function correctPasswordInput(password) {
+  if (password === undefined) {
+    console.log("password is undefined");
+    return false;
+  } else {
+    console.log("correctPasswordInput");
+    return true;
+  }
+}
 async function addUser(name, password) {
   let nextuuid = db_nextUuId.data.nextuuid++;
   let hashedPassword = bcrypt.hashSync(password, SALT);
@@ -54,15 +85,6 @@ async function addUser(name, password) {
   });
   await db_nextUuId.write();
   await db_users.write();
-}
-
-function usernameExists(username) {
-  let findUser = db_users.data.findIndex((user) => user.username === username);
-  if (findUser >= 0) {
-    return findUser;
-  } else {
-    return false;
-  }
 }
 
 export default router;

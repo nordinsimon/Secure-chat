@@ -5,22 +5,6 @@
     "channelid": 1,
     "chat": [
       {
-        "uuid": 1,
-        "message": "Hejfrgwepådig",
-        "timestamp": "tid",
-        "ischanged": "yes",
-        "iddeleted": "no",
-        "changedtime": "2023-01-27T02:18:13.213Z"
-      },
-      {
-        "uuid": 3,
-        "message": "Hej på dej",
-        "timestamp": "tid",
-        "ischanged": "no",
-        "iddeleted": "no",
-        "changedtime": ""
-      },
-      {
         "messageid": 1,
         "uuid": 4,
         "message": "Message DELETED",
