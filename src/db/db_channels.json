@@ -2,6 +2,7 @@
   {
     "chanel_name": "Public",
     "secure_status": "public",
+    "channelid": 1,
     "chat": [
       {
         "uuid": 1,
@@ -28,12 +29,29 @@
         "changedtime": "2023-01-27T02:40:17.457Z",
         "isdeleted": "yes",
         "deletedtime": "2023-01-27T02:41:05.116Z"
+      },
+      {
+        "messageid": 2,
+        "uuid": 4,
+        "message": "Message DELETED",
+        "timestamp": "2023-01-27T02:51:18.697Z",
+        "ischanged": "yes",
+        "changedtime": "2023-01-27T02:51:32.485Z",
+        "isdeleted": "yes",
+        "deletedtime": "2023-01-27T02:51:40.574Z"
+      },
+      {
+        "messageid": 3,
+        "uuid": 5,
+        "message": "Hej",
+        "timestamp": "2023-01-27T03:30:32.692Z"
       }
     ]
   },
   {
     "chanel_name": "Private",
     "secure_status": "private",
+    "channelid": 2,
     "chat": [
       {
         "uuid": 2,

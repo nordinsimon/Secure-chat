@@ -21,14 +21,15 @@ const file3 = join(__dirname, "../db/db_nextmessageid.json");
 const adapter3 = new JSONFile(file3);
 const db_nextMessageId = new Low(adapter3);
 
+const file4 = join(__dirname, "../db/db_nextchannelid.json");
+const adapter4 = new JSONFile(file4);
+const db_nextChannelId = new Low(adapter4);
+
 const router = express.Router();
 await db_users.read(), db_channels.read(), db_nextMessageId.read();
 
 router.get("/", (req, res) => {
   res.status(200).send(db_channels.data);
-});
-router.get("/users/", (req, res) => {
-  res.status(200).send(db_users.data);
 });
 
 router.post("/", (req, res) => {
@@ -79,6 +80,19 @@ router.delete("/", (req, res) => {
 
   deleteMessage(channelIndex, messageid, uuid);
   res.status(200).send(db_channels.data);
+});
+
+router.post("/newchannel/", (req, res) => {
+  const newChannelName = req.body.new_channel_name;
+  const uuid = req.body.uuid;
+  const message = req.body.message;
+  console.log("new channel name", newChannelName);
+  console.log(chanelExists(newChannelName));
+  if (chanelExists(newChannelName) === false && newChannelName !== undefined) {
+    res.status(200).send(db_channels.data);
+  } else {
+    res.sendStatus(400);
+  }
 });
 
 //

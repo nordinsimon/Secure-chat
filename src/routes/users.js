@@ -5,7 +5,6 @@ import { fileURLToPath } from "url";
 import { Low } from "lowdb";
 import { JSONFile } from "lowdb/node";
 import * as dotenv from "dotenv";
-import { question } from "readline-sync";
 import bcrypt from "bcryptjs";
 
 //Creates links to database
