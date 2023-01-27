@@ -1,6 +1,6 @@
 [
   {
-    "chanel_name": "Public",
+    "channel_name": "Public",
     "secure_status": "public",
     "channelid": 1,
     "chat": [
@@ -38,18 +38,59 @@
         "ischanged": "yes",
         "changedtime": "2023-01-27T02:51:32.485Z",
         "isdeleted": "yes",
-        "deletedtime": "2023-01-27T02:51:40.574Z"
+        "deletedtime": "2023-01-27T15:59:18.768Z"
       },
       {
         "messageid": 3,
-        "uuid": 5,
+        "uuid": 4,
+        "message": "Hejpf.   årfasrtbsrbtrsdig",
+        "timestamp": "2023-01-27T03:30:32.692Z",
+        "ischanged": "yes",
+        "changedtime": "2023-01-27T16:52:56.723Z"
+      },
+      {
+        "messageid": 4,
+        "uuid": 3,
+        "message": "Message DELETED",
+        "timestamp": "2023-01-27T14:57:42.347Z",
+        "isdeleted": "yes",
+        "deletedtime": "2023-01-27T16:13:12.831Z"
+      },
+      {
+        "messageid": 5,
+        "uuid": 2,
+        "message": "Message DELETED",
+        "timestamp": "2023-01-27T14:58:08.376Z",
+        "isdeleted": "yes",
+        "deletedtime": "2023-01-27T16:50:36.336Z"
+      },
+      {
+        "messageid": 6,
+        "uuid": 1,
         "message": "Hej",
-        "timestamp": "2023-01-27T03:30:32.692Z"
+        "timestamp": "2023-01-27T14:58:23.596Z"
+      },
+      {
+        "messageid": 7,
+        "uuid": 4,
+        "message": "Hej",
+        "timestamp": "2023-01-27T14:58:34.124Z"
+      },
+      {
+        "messageid": 8,
+        "uuid": 2,
+        "timestamp": "2023-01-27T15:15:48.882Z"
+      },
+      {
+        "messageid": 9,
+        "uuid": 2,
+        "message": "Hdhej",
+        "timestamp": "2023-01-27T15:18:48.268Z"
       }
     ]
   },
   {
-    "chanel_name": "Private",
+    "channel_name": "Private",
     "secure_status": "private",
     "channelid": 2,
     "chat": [

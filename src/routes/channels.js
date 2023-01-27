@@ -1,4 +1,4 @@
-//CHANEL API
+//CHANNEL API
 import express from "express";
 import { join, dirname } from "path";
 import { fileURLToPath } from "url";
@@ -33,52 +33,85 @@ router.get("/", (req, res) => {
 });
 
 router.post("/", (req, res) => {
-  const channelName = req.body.chanel_name;
-  const channelIndex = chanelExists(channelName);
+  const channelName = req.body.channel_name;
+  const channelIndex = channelExists(channelName);
   const uuid = req.body.uuid;
   const message = req.body.message;
 
-  if (exists(channelName, uuid) === false) {
+  if (
+    correctChannelInput(channelName) === false ||
+    correctUuidInput(uuid) === false ||
+    correctMessageInput(message) == false ||
+    channelExists(channelName) === false ||
+    userExists(uuid) === false
+  ) {
     res.sendStatus(400);
+    return;
   }
+
   addMessageToChannel(channelIndex, uuid, message);
   res.status(201).send(db_channels.data);
 });
 
 router.put("/", (req, res) => {
-  const channelName = req.body.chanel_name;
-  const channelIndex = chanelExists(channelName);
+  const channelName = req.body.channel_name;
   const uuid = req.body.uuid;
   const messageid = req.body.messageid;
   const newMessage = req.body.newMessage;
 
   if (
-    exists(channelName, uuid) === false ||
-    messageidExists(channelIndex, messageid) === false
+    correctChannelInput(channelName) === false ||
+    correctUuidInput(uuid) === false ||
+    correctMessageIdInput(messageid) === false ||
+    correctNewMessageInput(newMessage) === false ||
+    channelExists(channelName) === false ||
+    userExists(uuid) === false
   ) {
     res.sendStatus(400);
     return;
   }
+  const channelIndex = channelExists(channelName);
+  if (messageidExists(channelIndex, messageid) === false) {
+    res.sendStatus(400);
+    return;
+  }
+  const chatIndex = messageidExists(channelIndex, messageid);
+  if (isUuidEqual(channelIndex, chatIndex, uuid) === false) {
+    res.sendStatus(401);
+    return;
+  }
 
-  editMessage(channelIndex, messageid, uuid, newMessage);
+  editMessage(channelIndex, chatIndex, uuid, newMessage);
   res.status(200).send(db_channels.data);
 });
 
 router.delete("/", (req, res) => {
-  const channelName = req.body.chanel_name;
-  const channelIndex = chanelExists(channelName);
+  const channelName = req.body.channel_name;
   const uuid = req.body.uuid;
   const messageid = req.body.messageid;
 
   if (
-    exists(channelName, uuid) === false ||
-    messageidExists(channelIndex, messageid) === false
+    correctChannelInput(channelName) === false ||
+    correctUuidInput(uuid) === false ||
+    correctMessageIdInput(messageid) === false ||
+    channelExists(channelName) === false ||
+    userExists(uuid) === false
   ) {
     res.sendStatus(400);
     return;
   }
+  const channelIndex = channelExists(channelName);
+  if (messageidExists(channelIndex, messageid) === false) {
+    res.sendStatus(400);
+    return;
+  }
+  const chatIndex = messageidExists(channelIndex, messageid);
+  if (isUuidEqual(channelIndex, chatIndex, uuid) === false) {
+    res.sendStatus(401);
+    return;
+  }
 
-  deleteMessage(channelIndex, messageid, uuid);
+  deleteMessage(channelIndex, chatIndex, messageid, uuid);
   res.status(200).send(db_channels.data);
 });
 
@@ -87,8 +120,8 @@ router.post("/newchannel/", (req, res) => {
   const uuid = req.body.uuid;
   const message = req.body.message;
   console.log("new channel name", newChannelName);
-  console.log(chanelExists(newChannelName));
-  if (chanelExists(newChannelName) === false && newChannelName !== undefined) {
+  console.log(channelExists(newChannelName));
+  if (channelExists(newChannelName) === false && newChannelName !== undefined) {
     res.status(200).send(db_channels.data);
   } else {
     res.sendStatus(400);
@@ -98,14 +131,17 @@ router.post("/newchannel/", (req, res) => {
 //
 //
 //
+// FUNCTIONS :)))
 //
 //
-function chanelExists(channelname) {
-  let findChanel = db_channels.data.findIndex(
-    (channel) => channel.chanel_name === channelname
+//
+function channelExists(channelname) {
+  let findchannel = db_channels.data.findIndex(
+    (channel) => channel.channel_name === channelname
   );
-  if (findChanel >= 0) {
-    return findChanel;
+  if (findchannel >= 0) {
+    console.log("channelExists");
+    return findchannel;
   } else {
     return false;
   }
@@ -113,8 +149,10 @@ function chanelExists(channelname) {
 function userExists(uuid) {
   let findUser = db_users.data.findIndex((user) => user.uuid === uuid);
   if (findUser >= 0) {
+    console.log("uuidExists");
     return findUser;
   } else {
+    console.log("User does not exists");
     return false;
   }
 }
@@ -123,21 +161,67 @@ function messageidExists(channelIndex, messageid) {
     (chat) => chat.messageid === messageid
   );
   if (chatIndex >= 0) {
+    console.log("messageidExists");
     return chatIndex;
   } else {
     console.log("Messageid does not exists");
     return false;
   }
 }
-function exists(channelName, uuid) {
-  if (chanelExists(channelName) === false) {
-    console.log("Chanel does not exists");
+function correctChannelInput(channelName) {
+  if (channelName === undefined) {
+    console.log("Channel is undefined");
     return false;
-  } else if (userExists(uuid) === false) {
-    console.log("User does not exists");
-    return false;
+  } else {
+    console.log("correctChannelInput");
+    return true;
   }
-  return true;
+}
+function correctUuidInput(uuid) {
+  if (uuid === undefined) {
+    console.log("uuid is undefined");
+    return false;
+  } else {
+    console.log("correctUuidInput");
+    return true;
+  }
+}
+function correctMessageIdInput(messageid) {
+  if (messageid === undefined) {
+    console.log("messageid is undefined");
+    return false;
+  } else {
+    console.log("correctMessageIdInput");
+    return true;
+  }
+}
+function correctMessageInput(message) {
+  if (message === undefined) {
+    console.log("Message is undefined");
+    return false;
+  } else {
+    console.log("correctMessageInput");
+    return true;
+  }
+}
+function correctNewMessageInput(newMessage) {
+  if (newMessage === undefined) {
+    console.log("NewMessage is undefined");
+    return false;
+  } else {
+    console.log("correctNewMessageInput");
+    return true;
+  }
+}
+function isUuidEqual(channelIndex, chatIndex, uuid) {
+  let uuidOnMessage = db_channels.data[channelIndex].chat[chatIndex].uuid;
+  console.log("uuidOnMessage", uuidOnMessage);
+  if (uuidOnMessage !== uuid) {
+    console.log("uuid is not equal");
+    return false;
+  } else {
+    return true;
+  }
 }
 
 async function addMessageToChannel(channelIndex, uuid, message) {
@@ -150,9 +234,7 @@ async function addMessageToChannel(channelIndex, uuid, message) {
   });
   await db_channels.write(), db_nextMessageId.write();
 }
-async function editMessage(channelIndex, messageid, uuid, newmessage) {
-  const chatIndex = messageidExists(channelIndex, messageid);
-
+async function editMessage(channelIndex, chatIndex, uuid, newmessage) {
   const db = db_channels.data[channelIndex].chat[chatIndex];
   db.message = newmessage;
   db.ischanged = "yes";
@@ -160,9 +242,7 @@ async function editMessage(channelIndex, messageid, uuid, newmessage) {
 
   await db_channels.write();
 }
-async function deleteMessage(channelIndex, messageid, uuid) {
-  const chatIndex = messageidExists(channelIndex, messageid);
-
+async function deleteMessage(channelIndex, chatIndex, uuid) {
   const db = db_channels.data[channelIndex].chat[chatIndex];
   db.message = "Message DELETED";
   db.isdeleted = "yes";
