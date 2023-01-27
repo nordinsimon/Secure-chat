@@ -26,7 +26,10 @@ const adapter4 = new JSONFile(file4);
 const db_nextChannelId = new Low(adapter4);
 
 const router = express.Router();
-await db_users.read(), db_channels.read(), db_nextMessageId.read();
+await db_users.read(),
+  db_channels.read(),
+  db_nextMessageId.read(),
+  db_nextChannelId.read();
 
 router.get("/", (req, res) => {
   res.status(200).send(db_channels.data);
@@ -117,14 +120,18 @@ router.delete("/", (req, res) => {
 
 router.post("/newchannel/", (req, res) => {
   const newChannelName = req.body.new_channel_name;
-  const uuid = req.body.uuid;
-  const message = req.body.message;
-  console.log("new channel name", newChannelName);
-  console.log(channelExists(newChannelName));
-  if (channelExists(newChannelName) === false && newChannelName !== undefined) {
-    res.status(200).send(db_channels.data);
-  } else {
+  const secureStatus = req.body.secure_status;
+
+  if (
+    correctNewChannelName(newChannelName) === false ||
+    correctSecureStatusInput(secureStatus) === false ||
+    isValidSecureChatStatus(secureStatus) === false ||
+    channelExists(newChannelName) !== false
+  ) {
     res.sendStatus(400);
+  } else {
+    addNewChannel(newChannelName, secureStatus);
+    res.sendStatus(201).send(db_channels.data);
   }
 });
 
@@ -213,6 +220,24 @@ function correctNewMessageInput(newMessage) {
     return true;
   }
 }
+function correctNewChannelName(newChannelName) {
+  if (newChannelName === undefined) {
+    console.log("newChannelName is undefined");
+    return false;
+  } else {
+    console.log("correctNewChannelName");
+    return true;
+  }
+}
+function correctSecureStatusInput(status) {
+  if (status === undefined) {
+    console.log("Secure status is undefined");
+    return false;
+  } else {
+    console.log("correctSecureStatusInput");
+    return true;
+  }
+}
 function isUuidEqual(channelIndex, chatIndex, uuid) {
   let uuidOnMessage = db_channels.data[channelIndex].chat[chatIndex].uuid;
   console.log("uuidOnMessage", uuidOnMessage);
@@ -222,6 +247,14 @@ function isUuidEqual(channelIndex, chatIndex, uuid) {
   } else {
     return true;
   }
+}
+function isValidSecureChatStatus(status) {
+  if (status === "public" || status === "private") {
+    console.log("isValidSecureChatStatus");
+    return true;
+  }
+  console.log("Secure status incorrect value");
+  return false;
 }
 
 async function addMessageToChannel(channelIndex, uuid, message) {
@@ -249,6 +282,17 @@ async function deleteMessage(channelIndex, chatIndex, uuid) {
   db.deletedtime = new Date();
 
   await db_channels.write();
+}
+async function addNewChannel(chanelName, secureStatus) {
+  let nextchannelID = db_nextChannelId.data.nextchannelid++;
+
+  db_channels.data.push({
+    channel_name: chanelName,
+    secure_status: secureStatus,
+    channelid: nextchannelID,
+    chat: [],
+  });
+  await db_channels.write(), db_nextChannelId.write();
 }
 
 //
