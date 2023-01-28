@@ -4,10 +4,65 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
     <title>Secure Chat</title>
   </head>
   <body>
-    <h1>Secure Chat</h1>
-    <p>Säker Chat</p>
+    <header>
+      <h1>Secure Chat</h1>
+      <div class="auth_user">
+        <div class="auth_input">
+          <input id="auth-username" type="text" placeholder="Username" />
+          <input id="auth-password" type="password" placeholder="Password" />
+        </div>
+        <button id="auth-signin" class="auth_button">Sign in</button>
+      </div>
+    </header>
+    <main class="dark">
+      <div class="left">
+        <div class="heading">Channels</div>
+        <div>welcome</div>
+        <div class="selected">animal facts</div>
+        <div>🔓 work</div>
+        <div>random</div>
+
+        <div class="separator"></div>
+
+        <div class="auth">
+          Signed in as:
+          <div class="profile">
+            <div class="avatar"></div>
+            Edgar Djikstra
+          </div>
+          <button>Sign out</button>
+          Welcome, guest
+          <input type="text" value="Edgar Djikstra" />
+          <input type="password" value="1234" />
+          <button>Sign in</button>
+        </div>
+      </div>
+
+      <div class="right">
+        <div class="right-heading">animal facts</div>
+        <div class="message-list framed">
+          <div class="message one framed">Giraffer är fascinerande djur</div>
+          <div class="message two framed">
+            Visste du att giraffer kan bli 6 meter höga?
+          </div>
+          <div class="message one framed">Wow</div>
+          <div class="message one framed">Det är högt</div>
+          <div class="message three framed">
+            Varför pratar ingen om tvättbjörnar??
+          </div>
+        </div>
+
+        <div class="message-form">
+          <div class="avatar"></div>
+          <input type="text" value="Tvättbjörnar är underskattade" />
+          <button>Send</button>
+        </div>
+      </div>
+    </main>
   </body>
 </html>

@@ -1,4 +1,0 @@
-- Gör en funktion som kollar att användaren inte redan finns när man skapar en ny användare
-
--   Göra en funktion som ser till att inte servern 
-    krashar om man skickar fel format på json objektet

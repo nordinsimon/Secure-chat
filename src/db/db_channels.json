@@ -93,7 +93,23 @@
         "ischanged": "no",
         "iddeleted": "no",
         "changedtime": ""
+      },
+      {
+        "messageid": 10,
+        "uuid": 2,
+        "message": "Message DELETED",
+        "timestamp": "2023-01-27T18:30:44.892Z",
+        "ischanged": "yes",
+        "changedtime": "2023-01-27T18:31:25.511Z",
+        "isdeleted": "yes",
+        "deletedtime": "2023-01-27T18:31:50.431Z"
       }
     ]
+  },
+  {
+    "channel_name": "Nykanal",
+    "secure_status": "public",
+    "channelid": 5,
+    "chat": []
   }
 ]
