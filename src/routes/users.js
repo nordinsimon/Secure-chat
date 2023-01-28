@@ -88,3 +88,4 @@ async function addUser(name, password) {
 }
 
 export default router;
+export { usernameExists, correctUsernameInput, correctPasswordInput };

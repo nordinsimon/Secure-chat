@@ -2,6 +2,7 @@ import express from "express";
 import * as url from "url";
 import usersRoute from "./routes/users.js";
 import channelsRoute from "./routes/channels.js";
+import loginRoute from "./routes/login.js";
 
 // Konfiguration
 const app = express();
@@ -19,6 +20,7 @@ app.use(logger);
 app.use(express.static(staticPath));
 
 // Routes
+app.use("/api/login/", loginRoute);
 app.use("/api/users/", usersRoute);
 app.use("/api/channels/", channelsRoute);
 
