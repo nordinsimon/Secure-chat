@@ -33,16 +33,21 @@ authsigninButton.addEventListener("click", async () => {
     isLoggedIn = true;
   }
 });
-
-newMessageButton.addEventListener("click", () => {
-  const newMessage = inputNewMessage.value;
-
-  inputNewMessage.value = "";
-  const date = "2023-01.30 03:45";
-
-  const element = createChatElement(newMessage, loggedinUser, date);
-  chatMessageList.appendChild(element);
+inputNewMessage.addEventListener("keyup", (e) => {
+  //If enter is pressed send new message to chat
+  if (e.key === "Enter" && newMessageButton.disabled === false) {
+    addMessageToChat();
+  }
+  // Checks if input feeld is empy or not and set new message button disabled
+  let userText = inputNewMessage.value;
+  if (userText.length >= 1 || userText.value === "") {
+    newMessageButton.disabled = false;
+  } else {
+    newMessageButton.disabled = true;
+  }
 });
+
+newMessageButton.addEventListener("click", addMessageToChat);
 
 function createChatElement(newMessage, user, timestamp) {
   const message = document.createElement("div");
@@ -98,4 +103,21 @@ function createChatElement(newMessage, user, timestamp) {
   message.appendChild(messageboxRight);
 
   return message;
+}
+function addMessageToChat() {
+  const newMessage = inputNewMessage.value;
+
+  inputNewMessage.value = "";
+  const date = generateGoodDate();
+
+  const element = createChatElement(newMessage, loggedinUser, date);
+  chatMessageList.appendChild(element);
+  updateScroll();
+}
+function updateScroll() {
+  console.log(chatMessageList);
+  chatMessageList.scrollTop = chatMessageList.scrollHeight;
+}
+function generateGoodDate() {
+  return (date = new Date().toString().slice(4, 24));
 }
