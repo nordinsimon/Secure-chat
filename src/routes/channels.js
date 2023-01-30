@@ -35,6 +35,19 @@ router.get("/", (req, res) => {
   res.status(200).send(db_channels.data);
 });
 
+router.get("/:channel", (req, res) => {
+  const channelName = req.params.channel;
+  const channelIndex = channelExists(channelName);
+  if (
+    correctChannelInput(channelName) === false ||
+    channelExists(channelName) === false
+  ) {
+    res.sendStatus(400);
+    return;
+  }
+  res.status(200).send(db_channels.data[channelIndex]);
+});
+
 router.post("/", (req, res) => {
   const channelName = req.body.channel_name;
   const channelIndex = channelExists(channelName);
