@@ -19,47 +19,35 @@
         <button id="auth-signin" class="auth_button">Sign in</button>
       </div>
     </header>
-    <main class="dark">
-      <div class="left">
-        <div class="heading">Channels</div>
-        <div>welcome</div>
-        <div class="selected">animal facts</div>
-        <div>🔓 work</div>
-        <div>random</div>
-
-        <div class="separator"></div>
-
-        <div class="auth">
-          Signed in as:
-          <div class="profile">
-            <div class="avatar"></div>
-            Edgar Djikstra
-          </div>
-          <button>Sign out</button>
-          Welcome, guest
-          <input type="text" value="Edgar Djikstra" />
-          <input type="password" value="1234" />
-          <button>Sign in</button>
+    <main>
+      <div class="channels">
+        <div class="sub-header">
+          <h3>Channels</h3>
         </div>
+        <ul class="channels-list">
+          <li>
+            <label class="channels-item-box">
+              <span>Public</span>
+            </label>
+          </li>
+          <li>
+            <label class="channels-item-box">
+              <span>Private</span>
+              <div class="locked-status">🔒</div>
+            </label>
+          </li>
+        </ul>
       </div>
 
-      <div class="right">
-        <div class="right-heading">animal facts</div>
-        <div class="message-list framed">
-          <div class="message one framed">Giraffer är fascinerande djur</div>
-          <div class="message two framed">
-            Visste du att giraffer kan bli 6 meter höga?
-          </div>
-          <div class="message one framed">Wow</div>
-          <div class="message one framed">Det är högt</div>
-          <div class="message three framed">
-            Varför pratar ingen om tvättbjörnar??
-          </div>
+      <div class="chat">
+        <div class="sub-header">
+          <h3 id="selected-channel">Public</h3>
         </div>
 
-        <div class="message-form">
+        <div class="chat-message"></div>
+        <div class="chat-input">
           <div class="avatar"></div>
-          <input type="text" value="Tvättbjörnar är underskattade" />
+          <input type="text" placeholder="New message..." />
           <button>Send</button>
         </div>
       </div>

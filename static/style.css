@@ -8,7 +8,6 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-
   font-size: 120%;
 }
 body > * {
@@ -21,10 +20,11 @@ header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  border-bottom: 5px solid darkgreen;
+  border-bottom: 5px solid black;
 }
 header h1 {
   margin: 0;
+  margin-top: 0.4em;
   padding: 0;
 }
 .auth_user {
@@ -34,6 +34,8 @@ header h1 {
 .auth_input {
   display: flex;
   flex-direction: column;
+
+  font-size: 100%;
 }
 
 .auth_button {
@@ -43,144 +45,93 @@ header h1 {
   height: 1.8em;
 }
 
-main {
-  flex-grow: 1;
-  display: flex;
-  padding: 0em;
-}
-main > * {
-  flex-grow: 1;
-}
-.framed {
-  border: 2px solid #4f8340;
-  border-radius: 0.4em;
-  padding: 0.5em 1.5em;
-  margin: 0.2em 0em;
-}
-.message-list > * {
-  padding-left: 2em;
-}
-.right {
-  display: flex;
-  flex-direction: column;
-}
-.right > .message-list {
-  flex-grow: 1;
-}
-.message-form {
-  display: flex;
-  position: relative;
-}
-input {
-  padding: 0.2em;
-  font-size: 100%;
-
-  color: var(--text);
-}
 button {
   font-size: 100%;
   border-radius: 0.1em;
   border: none;
   padding: 0.4em 1.5em;
-  background: #5f8d51;
-  color: var(--text);
+}
+input {
+  padding: 0.2em;
+  font-size: 100%;
 }
 
-.darker {
-  background: #8bb080;
-}
-.dark {
-  /* Det är denna färgen jag ska ha */
+main {
+  flex-grow: 1;
+  display: flex;
+  padding: 0em;
   background: #a1cf91;
 }
-.bright {
-  background: #a4d395;
-}
-
-.left {
-  font-size: 110%;
-}
-.left > *,
-.right-heading {
-  background: #5f8d51;
-  border: 2px solid #7fb06f;
-  border-radius: 0.3rem;
-  padding: 0.4rem 1.5rem;
-  margin: 0.6rem 0.6rem 0.6rem 0;
-}
-.left > .selected {
-  border: 2px solid var(--text);
-}
-.left > .heading,
-.right-heading {
-  font-size: 120%;
-  font-weight: bold;
-  background: #7fb06f;
-  border: none;
-}
-
-.one,
-.two,
-.three {
-  position: relative;
-}
-.one::before,
-.two::before,
-.three::before,
-.avatar {
-  position: absolute;
-  left: 0.5em;
-  border: 4px solid #b740ca;
-  border-radius: 6px;
-  width: 1.2em;
-  height: 1.2em;
-  box-sizing: border-box;
-  display: block;
-  content: "";
-}
-.avatar {
-  top: 0.4em;
-  height: 1.3em;
-  width: 1.3em;
-}
-.one::before {
-  border-color: #2558b6;
-}
-.two::before {
-  border-color: #b740ca;
-}
-.three::before {
-  border-color: pink;
-}
-
-.left {
-  display: flex;
-  flex-direction: column;
-}
-.left .auth {
-  display: flex;
-  flex-direction: column;
-  background: #7fb06f;
-}
-.auth input {
-  margin-right: unset;
-}
-.separator {
+main > * {
   flex-grow: 1;
-  background: unset;
 }
-.profile {
-  font-size: 1.2rem;
-  font-weight: normal;
-  padding: 0.5em 0.5em;
+.channels {
+  border-right: 6px solid green;
 }
-.profile .avatar {
-  position: relative;
-  top: 0.2em;
-  right: unset;
-  left: unset;
-  display: inline-block;
+.sub-header {
+  margin: 0;
+  padding: 0;
+  border-bottom: 1px solid green;
 }
-.auth input {
-  padding-left: 1em;
+
+.sub-header h3 {
+  font-size: 150%;
+  text-decoration: underline;
+  margin: 1rem;
+}
+
+.channels-list {
+  list-style: none;
+
+  margin: 0;
+  padding: 0;
+  margin-top: 0.5em;
+}
+.channels-list li {
+  background-color: #7fb06f;
+  margin: 1rem;
+  border-radius: 0.5em;
+}
+.channels-item-box {
+  display: flex;
+  justify-content: space-between;
+}
+.channels-item-box span {
+  padding: 0.7em;
+}
+
+.channels-item-box .locked-status {
+  margin-right: 0.5em;
+  padding: 0.4em;
+}
+
+.chat {
+  display: flex;
+  flex-direction: column;
+}
+.chat-message {
+  flex-grow: 1;
+  margin: 1em;
+  margin-bottom: 0.5em;
+  padding: 1em;
+  border: 2px solid green;
+  border-radius: 0.5em;
+}
+.chat-input {
+  margin: 1em;
+  margin-top: 0.5em;
+  padding: 0.2em;
+}
+
+.chat-input {
+  display: flex;
+}
+.chat-input input {
+  flex-grow: 1;
+  border-radius: 0.3em;
+}
+.chat-input button {
+  border-radius: 0.3em;
+  padding: 0.4em 1.5em;
+  margin-left: 0.4em;
 }
