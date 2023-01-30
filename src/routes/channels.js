@@ -45,7 +45,7 @@ router.get("/:channel", (req, res) => {
     res.sendStatus(400);
     return;
   }
-  res.status(200).send(db_channels.data[channelIndex]);
+  res.status(200).send(db_channels.data[channelIndex].chat);
 });
 
 router.post("/", (req, res) => {

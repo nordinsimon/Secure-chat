@@ -49,7 +49,7 @@ header h1 {
 button {
   border: none;
 }
-button:hover {
+button:hover:enabled {
   opacity: 80%;
 }
 input {

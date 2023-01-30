@@ -16,7 +16,7 @@
           <input id="auth-username" type="text" placeholder="Username" />
           <input id="auth-password" type="password" placeholder="Password" />
         </div>
-        <button id="auth-signin" class="auth_button">Sign in</button>
+        <button id="auth-signin" class="auth_button" disabled>Sign in</button>
       </div>
     </header>
     <main>
@@ -27,12 +27,12 @@
         </div>
         <ul class="channels-list">
           <li>
-            <label class="channels-item-box">
+            <label id="public-chat" class="channels-item-box">
               <span>Public</span>
             </label>
           </li>
           <li>
-            <label class="channels-item-box">
+            <label id="private-chat" class="channels-item-box">
               <span>Private</span>
               <div class="locked-status">🔒</div>
             </label>
