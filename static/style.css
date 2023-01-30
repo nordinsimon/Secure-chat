@@ -34,7 +34,6 @@ header h1 {
 .auth_input {
   display: flex;
   flex-direction: column;
-
   font-size: 100%;
 }
 
@@ -82,7 +81,6 @@ main > * {
 
 .channels-list {
   list-style: none;
-
   margin: 0;
   padding: 0;
   margin-top: 0.5em;
@@ -116,16 +114,56 @@ main > * {
   padding: 1em;
   border: 2px solid green;
   border-radius: 0.5em;
+  height: calc(100vh - 300px);
+  overflow: scroll;
 }
+.message {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 0;
+  margin-bottom: 0.7em;
+  padding: 0;
+  background-color: #7fb06f;
+  border-radius: 0.5em;
+}
+.message p {
+  margin: 0;
+}
+.messagebox-left {
+  flex-grow: 1;
+}
+.message-info {
+  padding: 0.2em 0.3em 0em 0.3em;
+  font-size: 75%;
+  display: flex;
+}
+.message-user {
+  padding-right: 1em;
+}
+.message-main {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.2em 0.5em 0.5em 0.5em;
+}
+.messagebox-right {
+  padding: 0.71em 0.5em 0.71em 0.3em;
+}
+
+.messagebox-right button {
+  font-size: 75%;
+  border-radius: 0.3em;
+  padding: 0.4em 1em;
+  background-color: #a1cf91;
+}
+
 .chat-input {
+  display: flex;
   margin: 1em;
   margin-top: 0.5em;
   padding: 0.2em;
 }
 
-.chat-input {
-  display: flex;
-}
 .chat-input input {
   flex-grow: 1;
   border-radius: 0.3em;
