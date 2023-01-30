@@ -42,13 +42,12 @@ header h1 {
   margin: 1em;
   background-color: lightgray;
   height: 1.8em;
+  border-radius: 0.2em;
+  padding: 0.4em 1.5em;
 }
 
 button {
-  font-size: 100%;
-  border-radius: 0.1em;
   border: none;
-  padding: 0.4em 1.5em;
 }
 input {
   padding: 0.2em;
@@ -151,10 +150,13 @@ main > * {
 }
 
 .messagebox-right button {
-  font-size: 75%;
+  font-size: 70%;
   border-radius: 0.3em;
   padding: 0.4em 1em;
   background-color: #a1cf91;
+}
+.messagebox-right-edit {
+  margin-right: 0.4em;
 }
 
 .chat-input {
@@ -169,6 +171,7 @@ main > * {
   border-radius: 0.3em;
 }
 .chat-input button {
+  font-size: 100%;
   border-radius: 0.3em;
   padding: 0.4em 1.5em;
   margin-left: 0.4em;
