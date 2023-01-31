@@ -1,10 +1,12 @@
 const headerIsLoggedinBox = document.querySelector("#header-is-loggedin-box");
+const headerIsLoggedinText = document.querySelector("#header-is-loggedin-text");
 const authUserBox = document.querySelector("#auth-user-box");
 const authNewUser = document.querySelector("#auth-new-user");
 const authLogin = document.querySelector("#auth-login");
 const authInput = document.querySelector("#auth-input");
 const inputauthUsername = document.querySelector("#auth-username");
 const inputauthPassword = document.querySelector("#auth-password");
+const authSignoutButton = document.querySelector("#auth-sign-out");
 const authsigninButton = document.querySelector("#auth-signin");
 const authCreateNewUser = document.querySelector("#auth-create-new-user");
 const authBack = document.querySelector("#auth-back");
@@ -32,6 +34,7 @@ let isLoggedIn = false;
 let loggedinUser = "";
 let activeChannel = "Public";
 let uuidToUsers = [];
+let authPage = "";
 
 const loadJWT = getJWT();
 
@@ -46,22 +49,24 @@ authBack.addEventListener("click", setAuthBackPage);
 
 //To create new user
 authCreateNewUser.addEventListener("click", createNewUser);
-inputauthPassword.addEventListener("keyup", (e) => {
-  if (e.key === "Enter" && authsigninButton.disabled === false) {
-    signIn();
-  }
-  authsigninButton.disabled = isInputFieldNotEmpty(inputauthPassword);
-  authCreateNewUser.disabled = isInputFieldNotEmpty(inputauthPassword);
-});
-//to signin
+
+//to signin and create new user
 authsigninButton.addEventListener("click", signIn);
-inputauthPassword.addEventListener("keyup", (e) => {
-  if (e.key === "Enter" && authsigninButton.disabled === false) {
-    signIn();
+
+inputauthPassword.addEventListener("keyup", async (e) => {
+  if (e.key === "Enter") {
+    if (authsigninButton.disabled === false && authPage === "Login") {
+      await signIn();
+    } else if (authCreateNewUser.disabled === false && authPage === "NewUser") {
+      await createNewUser();
+    }
   }
   authsigninButton.disabled = isInputFieldNotEmpty(inputauthPassword);
   authCreateNewUser.disabled = isInputFieldNotEmpty(inputauthPassword);
 });
+
+//to signout
+authSignoutButton.addEventListener("click", signOut);
 
 //To create new message
 newMessageButton.addEventListener("click", addNewMessage);
@@ -79,12 +84,12 @@ inputNewMessage.addEventListener("keyup", (e) => {
 //To choose channel
 publicChat.addEventListener("click", () => {
   activeChannel = "Public";
-  updateChatMessages(activeChannel);
+  updateChatMessages();
 });
 privateChat.addEventListener("click", () => {
   if (isLoggedIn === false) return;
   activeChannel = "Private";
-  updateChatMessages(activeChannel);
+  updateChatMessages();
 });
 
 //
@@ -111,8 +116,7 @@ async function checkIfJWTMatch(loadJWT) {
     isLoggedIn = true;
     inputNewMessage.placeholder = "New message...";
     inputNewMessage.disabled = false;
-    console.log("JWT Matched");
-    updateHeader(isLoggedIn, loggedinUser);
+    updateHeader();
     return;
   }
 }
@@ -134,11 +138,11 @@ async function signIn() {
 
     localStorage.setItem(JWT_KEY, userToken.token);
     isLoggedIn = true;
-    loggedinUser = inputauthUsername.value;
+    loggedinUser = await inputauthUsername.value;
     inputNewMessage.placeholder = "New message...";
     inputNewMessage.disabled = false;
     inputauthUsername.value = "";
-    updateHeader(isLoggedIn, loggedinUser);
+    updateHeader();
   }
   inputauthPassword.value = "";
 }
@@ -225,7 +229,7 @@ async function addNewMessage() {
   inputNewMessage.value = "";
   newMessageButton.disabled = true;
 }
-async function updateChatMessages(activeChannel) {
+async function updateChatMessages() {
   chatMessageList.innerHTML = "";
   selectedChannel.innerText = activeChannel;
   await addMessageToChatFromDB(await getChatMessagesFromDB(activeChannel));
@@ -324,20 +328,20 @@ function isInputFieldNotEmpty(inputField) {
 }
 function getJWT() {
   let maybyJson = localStorage.getItem(JWT_KEY);
-  console.log("mayby", maybyJson);
   if (!maybyJson) {
     return;
   }
   return maybyJson;
 }
-function updateHeader(isLoggedIn, loggedinUser) {
+function updateHeader() {
   if (!isLoggedIn) return;
   authUserBox.className = "hide";
-  headerIsLoggedinBox.className = "";
-  headerIsLoggedinBox.getElementsByTagName("h3") = `Welcome to secure chat ${loggedinUser}!`;
+  headerIsLoggedinBox.className = "header-is-loggedin-box";
+  headerIsLoggedinText.innerText = `Welcome to secure chat ${loggedinUser}!`;
 }
 
 function setAuthLoginPage() {
+  authPage = "Login";
   authLogin.className = "hide";
   authNewUser.className = "hide";
   authInput.className = "auth-input";
@@ -346,6 +350,7 @@ function setAuthLoginPage() {
   authCreateNewUser.className = "hide";
 }
 function setAuthNewUserPage() {
+  authPage = "NewUser";
   authLogin.className = "hide";
   authNewUser.className = "hide";
   authInput.className = "auth-input";
@@ -353,6 +358,7 @@ function setAuthNewUserPage() {
   authBack.className = "auth-button";
 }
 function setAuthBackPage() {
+  authPage = "";
   authLogin.className = "auth-button";
   authNewUser.className = "auth-button";
   authInput.className = "hide";
@@ -360,11 +366,16 @@ function setAuthBackPage() {
   authCreateNewUser.className = "hide";
   authBack.className = "hide";
 }
-function logOut() {
-    isLoggedIn = false;
-    loggedinUser = "";
-    activeChannel = "Public";
+function signOut() {
+  isLoggedIn = false;
+  loggedinUser = "";
+  activeChannel = "Public";
+  localStorage.removeItem(JWT_KEY);
+  inputNewMessage.placeholder = "Sign in to send message!";
+  inputNewMessage.disabled = true;
+  authUserBox.className = "header-is-loggedin-box";
+  headerIsLoggedinBox.className = "hide";
 
-    updateChatMessages(activeChannel);
-    
+  updateChatMessages();
+  setAuthBackPage();
 }

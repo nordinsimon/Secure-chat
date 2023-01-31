@@ -6,150 +6,45 @@
     "chat": [
       {
         "messageid": 1,
-        "uuid": 4,
-        "message": "Message DELETED",
-        "timestamp": "2023-01-27T01:46:41.065Z",
-        "ischanged": "yes",
-        "changedtime": "2023-01-27T02:40:17.457Z",
-        "isdeleted": "yes",
-        "deletedtime": "2023-01-27T02:41:05.116Z"
+        "uuid": 5,
+        "message": "Hej",
+        "timestamp": "Jan 31 2023 23:07:33"
       },
       {
         "messageid": 2,
-        "uuid": 4,
-        "message": "Message DELETED",
-        "timestamp": "2023-01-27T02:51:18.697Z",
-        "ischanged": "yes",
-        "changedtime": "2023-01-27T02:51:32.485Z",
-        "isdeleted": "yes",
-        "deletedtime": "2023-01-27T15:59:18.768Z"
+        "uuid": 2,
+        "message": "Hej",
+        "timestamp": "Jan 31 2023 23:07:35"
       },
       {
         "messageid": 3,
-        "uuid": 4,
-        "message": "Hejpf.   årfasrtbsrbtrsdig",
-        "timestamp": "2023-01-27T03:30:32.692Z",
-        "ischanged": "yes",
-        "changedtime": "2023-01-27T16:52:56.723Z"
+        "uuid": 3,
+        "message": "Tjena!",
+        "timestamp": "Jan 31 2023 23:07:44"
       },
       {
         "messageid": 4,
-        "uuid": 3,
-        "message": "Message DELETED",
-        "timestamp": "2023-01-27T14:57:42.347Z",
-        "isdeleted": "yes",
-        "deletedtime": "2023-01-27T16:13:12.831Z"
+        "uuid": 1,
+        "message": "Tjena, allt bra med er?😊",
+        "timestamp": "Jan 31 2023 23:08:11"
       },
       {
         "messageid": 5,
-        "uuid": 2,
-        "message": "Message DELETED",
-        "timestamp": "2023-01-27T14:58:08.376Z",
-        "isdeleted": "yes",
-        "deletedtime": "2023-01-27T16:50:36.336Z"
+        "uuid": 5,
+        "message": "Jadå bara bra",
+        "timestamp": "Jan 31 2023 23:08:21"
       },
       {
         "messageid": 6,
-        "uuid": 1,
-        "message": "Hej",
-        "timestamp": "2023-01-27T14:58:23.596Z"
+        "uuid": 2,
+        "message": "Bra här med hur är det med dig?",
+        "timestamp": "Jan 31 2023 23:08:37"
       },
       {
         "messageid": 7,
-        "uuid": 4,
-        "message": "Hej",
-        "timestamp": "2023-01-27T14:58:34.124Z"
-      },
-      {
-        "messageid": 8,
-        "uuid": 2,
-        "timestamp": "2023-01-27T15:15:48.882Z"
-      },
-      {
-        "messageid": 9,
-        "uuid": 2,
-        "message": "Hdhej",
-        "timestamp": "2023-01-27T15:18:48.268Z"
-      },
-      {
-        "messageid": 13,
-        "uuid": 5,
-        "message": "fe",
-        "timestamp": "Jan 31 2023 14:11:01"
-      },
-      {
-        "messageid": 14,
-        "uuid": 5,
-        "message": "fe",
-        "timestamp": "Jan 31 2023 14:13:33"
-      },
-      {
-        "messageid": 15,
-        "uuid": 5,
-        "message": "fe",
-        "timestamp": "Jan 31 2023 14:13:35"
-      },
-      {
-        "messageid": 16,
-        "uuid": 5,
-        "message": "few",
-        "timestamp": "Jan 31 2023 14:13:37"
-      },
-      {
-        "messageid": 17,
-        "uuid": 5,
-        "message": "wed",
-        "timestamp": "Jan 31 2023 14:27:35"
-      },
-      {
-        "messageid": 19,
-        "uuid": 5,
-        "message": "fref",
-        "timestamp": "Jan 31 2023 14:28:07"
-      },
-      {
-        "messageid": 20,
-        "uuid": 5,
-        "message": "efs",
-        "timestamp": "Jan 31 2023 14:29:32"
-      },
-      {
-        "messageid": 21,
-        "uuid": 5,
-        "message": "dw",
-        "timestamp": "Jan 31 2023 14:30:21"
-      },
-      {
-        "messageid": 22,
-        "uuid": 5,
-        "message": "Ändrat Simon",
-        "timestamp": "Jan 31 2023 14:39:12",
-        "ischanged": "yes",
-        "changedtime": "2023-01-31T13:40:07.835Z"
-      },
-      {
-        "messageid": 23,
-        "uuid": 5,
-        "message": "dww",
-        "timestamp": "Jan 31 2023 18:31:29"
-      },
-      {
-        "messageid": 25,
-        "uuid": 5,
-        "message": "gr",
-        "timestamp": "Jan 31 2023 18:39:16"
-      },
-      {
-        "messageid": 28,
-        "uuid": 5,
-        "message": "qw4f",
-        "timestamp": "Jan 31 2023 21:38:59"
-      },
-      {
-        "messageid": 29,
-        "uuid": 5,
-        "message": "qf4",
-        "timestamp": "Jan 31 2023 21:39:01"
+        "uuid": 1,
+        "message": "Det är toppen 😍",
+        "timestamp": "Jan 31 2023 23:08:56"
       }
     ]
   },
@@ -159,91 +54,47 @@
     "channelid": 2,
     "chat": [
       {
-        "uuid": 2,
-        "message": "Private chat",
-        "timestamp": "tid",
-        "ischanged": "no",
-        "iddeleted": "no",
-        "changedtime": ""
+        "messageid": 8,
+        "uuid": 4,
+        "message": "Här kan vi skriva hemliga saker",
+        "timestamp": "Jan 31 2023 23:09:06"
       },
       {
-        "uuid": 4,
-        "message": "Private",
-        "timestamp": "tid",
-        "ischanged": "no",
-        "iddeleted": "no",
-        "changedtime": ""
+        "messageid": 9,
+        "uuid": 3,
+        "message": "Ja, det kan vi",
+        "timestamp": "Jan 31 2023 23:09:12"
       },
       {
         "messageid": 10,
         "uuid": 2,
-        "message": "Message Private",
-        "timestamp": "2023-01-27T18:30:44.892Z",
-        "ischanged": "yes",
-        "changedtime": "2023-01-27T18:31:25.511Z",
-        "isdeleted": "yes",
-        "deletedtime": "2023-01-27T18:31:50.431Z"
+        "message": "Vad ska ni göra på fredag?",
+        "timestamp": "Jan 31 2023 23:09:39"
       },
       {
         "messageid": 11,
         "uuid": 2,
-        "message": "Test med pappa",
-        "timestamp": "2023-01-31T12:29:50.769Z"
+        "message": "Sugna på att käka middag och dricka öl?",
+        "timestamp": "Jan 31 2023 23:09:50"
       },
       {
         "messageid": 12,
-        "uuid": 2,
-        "message": "Test med pappa",
-        "timestamp": "Jan 31 2023 13:33:54"
+        "uuid": 5,
+        "message": "Gärna!",
+        "timestamp": "Jan 31 2023 23:09:56"
       },
       {
-        "messageid": 18,
-        "uuid": 5,
-        "message": "efw",
-        "timestamp": "Jan 31 2023 14:27:50"
+        "messageid": 13,
+        "uuid": 1,
+        "message": "Ja! Toppen ide ",
+        "timestamp": "Jan 31 2023 23:10:06"
       },
       {
-        "messageid": 24,
-        "uuid": 5,
-        "message": "faewf",
-        "timestamp": "Jan 31 2023 18:31:50"
-      },
-      {
-        "messageid": 26,
-        "uuid": 5,
-        "message": "g",
-        "timestamp": "Jan 31 2023 18:39:32"
-      },
-      {
-        "messageid": 27,
-        "uuid": 5,
-        "message": "rd",
-        "timestamp": "Jan 31 2023 18:39:34"
-      },
-      {
-        "messageid": 30,
-        "uuid": 5,
-        "message": "qwf4",
-        "timestamp": "Jan 31 2023 21:39:05"
-      },
-      {
-        "messageid": 31,
-        "uuid": 5,
-        "message": "qf4",
-        "timestamp": "Jan 31 2023 21:39:10"
-      },
-      {
-        "messageid": 32,
-        "uuid": 5,
-        "message": "f4",
-        "timestamp": "Jan 31 2023 21:39:16"
+        "messageid": 14,
+        "uuid": 1,
+        "message": "🍻🍻",
+        "timestamp": "Jan 31 2023 23:10:21"
       }
     ]
-  },
-  {
-    "channel_name": "Nykanal",
-    "secure_status": "public",
-    "channelid": 5,
-    "chat": []
   }
 ]
