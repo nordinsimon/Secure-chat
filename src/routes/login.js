@@ -47,15 +47,22 @@ router.post("/", (req, res) => {
     return;
   }
   const userToken = createToken(username);
+  saveTokenToUserDb(userIndex, userToken);
   res.status(200).send(userToken);
 });
 
 function createToken(name) {
   const user = { name: name };
-  const token = jwt.sign(user, process.env.SECRET, { expiresIn: "1h" });
+  const token = jwt.sign(user, process.env.SECRET, { expiresIn: "10s" });
   user.token = token;
   console.log("createToken", user);
   return user;
 }
 
+async function saveTokenToUserDb(userIndex, token) {
+  const user = db_users.data[userIndex];
+  user.JWT = token.token;
+
+  await db_users.write();
+}
 export default router;

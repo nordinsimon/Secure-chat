@@ -18,7 +18,7 @@ const privateChat = document.querySelector("#private-chat");
 
 const JWT_KEY = "login-jwt";
 let isLoggedIn = false;
-let loggedinUser = "Användarnamn";
+let loggedinUser = "";
 let activeChannel = "Public";
 let uuidToUsers = [];
 
@@ -36,7 +36,9 @@ inputNewMessage.addEventListener("keyup", (e) => {
     addNewMessageToChat();
   }
   // Checks if input feeld is empy or not and set new message button disabled
-  newMessageButton.disabled = isInputFieldNotEmpty(inputNewMessage);
+  let isItOkToSendMessage =
+    isInputFieldNotEmpty(inputNewMessage) || !isLoggedIn;
+  newMessageButton.disabled = isItOkToSendMessage;
 });
 
 updateUuidToUsername();
