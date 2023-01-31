@@ -10,10 +10,17 @@ const newMessageButton = document.querySelector("#new-message-button");
 const publicChat = document.querySelector("#public-chat");
 const privateChat = document.querySelector("#private-chat");
 
+//
+//
+// SERVER START
+//
+//
+
 const JWT_KEY = "login-jwt";
 let isLoggedIn = false;
 let loggedinUser = "Användarnamn";
 let activeChannel = "Public";
+let uuidToUsers = [];
 
 authsigninButton.addEventListener("click", signIn);
 inputauthPassword.addEventListener("keyup", (e) => {
@@ -22,18 +29,24 @@ inputauthPassword.addEventListener("keyup", (e) => {
   }
   authsigninButton.disabled = isInputFieldNotEmpty(inputauthPassword);
 });
-newMessageButton.addEventListener("click", addMessageToChat);
+newMessageButton.addEventListener("click", addNewMessageToChat);
 inputNewMessage.addEventListener("keyup", (e) => {
   //If enter is pressed send new message to chat
   if (e.key === "Enter" && newMessageButton.disabled === false) {
-    addMessageToChat();
+    addNewMessageToChat();
   }
   // Checks if input feeld is empy or not and set new message button disabled
   newMessageButton.disabled = isInputFieldNotEmpty(inputNewMessage);
 });
 
-getChatMessagesFromDB(activeChannel);
+updateUuidToUsername();
+addMessageToChatFromDB(getChatMessagesFromDB(activeChannel));
 
+//
+//
+// FUNCTIONS
+//
+//
 async function signIn() {
   const user = {
     username: inputauthUsername.value,
@@ -57,7 +70,19 @@ async function signIn() {
   }
   inputauthPassword.value = "";
 }
-
+async function updateUuidToUsername() {
+  const options = {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+  const response = await fetch("/api/users/", options);
+  if (response.status === 200) {
+    const usersFromDB = await response.json();
+    uuidToUsers = await usersFromDB;
+  }
+}
 async function getChatMessagesFromDB(db) {
   const options = {
     method: "GET",
@@ -68,8 +93,23 @@ async function getChatMessagesFromDB(db) {
   const response = await fetch(`/api/channels/${db}`, options);
   if (response.status === 200) {
     const db = await response.json();
-    console.log(db);
+    return db;
   }
+}
+async function addMessageToChatFromDB(dbInput) {
+  const db = await dbInput;
+  db.forEach((data) => {
+    const message = data.message;
+    const uuid = data.uuid;
+    const user = uuidToUsers.find((user) => user.uuid === Number(uuid));
+    const username = user.username;
+    const timestamp = data.timestamp;
+
+    const element = createChatElement(message, username, timestamp);
+    chatMessageList.appendChild(element);
+  });
+
+  updateScroll();
 }
 
 function createChatElement(newMessage, user, timestamp) {
@@ -127,7 +167,7 @@ function createChatElement(newMessage, user, timestamp) {
 
   return message;
 }
-function addMessageToChat() {
+function addNewMessageToChat() {
   const newMessage = inputNewMessage.value;
 
   inputNewMessage.value = "";
@@ -138,6 +178,7 @@ function addMessageToChat() {
   chatMessageList.appendChild(element);
   updateScroll();
 }
+
 function updateScroll() {
   chatMessageList.scrollTop = chatMessageList.scrollHeight;
 }

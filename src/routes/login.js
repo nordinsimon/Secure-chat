@@ -24,6 +24,8 @@ const SALT = process.env.SALT;
 
 const router = express.Router();
 
+await db_users.read();
+
 router.post("/", (req, res) => {
   const username = req.body.username;
   const password = req.body.password;
@@ -55,6 +57,5 @@ function createToken(name) {
   console.log("createToken", user);
   return user;
 }
-await db_users.read();
 
 export default router;

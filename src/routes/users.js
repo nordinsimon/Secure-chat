@@ -28,7 +28,17 @@ const router = express.Router();
 await db_users.read(), db_nextUuId.read();
 
 router.get("/", (req, res) => {
-  res.status(200).send(db_users.data);
+  const dbWithoutPassword = [];
+  db_users.data.forEach((user) => {
+    const uuid = user.uuid;
+    const username = user.username;
+    const newUser = {
+      uuid,
+      username,
+    };
+    dbWithoutPassword.push(newUser);
+  });
+  res.status(200).send(dbWithoutPassword);
 });
 
 router.get("/nextuuid/", (req, res) => {
