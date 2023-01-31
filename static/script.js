@@ -1,6 +1,13 @@
+const headerIsLoggedinBox = document.querySelector("#header-is-loggedin-box");
+const authUserBox = document.querySelector("#auth-user-box");
+const authNewUser = document.querySelector("#auth-new-user");
+const authLogin = document.querySelector("#auth-login");
+const authInput = document.querySelector("#auth-input");
 const inputauthUsername = document.querySelector("#auth-username");
 const inputauthPassword = document.querySelector("#auth-password");
 const authsigninButton = document.querySelector("#auth-signin");
+const authCreateNewUser = document.querySelector("#auth-create-new-user");
+const authBack = document.querySelector("#auth-back");
 
 const chatMessageList = document.querySelector("#chat-messege-list");
 
@@ -9,6 +16,8 @@ const newMessageButton = document.querySelector("#new-message-button");
 
 const publicChat = document.querySelector("#public-chat");
 const privateChat = document.querySelector("#private-chat");
+
+const newChatButton = document.querySelector("#new-chat-button");
 
 const selectedChannel = document.querySelector("#selected-channel");
 
@@ -21,7 +30,6 @@ const selectedChannel = document.querySelector("#selected-channel");
 const JWT_KEY = "login-jwt";
 let isLoggedIn = false;
 let loggedinUser = "";
-let loggedinUuid;
 let activeChannel = "Public";
 let uuidToUsers = [];
 
@@ -30,6 +38,30 @@ const loadJWT = getJWT();
 updateUuidToUsername();
 updateChatMessages(activeChannel);
 checkIfJWTMatch(loadJWT);
+
+authLogin.addEventListener("click", () => {
+  authLogin.className = "hide";
+  authNewUser.className = "hide";
+  authInput.className = "auth-input";
+  authsigninButton.className = "auth-button";
+  authBack.className = "auth-button";
+});
+authNewUser.addEventListener("click", () => {
+  authLogin.className = "hide";
+  authNewUser.className = "hide";
+  authInput.className = "auth-input";
+  authCreateNewUser.className = "auth-button";
+  authBack.className = "auth-button";
+});
+
+authBack.addEventListener("click", () => {
+  authLogin.className = "auth-button";
+  authNewUser.className = "auth-button";
+  authInput.className = "hide";
+  authsigninButton.className = "hide";
+  authCreateNewUser.className = "hide";
+  authBack.className = "hide";
+});
 
 authsigninButton.addEventListener("click", signIn);
 inputauthPassword.addEventListener("keyup", (e) => {
@@ -59,7 +91,6 @@ privateChat.addEventListener("click", () => {
   activeChannel = "Private";
   updateChatMessages(activeChannel);
 });
-updateScroll();
 
 //
 //
@@ -86,6 +117,7 @@ async function checkIfJWTMatch(loadJWT) {
     inputNewMessage.placeholder = "New message...";
     inputNewMessage.disabled = false;
     console.log("JWT Matched");
+    updateHeader(isLoggedIn, loggedinUser);
     return;
   }
 }
@@ -111,6 +143,7 @@ async function signIn() {
     inputNewMessage.placeholder = "New message...";
     inputNewMessage.disabled = false;
     inputauthUsername.value = "";
+    updateHeader(isLoggedIn, loggedinUser);
   }
   inputauthPassword.value = "";
 }
@@ -197,6 +230,14 @@ async function addNewMessage() {
   inputNewMessage.value = "";
   newMessageButton.disabled = true;
 }
+async function updateChatMessages(activeChannel) {
+  chatMessageList.innerHTML = "";
+  selectedChannel.innerText = activeChannel;
+  await addMessageToChatFromDB(await getChatMessagesFromDB(activeChannel));
+  setTimeout(() => {
+    updateScroll();
+  }, 0);
+}
 
 function createChatElement(newMessage, user, timestamp) {
   const message = document.createElement("div");
@@ -268,11 +309,7 @@ function isInputFieldNotEmpty(inputField) {
     return true;
   }
 }
-function updateChatMessages(activeChannel) {
-  chatMessageList.innerHTML = "";
-  selectedChannel.innerText = activeChannel;
-  addMessageToChatFromDB(getChatMessagesFromDB(activeChannel));
-}
+
 function getJWT() {
   let maybyJson = localStorage.getItem(JWT_KEY);
   console.log("mayby", maybyJson);
@@ -280,4 +317,10 @@ function getJWT() {
     return;
   }
   return maybyJson;
+}
+function updateHeader(isLoggedIn, loggedinUser) {
+  if (!isLoggedIn) return;
+  authUserBox.className = "hide";
+  headerIsLoggedinBox.className = "";
+  headerIsLoggedinBox.innerText = `Welcome to secure chat ${loggedinUser}!`;
 }

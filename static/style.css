@@ -27,17 +27,21 @@ header h1 {
   margin-top: 0.4em;
   padding: 0;
 }
-.auth_user {
+.auth-user {
   display: flex;
   flex-direction: row;
 }
-.auth_input {
+.auth-input {
   display: flex;
   flex-direction: column;
   font-size: 100%;
 }
+.auth-input input {
+  border-radius: 0.2em;
+  margin: 0.1em;
+}
 
-.auth_button {
+.auth-button {
   font-size: 100%;
   margin: 1em;
   background-color: lightgray;
@@ -202,4 +206,8 @@ main > * {
   border-radius: 0.3em;
   padding: 0.4em 1.5em;
   margin-left: 0.4em;
+}
+
+.hide {
+  display: none;
 }

@@ -11,12 +11,19 @@
   <body>
     <header>
       <h1>Secure Chat</h1>
-      <div class="auth_user">
-        <div class="auth_input">
+      <div id="header-is-loggedin-box" class="hide"></div>
+      <div id="auth-user-box" class="auth-user">
+        <div id="auth-input" class="hide">
           <input id="auth-username" type="text" placeholder="Username" />
           <input id="auth-password" type="password" placeholder="Password" />
         </div>
-        <button id="auth-signin" class="auth_button" disabled>Sign in</button>
+        <button id="auth-signin" class="hide" disabled>Sign in</button>
+        <button id="auth-create-new-user" class="hide" disabled>
+          Create new user
+        </button>
+        <button id="auth-back" class="hide">Back</button>
+        <button id="auth-new-user" class="auth-button">New user</button>
+        <button id="auth-login" class="auth-button">Log in</button>
       </div>
     </header>
     <main>
@@ -40,7 +47,7 @@
         </ul>
         <div>
           <div class="new-chat">
-            <button id="new-message-">New chat</button>
+            <button id="new-chat-button">New chat</button>
           </div>
         </div>
       </div>

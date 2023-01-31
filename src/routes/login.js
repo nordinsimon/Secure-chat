@@ -83,9 +83,10 @@ router.post("/JWT", (req, res) => {
 
 function createToken(name) {
   const user = { name: name };
-  const token = jwt.sign(user, process.env.SECRET, { expiresIn: "1h" });
+  const token = jwt.sign(user, process.env.SECRET, {
+    expiresIn: process.env.JWTTIME,
+  });
   user.token = token;
-  console.log("createToken", user);
   return user;
 }
 
