@@ -9,6 +9,7 @@ import { JSONFile } from "lowdb/node";
 //import { channel } from "diagnostics_channel";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
+
 const file = join(__dirname, "../db/db_users.json");
 const adapter = new JSONFile(file);
 const db_users = new Low(adapter);
@@ -53,6 +54,7 @@ router.post("/", (req, res) => {
   const channelIndex = channelExists(channelName);
   const uuid = req.body.uuid;
   const message = req.body.message;
+  const timestamp = req.body.timestamp;
 
   if (
     correctChannelInput(channelName) === false ||
@@ -65,8 +67,8 @@ router.post("/", (req, res) => {
     return;
   }
 
-  addMessageToChannel(channelIndex, uuid, message);
-  res.status(201).send(db_channels.data);
+  addMessageToChannel(channelIndex, uuid, message, timestamp);
+  res.sendStatus(201);
 });
 
 router.put("/", (req, res) => {
@@ -270,13 +272,13 @@ function isValidSecureChatStatus(status) {
   return false;
 }
 
-async function addMessageToChannel(channelIndex, uuid, message) {
+async function addMessageToChannel(channelIndex, uuid, message, timestamp) {
   let nextMessageID = db_nextMessageId.data.nextmessageid++;
   db_channels.data[channelIndex].chat.push({
     messageid: nextMessageID,
     uuid: uuid,
     message: message,
-    timestamp: new Date(),
+    timestamp: timestamp,
   });
   await db_channels.write(), db_nextMessageId.write();
 }

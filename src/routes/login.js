@@ -47,47 +47,46 @@ router.post("/", (req, res) => {
     return;
   }
   const userToken = createToken(username);
-  saveTokenToUserDb(userIndex, userToken);
   res.status(200).send(userToken);
 });
-router.post("/JWT/", (req, res) => {
-  const JWTFromUser = req.body.JWT;
-  if (JWTFromUser === undefined) {
-    res.sendStatus(401);
-    return;
-  }
-  console.log("JWTfromUSER", JWTFromUser);
-  let username;
-  let itIsAMatch = false;
-  db_users.data.forEach((user) => {
-    console.log("JWTFromDB  ", user.JWT);
-    if (user.JWT === JWTFromUser) {
-      username = { username: user.username };
-      console.log("JWT matches");
-      itIsAMatch = true;
+
+router.post("/JWT", (req, res) => {
+  // JWT kan skickas antingen i request body, med querystring, eller i header: Authorization
+  let token = req.body.token || req.query.token;
+  if (!token) {
+    let x = req.headers["authorization"];
+    if (x === undefined) {
+      // Vi hittade ingen token, authorization fail
+      res.sendStatus(401);
       return;
     }
-  });
-  if (itIsAMatch) {
-    res.status(200).send(JSON.stringify(username));
-    return;
+    token = x.substring(7);
   }
-  console.log("JWT doesnot match");
-  res.sendStatus(401);
+
+  console.log("Token: ", token);
+  if (token) {
+    let decoded;
+    try {
+      decoded = jwt.verify(token, process.env.SECRET);
+    } catch (error) {
+      console.log("Catch! Felaktig token!!");
+      res.sendStatus(401);
+      return;
+    }
+    console.log("decoded: ", decoded);
+    res.status(200).send(decoded);
+  } else {
+    console.log("Ingen token");
+    res.sendStatus(401); // Unauthorized
+  }
 });
 
 function createToken(name) {
   const user = { name: name };
-  const token = jwt.sign(user, process.env.SECRET, { expiresIn: "10s" });
+  const token = jwt.sign(user, process.env.SECRET, { expiresIn: "1h" });
   user.token = token;
   console.log("createToken", user);
   return user;
 }
 
-async function saveTokenToUserDb(userIndex, token) {
-  const user = db_users.data[userIndex];
-  user.JWT = token.token;
-
-  await db_users.write();
-}
 export default router;

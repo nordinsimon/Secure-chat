@@ -21,6 +21,7 @@ const selectedChannel = document.querySelector("#selected-channel");
 const JWT_KEY = "login-jwt";
 let isLoggedIn = false;
 let loggedinUser = "";
+let loggedinUuid;
 let activeChannel = "Public";
 let uuidToUsers = [];
 
@@ -28,6 +29,7 @@ const loadJWT = getJWT();
 
 updateUuidToUsername();
 updateChatMessages(activeChannel);
+checkIfJWTMatch(loadJWT);
 
 authsigninButton.addEventListener("click", signIn);
 inputauthPassword.addEventListener("keyup", (e) => {
@@ -36,11 +38,11 @@ inputauthPassword.addEventListener("keyup", (e) => {
   }
   authsigninButton.disabled = isInputFieldNotEmpty(inputauthPassword);
 });
-newMessageButton.addEventListener("click", addNewMessageToChat);
+newMessageButton.addEventListener("click", addNewMessage);
 inputNewMessage.addEventListener("keyup", (e) => {
   //If enter is pressed send new message to chat
   if (e.key === "Enter" && newMessageButton.disabled === false) {
-    addNewMessageToChat();
+    addNewMessage();
   }
   // Checks if input feeld is empy or not and set new message button disabled
   let isItOkToSendMessage =
@@ -57,13 +59,36 @@ privateChat.addEventListener("click", () => {
   activeChannel = "Private";
   updateChatMessages(activeChannel);
 });
+updateScroll();
 
-checkIfJWTMatch(loadJWT);
 //
 //
 // FUNCTIONS
 //
 //
+async function checkIfJWTMatch(loadJWT) {
+  const jwtObject = {
+    token: loadJWT,
+  };
+  const options = {
+    method: "POST",
+    body: JSON.stringify(jwtObject),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+
+  const response = await fetch("/api/login/JWT", options);
+  if (response.status === 200) {
+    let userFromJWT = await response.json();
+    loggedinUser = userFromJWT.name;
+    isLoggedIn = true;
+    inputNewMessage.placeholder = "New message...";
+    inputNewMessage.disabled = false;
+    console.log("JWT Matched");
+    return;
+  }
+}
 async function signIn() {
   const user = {
     username: inputauthUsername.value,
@@ -116,6 +141,7 @@ async function getChatMessagesFromDB(db) {
   }
 }
 async function addMessageToChatFromDB(dbInput) {
+  await updateUuidToUsername();
   const db = await dbInput;
   db.forEach(async (data) => {
     const message = await data.message;
@@ -130,29 +156,48 @@ async function addMessageToChatFromDB(dbInput) {
 
   updateScroll();
 }
-async function checkIfJWTMatch(loadJWT) {
-  const jwtObject = {
-    JWT: loadJWT,
+async function addNewMessageToDB(newMessage, timestamp) {
+  await updateUuidToUsername();
+  const userAddMessage = loggedinUser;
+  const uuidObject = uuidToUsers.find(
+    (user) => user.username == userAddMessage
+  );
+  const uuid = uuidObject.uuid;
+  const message = {
+    channel_name: activeChannel,
+    uuid: uuid,
+    message: newMessage,
+    timestamp: timestamp,
   };
   const options = {
     method: "POST",
-    body: JSON.stringify(jwtObject),
+    body: JSON.stringify(message),
     headers: {
       "Content-Type": "application/json",
     },
   };
 
-  const response = await fetch(`/api/login/JWT`, options);
-  if (response.status === 200) {
-    let userFromJWT = await response.json();
-    loggedinUser = userFromJWT.username;
-    isLoggedIn = true;
-    inputNewMessage.placeholder = "New message...";
-    inputNewMessage.disabled = false;
-    console.log("JWT Matched");
+  const response = await fetch("/api/channels/", options);
+  if (response.status === 201) {
+    console.log("MessageAdded to DB");
+
     return;
   }
+  updateScroll();
 }
+async function addNewMessage() {
+  const newMessage = inputNewMessage.value;
+  const timestamp = new Date().toString().slice(4, 24);
+
+  const element = createChatElement(newMessage, loggedinUser, timestamp);
+  chatMessageList.appendChild(element);
+
+  await addNewMessageToDB(newMessage, timestamp);
+  updateScroll();
+  inputNewMessage.value = "";
+  newMessageButton.disabled = true;
+}
+
 function createChatElement(newMessage, user, timestamp) {
   const message = document.createElement("div");
   message.className = "message";
@@ -207,17 +252,6 @@ function createChatElement(newMessage, user, timestamp) {
   message.appendChild(messageboxRight);
 
   return message;
-}
-function addNewMessageToChat() {
-  const newMessage = inputNewMessage.value;
-
-  inputNewMessage.value = "";
-  newMessageButton.disabled = true;
-  const date = generateGoodDate();
-
-  const element = createChatElement(newMessage, loggedinUser, date);
-  chatMessageList.appendChild(element);
-  updateScroll();
 }
 
 function updateScroll() {
