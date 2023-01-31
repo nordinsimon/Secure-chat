@@ -28,5 +28,15 @@
     "uuid": 6,
     "username": "Simdon",
     "password": "$2a$10$QI5DADycsSNMvGRDHZI3Ge1yeiB89pQ8/fNKgAQtxQ0i0WjGDoovm"
+  },
+  {
+    "uuid": 7,
+    "username": "hej",
+    "password": "$2a$10$QI5DADycsSNMvGRDHZI3Gehj26dw7tWJ2YXitzyNgw.zla6shxQjq"
+  },
+  {
+    "uuid": 8,
+    "username": "dw",
+    "password": "$2a$10$QI5DADycsSNMvGRDHZI3GeWIaXoI0burREyIPvQ9RhI7Mly9.H89S"
   }
 ]

@@ -39,37 +39,31 @@ updateUuidToUsername();
 updateChatMessages(activeChannel);
 checkIfJWTMatch(loadJWT);
 
-authLogin.addEventListener("click", () => {
-  authLogin.className = "hide";
-  authNewUser.className = "hide";
-  authInput.className = "auth-input";
-  authsigninButton.className = "auth-button";
-  authBack.className = "auth-button";
-});
-authNewUser.addEventListener("click", () => {
-  authLogin.className = "hide";
-  authNewUser.className = "hide";
-  authInput.className = "auth-input";
-  authCreateNewUser.className = "auth-button";
-  authBack.className = "auth-button";
-});
+// to set stages of login header
+authLogin.addEventListener("click", setAuthLoginPage);
+authNewUser.addEventListener("click", setAuthNewUserPage);
+authBack.addEventListener("click", setAuthBackPage);
 
-authBack.addEventListener("click", () => {
-  authLogin.className = "auth-button";
-  authNewUser.className = "auth-button";
-  authInput.className = "hide";
-  authsigninButton.className = "hide";
-  authCreateNewUser.className = "hide";
-  authBack.className = "hide";
+//To create new user
+authCreateNewUser.addEventListener("click", createNewUser);
+inputauthPassword.addEventListener("keyup", (e) => {
+  if (e.key === "Enter" && authsigninButton.disabled === false) {
+    signIn();
+  }
+  authsigninButton.disabled = isInputFieldNotEmpty(inputauthPassword);
+  authCreateNewUser.disabled = isInputFieldNotEmpty(inputauthPassword);
 });
-
+//to signin
 authsigninButton.addEventListener("click", signIn);
 inputauthPassword.addEventListener("keyup", (e) => {
   if (e.key === "Enter" && authsigninButton.disabled === false) {
     signIn();
   }
   authsigninButton.disabled = isInputFieldNotEmpty(inputauthPassword);
+  authCreateNewUser.disabled = isInputFieldNotEmpty(inputauthPassword);
 });
+
+//To create new message
 newMessageButton.addEventListener("click", addNewMessage);
 inputNewMessage.addEventListener("keyup", (e) => {
   //If enter is pressed send new message to chat
@@ -82,6 +76,7 @@ inputNewMessage.addEventListener("keyup", (e) => {
   newMessageButton.disabled = isItOkToSendMessage;
 });
 
+//To choose channel
 publicChat.addEventListener("click", () => {
   activeChannel = "Public";
   updateChatMessages(activeChannel);
@@ -238,6 +233,25 @@ async function updateChatMessages(activeChannel) {
     updateScroll();
   }, 0);
 }
+async function createNewUser() {
+  const user = {
+    username: inputauthUsername.value,
+    password: inputauthPassword.value,
+  };
+  const options = {
+    method: "POST",
+    body: JSON.stringify(user),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+  const response = await fetch("/api/users/", options);
+  if (response.status === 201) {
+    setAuthLoginPage();
+    inputauthPassword.value = "";
+  }
+  inputauthPassword.value = "";
+}
 
 function createChatElement(newMessage, user, timestamp) {
   const message = document.createElement("div");
@@ -294,7 +308,6 @@ function createChatElement(newMessage, user, timestamp) {
 
   return message;
 }
-
 function updateScroll() {
   chatMessageList.scrollTop = chatMessageList.scrollHeight;
 }
@@ -309,7 +322,6 @@ function isInputFieldNotEmpty(inputField) {
     return true;
   }
 }
-
 function getJWT() {
   let maybyJson = localStorage.getItem(JWT_KEY);
   console.log("mayby", maybyJson);
@@ -322,5 +334,37 @@ function updateHeader(isLoggedIn, loggedinUser) {
   if (!isLoggedIn) return;
   authUserBox.className = "hide";
   headerIsLoggedinBox.className = "";
-  headerIsLoggedinBox.innerText = `Welcome to secure chat ${loggedinUser}!`;
+  headerIsLoggedinBox.getElementsByTagName("h3") = `Welcome to secure chat ${loggedinUser}!`;
+}
+
+function setAuthLoginPage() {
+  authLogin.className = "hide";
+  authNewUser.className = "hide";
+  authInput.className = "auth-input";
+  authsigninButton.className = "auth-button";
+  authBack.className = "auth-button";
+  authCreateNewUser.className = "hide";
+}
+function setAuthNewUserPage() {
+  authLogin.className = "hide";
+  authNewUser.className = "hide";
+  authInput.className = "auth-input";
+  authCreateNewUser.className = "auth-button";
+  authBack.className = "auth-button";
+}
+function setAuthBackPage() {
+  authLogin.className = "auth-button";
+  authNewUser.className = "auth-button";
+  authInput.className = "hide";
+  authsigninButton.className = "hide";
+  authCreateNewUser.className = "hide";
+  authBack.className = "hide";
+}
+function logOut() {
+    isLoggedIn = false;
+    loggedinUser = "";
+    activeChannel = "Public";
+
+    updateChatMessages(activeChannel);
+    
 }
