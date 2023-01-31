@@ -80,7 +80,7 @@
     "chat": [
       {
         "uuid": 2,
-        "message": "Hemligt medelande",
+        "message": "Private chat",
         "timestamp": "tid",
         "ischanged": "no",
         "iddeleted": "no",
@@ -88,7 +88,7 @@
       },
       {
         "uuid": 4,
-        "message": "Superhemligt",
+        "message": "Private",
         "timestamp": "tid",
         "ischanged": "no",
         "iddeleted": "no",
@@ -97,7 +97,7 @@
       {
         "messageid": 10,
         "uuid": 2,
-        "message": "Message DELETED",
+        "message": "Message Private",
         "timestamp": "2023-01-27T18:30:44.892Z",
         "ischanged": "yes",
         "changedtime": "2023-01-27T18:31:25.511Z",

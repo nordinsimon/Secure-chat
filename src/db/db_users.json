@@ -23,7 +23,7 @@
     "uuid": 5,
     "username": "Simon",
     "password": "$2a$10$QI5DADycsSNMvGRDHZI3Ge1yeiB89pQ8/fNKgAQtxQ0i0WjGDoovm",
-    "JWT": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiU2ltb24iLCJpYXQiOjE2NzUxMjgwNjgsImV4cCI6MTY3NTEyODA3OH0.O2ejuF4tgBkEr50m_TO8KTQ1prqKDzXnLRBRun3uhLs"
+    "JWT": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiU2ltb24iLCJpYXQiOjE2NzUxNDI0NjQsImV4cCI6MTY3NTE0MjQ3NH0.yh362nh8-NXFVs8l9dEKubP14W50A9rGm_C30JxjcrE"
   },
   {
     "uuid": 6,

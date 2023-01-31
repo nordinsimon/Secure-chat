@@ -50,6 +50,31 @@ router.post("/", (req, res) => {
   saveTokenToUserDb(userIndex, userToken);
   res.status(200).send(userToken);
 });
+router.post("/JWT/", (req, res) => {
+  const JWTFromUser = req.body.JWT;
+  if (JWTFromUser === undefined) {
+    res.sendStatus(401);
+    return;
+  }
+  console.log("JWTfromUSER", JWTFromUser);
+  let username;
+  let itIsAMatch = false;
+  db_users.data.forEach((user) => {
+    console.log("JWTFromDB  ", user.JWT);
+    if (user.JWT === JWTFromUser) {
+      username = { username: user.username };
+      console.log("JWT matches");
+      itIsAMatch = true;
+      return;
+    }
+  });
+  if (itIsAMatch) {
+    res.status(200).send(JSON.stringify(username));
+    return;
+  }
+  console.log("JWT doesnot match");
+  res.sendStatus(401);
+});
 
 function createToken(name) {
   const user = { name: name };

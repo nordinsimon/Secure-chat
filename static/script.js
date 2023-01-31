@@ -10,9 +10,11 @@ const newMessageButton = document.querySelector("#new-message-button");
 const publicChat = document.querySelector("#public-chat");
 const privateChat = document.querySelector("#private-chat");
 
+const selectedChannel = document.querySelector("#selected-channel");
+
 //
 //
-// SERVER START
+// Webbsidan laddas
 //
 //
 
@@ -21,6 +23,11 @@ let isLoggedIn = false;
 let loggedinUser = "";
 let activeChannel = "Public";
 let uuidToUsers = [];
+
+const loadJWT = getJWT();
+
+updateUuidToUsername();
+updateChatMessages(activeChannel);
 
 authsigninButton.addEventListener("click", signIn);
 inputauthPassword.addEventListener("keyup", (e) => {
@@ -41,9 +48,17 @@ inputNewMessage.addEventListener("keyup", (e) => {
   newMessageButton.disabled = isItOkToSendMessage;
 });
 
-updateUuidToUsername();
-addMessageToChatFromDB(getChatMessagesFromDB(activeChannel));
+publicChat.addEventListener("click", () => {
+  activeChannel = "Public";
+  updateChatMessages(activeChannel);
+});
+privateChat.addEventListener("click", () => {
+  if (isLoggedIn === false) return;
+  activeChannel = "Private";
+  updateChatMessages(activeChannel);
+});
 
+checkIfJWTMatch(loadJWT);
 //
 //
 // FUNCTIONS
@@ -68,6 +83,8 @@ async function signIn() {
     localStorage.setItem(JWT_KEY, userToken.token);
     isLoggedIn = true;
     loggedinUser = inputauthUsername.value;
+    inputNewMessage.placeholder = "New message...";
+    inputNewMessage.disabled = false;
     inputauthUsername.value = "";
   }
   inputauthPassword.value = "";
@@ -100,12 +117,12 @@ async function getChatMessagesFromDB(db) {
 }
 async function addMessageToChatFromDB(dbInput) {
   const db = await dbInput;
-  db.forEach((data) => {
-    const message = data.message;
-    const uuid = data.uuid;
+  db.forEach(async (data) => {
+    const message = await data.message;
+    const uuid = await data.uuid;
     const user = uuidToUsers.find((user) => user.uuid === Number(uuid));
     const username = user.username;
-    const timestamp = data.timestamp;
+    const timestamp = await data.timestamp;
 
     const element = createChatElement(message, username, timestamp);
     chatMessageList.appendChild(element);
@@ -113,7 +130,29 @@ async function addMessageToChatFromDB(dbInput) {
 
   updateScroll();
 }
+async function checkIfJWTMatch(loadJWT) {
+  const jwtObject = {
+    JWT: loadJWT,
+  };
+  const options = {
+    method: "POST",
+    body: JSON.stringify(jwtObject),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
 
+  const response = await fetch(`/api/login/JWT`, options);
+  if (response.status === 200) {
+    let userFromJWT = await response.json();
+    loggedinUser = userFromJWT.username;
+    isLoggedIn = true;
+    inputNewMessage.placeholder = "New message...";
+    inputNewMessage.disabled = false;
+    console.log("JWT Matched");
+    return;
+  }
+}
 function createChatElement(newMessage, user, timestamp) {
   const message = document.createElement("div");
   message.className = "message";
@@ -194,4 +233,17 @@ function isInputFieldNotEmpty(inputField) {
   } else {
     return true;
   }
+}
+function updateChatMessages(activeChannel) {
+  chatMessageList.innerHTML = "";
+  selectedChannel.innerText = activeChannel;
+  addMessageToChatFromDB(getChatMessagesFromDB(activeChannel));
+}
+function getJWT() {
+  let maybyJson = localStorage.getItem(JWT_KEY);
+  console.log("mayby", maybyJson);
+  if (!maybyJson) {
+    return;
+  }
+  return maybyJson;
 }
