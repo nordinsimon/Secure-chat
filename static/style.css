@@ -74,6 +74,7 @@ main > * {
   flex-grow: 1;
 }
 .channels {
+  flex-grow: 0;
   display: flex;
   flex-direction: column;
   min-width: 220px;

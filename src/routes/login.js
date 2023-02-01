@@ -26,7 +26,8 @@ const router = express.Router();
 
 await db_users.read();
 
-router.post("/", (req, res) => {
+router.post("/", async (req, res) => {
+  await db_users.read();
   const username = req.body.username;
   const password = req.body.password;
   let hashedPassword = bcrypt.hashSync(password, SALT);
@@ -50,7 +51,8 @@ router.post("/", (req, res) => {
   res.status(200).send(userToken);
 });
 
-router.post("/JWT", (req, res) => {
+router.post("/JWT", async (req, res) => {
+  await db_users.read();
   // JWT kan skickas antingen i request body, med querystring, eller i header: Authorization
   let token = req.body.token || req.query.token;
   if (!token) {

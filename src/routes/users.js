@@ -25,9 +25,11 @@ const SALT = process.env.SALT;
 
 const router = express.Router();
 
-await db_users.read(), db_nextUuId.read();
+await updateAllDB();
 
-router.get("/", (req, res) => {
+router.get("/", async (req, res) => {
+  await updateAllDB();
+
   const dbWithoutPassword = [];
   db_users.data.forEach((user) => {
     const uuid = user.uuid;
@@ -41,11 +43,13 @@ router.get("/", (req, res) => {
   res.status(200).send(dbWithoutPassword);
 });
 
-router.get("/nextuuid/", (req, res) => {
+router.get("/nextuuid/", async (req, res) => {
+  await updateAllDB();
   res.status(200).send(db_nextUuId.data);
 });
 
-router.post("/", (req, res) => {
+router.post("/", async (req, res) => {
+  await updateAllDB();
   const username = req.body.username;
   const password = req.body.password;
   if (
@@ -59,6 +63,7 @@ router.post("/", (req, res) => {
   addUser(username, password);
   res.sendStatus(201);
 });
+
 function usernameExists(username) {
   let findUser = db_users.data.findIndex((user) => user.username === username);
   if (findUser >= 0) {
@@ -69,10 +74,8 @@ function usernameExists(username) {
 }
 function correctUsernameInput(username) {
   if (username === undefined) {
-    console.log("username is undefined");
     return false;
   } else {
-    console.log("correctUsernameInput");
     return true;
   }
 }
@@ -85,17 +88,19 @@ function correctPasswordInput(password) {
     return true;
   }
 }
-async function addUser(name, password) {
+async function addUser(username, password) {
   let nextuuid = db_nextUuId.data.nextuuid++;
   let hashedPassword = bcrypt.hashSync(password, SALT);
   db_users.data.push({
     uuid: nextuuid,
-    username: name,
+    username: username,
     password: hashedPassword,
   });
   await db_nextUuId.write();
   await db_users.write();
 }
-
+async function updateAllDB() {
+  await db_users.read(), db_nextUuId.read();
+}
 export default router;
 export { usernameExists, correctUsernameInput, correctPasswordInput };

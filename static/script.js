@@ -16,6 +16,7 @@ const chatMessageList = document.querySelector("#chat-messege-list");
 const inputNewMessage = document.querySelector("#input-new-message");
 const newMessageButton = document.querySelector("#new-message-button");
 
+const channelsList = document.querySelector("#channels-list");
 const publicChat = document.querySelector("#public-chat");
 const privateChat = document.querySelector("#private-chat");
 
@@ -60,6 +61,8 @@ inputauthPassword.addEventListener("keyup", async (e) => {
     } else if (authCreateNewUser.disabled === false && authPage === "NewUser") {
       await createNewUser();
     }
+    authsigninButton.disabled = isInputFieldNotEmpty(inputauthPassword);
+    authCreateNewUser.disabled = isInputFieldNotEmpty(inputauthPassword);
   }
   authsigninButton.disabled = isInputFieldNotEmpty(inputauthPassword);
   authCreateNewUser.disabled = isInputFieldNotEmpty(inputauthPassword);
@@ -142,6 +145,7 @@ async function signIn() {
     inputNewMessage.placeholder = "New message...";
     inputNewMessage.disabled = false;
     inputauthUsername.value = "";
+    newChatButton.disabled = false;
     updateHeader();
   }
   inputauthPassword.value = "";
@@ -256,6 +260,11 @@ async function createNewUser() {
   }
   inputauthPassword.value = "";
 }
+async function addNewChannel() {
+  const newChannel = inputNewMessage.value;
+
+  const element = createChannelElement(newChannel);
+}
 
 function createChatElement(newMessage, user, timestamp) {
   const message = document.createElement("div");
@@ -312,6 +321,17 @@ function createChatElement(newMessage, user, timestamp) {
 
   return message;
 }
+function createChannelElement(channelName) {
+  const li = document.createElement("li");
+  const label = document.createElement("label");
+  label.className = "channels";
+  const span = document.createElement("span");
+  span.innerText = channelName;
+
+  label.appendChild(span);
+  li.appendChild(li);
+  return li;
+}
 function updateScroll() {
   chatMessageList.scrollTop = chatMessageList.scrollHeight;
 }
@@ -339,7 +359,6 @@ function updateHeader() {
   headerIsLoggedinBox.className = "header-is-loggedin-box";
   headerIsLoggedinText.innerText = `Welcome to secure chat ${loggedinUser}!`;
 }
-
 function setAuthLoginPage() {
   authPage = "Login";
   authLogin.className = "hide";
@@ -375,6 +394,7 @@ function signOut() {
   inputNewMessage.disabled = true;
   authUserBox.className = "header-is-loggedin-box";
   headerIsLoggedinBox.className = "hide";
+  newChatButton.disabled = true;
 
   updateChatMessages();
   setAuthBackPage();

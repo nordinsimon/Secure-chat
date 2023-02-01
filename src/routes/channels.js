@@ -27,16 +27,15 @@ const adapter4 = new JSONFile(file4);
 const db_nextChannelId = new Low(adapter4);
 
 const router = express.Router();
-await db_users.read(),
-  db_channels.read(),
-  db_nextMessageId.read(),
-  db_nextChannelId.read();
+await updateDataFromAllDB();
 
-router.get("/", (req, res) => {
+router.get("/", async (req, res) => {
+  await updateDataFromAllDB();
   res.status(200).send(db_channels.data);
 });
 
-router.get("/:channel", (req, res) => {
+router.get("/:channel", async (req, res) => {
+  await updateDataFromAllDB();
   const channelName = req.params.channel;
   const channelIndex = channelExists(channelName);
   if (
@@ -49,7 +48,8 @@ router.get("/:channel", (req, res) => {
   res.status(200).send(db_channels.data[channelIndex].chat);
 });
 
-router.post("/", (req, res) => {
+router.post("/", async (req, res) => {
+  await updateDataFromAllDB();
   const channelName = req.body.channel_name;
   const channelIndex = channelExists(channelName);
   const uuid = req.body.uuid;
@@ -71,7 +71,8 @@ router.post("/", (req, res) => {
   res.sendStatus(201);
 });
 
-router.put("/", (req, res) => {
+router.put("/", async (req, res) => {
+  await updateDataFromAllDB();
   const channelName = req.body.channel_name;
   const uuid = req.body.uuid;
   const messageid = req.body.messageid;
@@ -103,7 +104,8 @@ router.put("/", (req, res) => {
   res.status(200).send(db_channels.data);
 });
 
-router.delete("/", (req, res) => {
+router.delete("/", async (req, res) => {
+  await updateDataFromAllDB();
   const channelName = req.body.channel_name;
   const uuid = req.body.uuid;
   const messageid = req.body.messageid;
@@ -133,7 +135,8 @@ router.delete("/", (req, res) => {
   res.status(200).send(db_channels.data);
 });
 
-router.post("/newchannel/", (req, res) => {
+router.post("/newchannel/", async (req, res) => {
+  await updateDataFromAllDB();
   const newChannelName = req.body.new_channel_name;
   const secureStatus = req.body.secure_status;
 
@@ -271,7 +274,12 @@ function isValidSecureChatStatus(status) {
   console.log("Secure status incorrect value");
   return false;
 }
-
+async function updateDataFromAllDB() {
+  await db_users.read(),
+    db_channels.read(),
+    db_nextMessageId.read(),
+    db_nextChannelId.read();
+}
 async function addMessageToChannel(channelIndex, uuid, message, timestamp) {
   let nextMessageID = db_nextMessageId.data.nextmessageid++;
   db_channels.data[channelIndex].chat.push({

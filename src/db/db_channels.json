@@ -45,6 +45,24 @@
         "uuid": 1,
         "message": "Det är toppen 😍",
         "timestamp": "Jan 31 2023 23:08:56"
+      },
+      {
+        "messageid": 15,
+        "uuid": 5,
+        "message": "Gött",
+        "timestamp": "Jan 31 2023 23:17:48"
+      },
+      {
+        "messageid": 16,
+        "uuid": 6,
+        "message": "Vädret är fint",
+        "timestamp": "Jan 31 2023 23:19:11"
+      },
+      {
+        "messageid": 19,
+        "uuid": 18,
+        "message": "ja",
+        "timestamp": "Feb 01 2023 18:51:14"
       }
     ]
   },
@@ -94,6 +112,18 @@
         "uuid": 1,
         "message": "🍻🍻",
         "timestamp": "Jan 31 2023 23:10:21"
+      },
+      {
+        "messageid": 17,
+        "uuid": 1,
+        "message": "Test",
+        "timestamp": "Jan 31 2023 23:31:25"
+      },
+      {
+        "messageid": 18,
+        "uuid": 1,
+        "message": "testar igen",
+        "timestamp": "Jan 31 2023 23:33:18"
       }
     ]
   }
