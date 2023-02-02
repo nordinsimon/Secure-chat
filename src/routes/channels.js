@@ -29,13 +29,11 @@ const db_nextChannelId = new Low(adapter4);
 const router = express.Router();
 await updateDataFromAllDB();
 
-router.get("/", async (req, res) => {
-  await updateDataFromAllDB();
+router.get("/", (req, res) => {
   res.status(200).send(db_channels.data);
 });
 
-router.get("/:channel", async (req, res) => {
-  await updateDataFromAllDB();
+router.get("/:channel", (req, res) => {
   const channelName = req.params.channel;
   const channelIndex = channelExists(channelName);
   if (
@@ -51,7 +49,7 @@ router.get("/:channel", async (req, res) => {
 router.post("/", async (req, res) => {
   await updateDataFromAllDB();
   const channelName = req.body.channel_name;
-  const channelIndex = channelExists(channelName);
+  const channelIndex = await channelExists(channelName);
   const uuid = req.body.uuid;
   const message = req.body.message;
   const timestamp = req.body.timestamp;
@@ -60,8 +58,8 @@ router.post("/", async (req, res) => {
     correctChannelInput(channelName) === false ||
     correctUuidInput(uuid) === false ||
     correctMessageInput(message) == false ||
-    channelExists(channelName) === false ||
-    userExists(uuid) === false
+    (await channelExists(channelName)) === false ||
+    (await userExists(uuid)) === false
   ) {
     res.sendStatus(400);
     return;
@@ -71,8 +69,7 @@ router.post("/", async (req, res) => {
   res.sendStatus(201);
 });
 
-router.put("/", async (req, res) => {
-  await updateDataFromAllDB();
+router.put("/", (req, res) => {
   const channelName = req.body.channel_name;
   const uuid = req.body.uuid;
   const messageid = req.body.messageid;
@@ -104,8 +101,7 @@ router.put("/", async (req, res) => {
   res.status(200).send(db_channels.data);
 });
 
-router.delete("/", async (req, res) => {
-  await updateDataFromAllDB();
+router.delete("/", (req, res) => {
   const channelName = req.body.channel_name;
   const uuid = req.body.uuid;
   const messageid = req.body.messageid;
@@ -135,8 +131,7 @@ router.delete("/", async (req, res) => {
   res.status(200).send(db_channels.data);
 });
 
-router.post("/newchannel/", async (req, res) => {
-  await updateDataFromAllDB();
+router.post("/newchannel/", (req, res) => {
   const newChannelName = req.body.new_channel_name;
   const secureStatus = req.body.secure_status;
 
@@ -149,7 +144,7 @@ router.post("/newchannel/", async (req, res) => {
     res.sendStatus(400);
   } else {
     addNewChannel(newChannelName, secureStatus);
-    res.sendStatus(201).send(db_channels.data);
+    res.status(201).send(db_channels.data);
   }
 });
 
@@ -168,16 +163,6 @@ function channelExists(channelname) {
     console.log("channelExists");
     return findchannel;
   } else {
-    return false;
-  }
-}
-function userExists(uuid) {
-  let findUser = db_users.data.findIndex((user) => user.uuid === uuid);
-  if (findUser >= 0) {
-    console.log("uuidExists");
-    return findUser;
-  } else {
-    console.log("User does not exists");
     return false;
   }
 }
@@ -274,6 +259,17 @@ function isValidSecureChatStatus(status) {
   console.log("Secure status incorrect value");
   return false;
 }
+async function userExists(uuid) {
+  db_users.read;
+  let findUser = await db_users.data.findIndex((user) => user.uuid === uuid);
+  if (findUser >= 0) {
+    console.log("uuidExists");
+    return findUser;
+  } else {
+    console.log("User does not exists");
+    return false;
+  }
+}
 async function updateDataFromAllDB() {
   await db_users.read(),
     db_channels.read(),
@@ -308,14 +304,15 @@ async function deleteMessage(channelIndex, chatIndex, uuid) {
 }
 async function addNewChannel(chanelName, secureStatus) {
   let nextchannelID = db_nextChannelId.data.nextchannelid++;
-
+  console.log(nextchannelID);
   db_channels.data.push({
     channel_name: chanelName,
     secure_status: secureStatus,
     channelid: nextchannelID,
     chat: [],
   });
-  await db_channels.write(), db_nextChannelId.write();
+  await db_channels.write();
+  await db_nextChannelId.write();
 }
 
 //
