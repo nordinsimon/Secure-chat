@@ -19,8 +19,14 @@ const newMessageButton = document.querySelector("#new-message-button");
 const channelsList = document.querySelector("#channels-list");
 const publicChat = document.querySelector("#public-chat");
 const privateChat = document.querySelector("#private-chat");
+const inputNewChannel = document.querySelector("#input-new-channel");
+const publicOrPrivareButton = document.querySelector(
+  "#public-or-private-button"
+);
 
 const newChatButton = document.querySelector("#new-chat-button");
+const addChatButton = document.querySelector("#add-chat-button");
+const backChatButton = document.querySelector("#back-chat-button");
 
 const selectedChannel = document.querySelector("#selected-channel");
 
@@ -36,6 +42,8 @@ let loggedinUser = "";
 let activeChannel = "Public";
 let uuidToUsers = [];
 let authPage = "";
+
+let newChannelSecureStatus = "public";
 
 const loadJWT = getJWT();
 
@@ -53,7 +61,6 @@ authCreateNewUser.addEventListener("click", createNewUser);
 
 //to signin and create new user
 authsigninButton.addEventListener("click", signIn);
-
 inputauthPassword.addEventListener("keyup", async (e) => {
   if (e.key === "Enter") {
     if (authsigninButton.disabled === false && authPage === "Login") {
@@ -95,6 +102,36 @@ privateChat.addEventListener("click", () => {
   updateChatMessages();
 });
 
+//To navigate to create new channe
+newChatButton.addEventListener("click", () => {
+  newChatButton.className = "hide";
+  inputNewChannel.className = "new-chat-input";
+  addChatButton.className = "";
+  backChatButton.className = "";
+  publicOrPrivareButton.className = "";
+});
+backChatButton.addEventListener("click", setBackChatButton);
+
+//To create new channel
+publicOrPrivareButton.addEventListener("click", () => {
+  if (newChannelSecureStatusToBoolean()) {
+    newChannelSecureStatus = "public";
+    publicOrPrivareButton.innerText = "Public";
+  } else {
+    newChannelSecureStatus = "private";
+    publicOrPrivareButton.innerText = "Private";
+  }
+});
+addChatButton.addEventListener("click", addNewChannel);
+inputNewChannel.addEventListener("keyup", (e) => {
+  if (e.key === "Enter" && addChatButton.disabled === false) {
+    addNewChannel();
+  }
+  let isItOkToCreateChannel =
+    isInputFieldNotEmpty(inputNewChannel) || !isLoggedIn;
+  addChatButton.disabled = isItOkToCreateChannel;
+});
+
 //
 //
 // FUNCTIONS
@@ -119,6 +156,7 @@ async function checkIfJWTMatch(loadJWT) {
     isLoggedIn = true;
     inputNewMessage.placeholder = "New message...";
     inputNewMessage.disabled = false;
+    newChatButton.disabled = false;
     updateHeader();
     return;
   }
@@ -199,6 +237,7 @@ async function addNewMessageToDB(newMessage, timestamp) {
     (user) => user.username == userAddMessage
   );
   const uuid = uuidObject.uuid;
+  console.log(uuid);
   const message = {
     channel_name: activeChannel,
     uuid: uuid,
@@ -260,10 +299,50 @@ async function createNewUser() {
   }
   inputauthPassword.value = "";
 }
+async function addNewChannelToDb(channel, secure) {
+  const newChannel = {
+    new_channel_name: channel,
+    secure_status: secure,
+  };
+  const options = {
+    method: "POST",
+    body: JSON.stringify(newChannel),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+  const response = await fetch("/api/channels/newchannel", options);
+  if (response.status === 201) {
+    console.log("channel Added to DB");
+  }
+}
 async function addNewChannel() {
-  const newChannel = inputNewMessage.value;
+  if (!isLoggedIn) return;
 
-  const element = createChannelElement(newChannel);
+  const newChannel = inputNewChannel.value;
+  const secureStatus = newChannelSecureStatus;
+
+  const element = createChannelElement(newChannel, secureStatus);
+  channelsList.appendChild(element);
+  inputNewChannel.value = "";
+  addChatButton.disabled = true;
+  setBackChatButton();
+
+  addNewChannelToDb(newChannel, secureStatus);
+  console.log("addNewchannel");
+}
+async function getAllChannelsFromDB() {
+  const options = {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+  const response = await fetch("/api/channels/getallchannels", options);
+  if (response.status === 200) {
+    const db = await response.json();
+    return db;
+  }
 }
 
 function createChatElement(newMessage, user, timestamp) {
@@ -321,15 +400,21 @@ function createChatElement(newMessage, user, timestamp) {
 
   return message;
 }
-function createChannelElement(channelName) {
+function createChannelElement(channelName, secureStatus) {
   const li = document.createElement("li");
   const label = document.createElement("label");
-  label.className = "channels";
+  label.className = "channels-item-box";
   const span = document.createElement("span");
   span.innerText = channelName;
 
   label.appendChild(span);
-  li.appendChild(li);
+  if (newChannelSecureStatusToBoolean(secureStatus)) {
+    const div = document.createElement("div");
+    div.className = "locked-status";
+    div.innerText = "🔒";
+    label.appendChild(div);
+  }
+  li.appendChild(label);
   return li;
 }
 function updateScroll() {
@@ -385,6 +470,13 @@ function setAuthBackPage() {
   authCreateNewUser.className = "hide";
   authBack.className = "hide";
 }
+function setBackChatButton() {
+  newChatButton.className = "";
+  inputNewChannel.className = "hide";
+  addChatButton.className = "hide";
+  backChatButton.className = "hide";
+  publicOrPrivareButton.className = "hide";
+}
 function signOut() {
   isLoggedIn = false;
   loggedinUser = "";
@@ -398,4 +490,9 @@ function signOut() {
 
   updateChatMessages();
   setAuthBackPage();
+}
+function newChannelSecureStatusToBoolean() {
+  if (newChannelSecureStatus === "private") {
+    return true;
+  } else return false;
 }

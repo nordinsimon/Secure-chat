@@ -28,50 +28,5 @@
     "uuid": 6,
     "username": "Catarina",
     "password": "$2a$10$QI5DADycsSNMvGRDHZI3Gehj26dw7tWJ2YXitzyNgw.zla6shxQjq"
-  },
-  {
-    "uuid": 7,
-    "username": "test",
-    "password": "$2a$10$QI5DADycsSNMvGRDHZI3GeM7srk7t43VixruvDHg/4pDC98G6QiaS"
-  },
-  {
-    "uuid": 8,
-    "username": "test2",
-    "password": "$2a$10$QI5DADycsSNMvGRDHZI3Ge2E9RRawqP2X3PFR9fXlllnqaoSEKLEG"
-  },
-  {
-    "uuid": 9,
-    "username": "dw",
-    "password": "$2a$10$QI5DADycsSNMvGRDHZI3GeWIaXoI0burREyIPvQ9RhI7Mly9.H89S"
-  },
-  {
-    "uuid": 10,
-    "username": "abc",
-    "password": "$2a$10$QI5DADycsSNMvGRDHZI3GeBWDX/lAF/M86Zuhx4t.kjz3NMEq4ZJG"
-  },
-  {
-    "uuid": 11,
-    "username": "a",
-    "password": "$2a$10$QI5DADycsSNMvGRDHZI3GexOxh46lV.m4NJdILUShy24AKUPM9wCO"
-  },
-  {
-    "uuid": 12,
-    "username": "b",
-    "password": "$2a$10$QI5DADycsSNMvGRDHZI3GeQ7h.g0IBMthT3QwBuZZrO.jrHUUJnju"
-  },
-  {
-    "uuid": 15,
-    "username": "aaa",
-    "password": "$2a$10$QI5DADycsSNMvGRDHZI3Ges4ktPCbw8DNL1tAs0zO2kSvE7qFUdUi"
-  },
-  {
-    "uuid": 17,
-    "username": "bb",
-    "password": "$2a$10$QI5DADycsSNMvGRDHZI3GeCnoM/KvYTGVBn66B47LSTqMF21MTLAa"
-  },
-  {
-    "uuid": 18,
-    "username": "bbb",
-    "password": "$2a$10$QI5DADycsSNMvGRDHZI3GeoD5C2kQ.bDGbNDazGh1ocGX8wOsqhKe"
   }
 ]
