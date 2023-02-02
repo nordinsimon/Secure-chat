@@ -263,6 +263,7 @@ async function addNewMessage() {
 
   await addNewMessageToDB(newMessage, timestamp);
   updateScroll();
+  updateEventListenerMessages();
   inputNewMessage.value = "";
   newMessageButton.disabled = true;
 }
@@ -271,6 +272,7 @@ async function updateChatMessages() {
   await addMessageToChatFromDB(await getChatMessagesFromDB(activeChannel));
   setTimeout(() => {
     updateScroll();
+    updateEventListenerMessages();
   }, 0);
 }
 async function createNewUser() {
@@ -353,7 +355,7 @@ async function addNewChannel() {
 }
 
 function createChatElement(newMessage, user, timestamp) {
-  const message = document.createElement("div");
+  const message = document.createElement("li");
   message.className = "message";
 
   const messageboxLeft = document.createElement("div");
@@ -389,6 +391,7 @@ function createChatElement(newMessage, user, timestamp) {
 
   const deleteButton = document.createElement("button");
   deleteButton.innerText = "Delete";
+  deleteButton.className = "messagebox-right-delete";
 
   messageInfo.appendChild(messageUser);
   messageInfo.appendChild(messageTimestamp);
@@ -508,7 +511,6 @@ function newChannelSecureStatusToBoolean(secureStatus) {
     return true;
   } else return false;
 }
-
 function updateEventListenerChannels() {
   let list = channelsList.getElementsByTagName("li");
   for (let i = 0; i < list.length; i++) {
@@ -519,5 +521,24 @@ function updateEventListenerChannels() {
       selectedChannel.innerText = list[i].name;
     });
   }
-  console.log("Event Listener Updated");
+  console.log("Event Listener Channels Updated");
+}
+
+function updateEventListenerMessages() {
+  let list = chatMessageList.getElementsByTagName("li");
+  for (let i = 0; i < list.length; i++) {
+    list[i]
+      .querySelector(".messagebox-right-edit")
+      .addEventListener("click", (e) => {
+        //EDIT
+        console.log("edit", i, e);
+      });
+
+    list[i]
+      .querySelector(".messagebox-right-delete")
+      .addEventListener("click", (e) => {
+        console.log("delete", i, e);
+      });
+  }
+  console.log("Event Listener Edit Updated");
 }

@@ -51,6 +51,30 @@
         "uuid": 5,
         "message": "Gött",
         "timestamp": "Jan 31 2023 23:17:48"
+      },
+      {
+        "messageid": 36,
+        "uuid": 5,
+        "message": "Test",
+        "timestamp": "Feb 02 2023 20:53:22"
+      },
+      {
+        "messageid": 37,
+        "uuid": 5,
+        "message": "nytt",
+        "timestamp": "Feb 02 2023 21:19:56"
+      },
+      {
+        "messageid": 38,
+        "uuid": 5,
+        "message": "test",
+        "timestamp": "Feb 02 2023 21:20:48"
+      },
+      {
+        "messageid": 39,
+        "uuid": 5,
+        "message": "nytt medelande",
+        "timestamp": "Feb 02 2023 21:22:33"
       }
     ]
   },
@@ -100,6 +124,32 @@
         "uuid": 1,
         "message": "🍻🍻",
         "timestamp": "Jan 31 2023 23:10:21"
+      }
+    ]
+  },
+  {
+    "channel_name": "Pappa",
+    "secure_status": "private",
+    "channelid": 19,
+    "chat": [
+      {
+        "messageid": 35,
+        "uuid": 5,
+        "message": "Pappas kanal",
+        "timestamp": "Feb 02 2023 20:30:45"
+      }
+    ]
+  },
+  {
+    "channel_name": "Mamma",
+    "secure_status": "public",
+    "channelid": 20,
+    "chat": [
+      {
+        "messageid": 40,
+        "uuid": 5,
+        "message": "Mamma",
+        "timestamp": "Feb 02 2023 21:24:23"
       }
     ]
   }

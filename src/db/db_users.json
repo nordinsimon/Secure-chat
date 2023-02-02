@@ -68,5 +68,10 @@
     "uuid": 41,
     "username": "8",
     "password": "$2a$10$QI5DADycsSNMvGRDHZI3Ge1vh4sAHleAKhdkLSms/xZNdkYuLjP5C"
+  },
+  {
+    "uuid": 42,
+    "username": "Mamma",
+    "password": "$2a$10$QI5DADycsSNMvGRDHZI3GekGq8CkoTH2n3ERQMpi./9DdoISy4bHi"
   }
 ]
