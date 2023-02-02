@@ -51,14 +51,18 @@
       {
         "messageid": 15,
         "uuid": 5,
-        "message": "Gött",
-        "timestamp": "Jan 31 2023 23:17:48"
+        "message": "Message DELETED",
+        "timestamp": "Jan 31 2023 23:17:48",
+        "isdeleted": "yes",
+        "deletedtime": "2023-02-02T23:10:22.557Z"
       },
       {
         "messageid": 36,
         "uuid": 5,
-        "message": "Test",
-        "timestamp": "Feb 02 2023 20:53:22"
+        "message": "Message DELETED",
+        "timestamp": "Feb 02 2023 20:53:22",
+        "isdeleted": "yes",
+        "deletedtime": "2023-02-02T23:11:28.292Z"
       },
       {
         "messageid": 37,
@@ -77,6 +81,24 @@
         "uuid": 5,
         "message": "nytt medelande",
         "timestamp": "Feb 02 2023 21:22:33"
+      },
+      {
+        "messageid": 41,
+        "uuid": 5,
+        "message": "det blir nog fel nu",
+        "timestamp": "Feb 02 2023 23:56:49"
+      },
+      {
+        "messageid": 42,
+        "uuid": 5,
+        "message": "nu då",
+        "timestamp": "Feb 02 2023 23:57:26"
+      },
+      {
+        "messageid": 43,
+        "uuid": 5,
+        "message": "rgd",
+        "timestamp": "Feb 02 2023 23:57:34"
       }
     ]
   },
@@ -154,5 +176,17 @@
         "timestamp": "Feb 02 2023 21:24:23"
       }
     ]
+  },
+  {
+    "channel_name": "test",
+    "secure_status": "private",
+    "channelid": 21,
+    "chat": []
+  },
+  {
+    "channel_name": "few",
+    "secure_status": "public",
+    "channelid": 22,
+    "chat": []
   }
 ]

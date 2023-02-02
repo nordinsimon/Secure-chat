@@ -103,7 +103,7 @@ backChatButton.addEventListener("click", setBackChatButton);
 
 //To create new channel
 publicOrPrivareButton.addEventListener("click", () => {
-  if (newChannelSecureStatusToBoolean()) {
+  if (newChannelSecureStatusToBoolean(newChannelSecureStatus)) {
     newChannelSecureStatus = "public";
     publicOrPrivareButton.innerText = "Public";
   } else {
@@ -218,12 +218,14 @@ async function addMessageToChatFromDB(dbInput) {
     const user = uuidToUsers.find((user) => user.uuid === Number(uuid));
     const username = user.username;
     const timestamp = await data.timestamp;
+    const messageid = await data.messageid;
 
-    const element = createChatElement(message, username, timestamp);
+    const element = createChatElement(message, username, timestamp, messageid);
     chatMessageList.appendChild(element);
   });
-
-  updateScroll();
+  setTimeout(() => {
+    updateScroll();
+  }, 0);
 }
 async function addNewMessageToDB(newMessage, timestamp) {
   await updateUuidToUsername();
@@ -258,12 +260,11 @@ async function addNewMessageToDB(newMessage, timestamp) {
 async function addNewMessage() {
   const newMessage = inputNewMessage.value;
   const timestamp = new Date().toString().slice(4, 24);
-  const element = createChatElement(newMessage, loggedinUser, timestamp);
-  chatMessageList.appendChild(element);
 
   await addNewMessageToDB(newMessage, timestamp);
-  updateScroll();
-  updateEventListenerMessages();
+
+  chatMessageList.innerHTML = "";
+  await addMessageToChatFromDB(await getChatMessagesFromDB(activeChannel));
   inputNewMessage.value = "";
   newMessageButton.disabled = true;
 }
@@ -353,10 +354,38 @@ async function addNewChannel() {
   console.log("addNewchannel");
   await addChannelsToChannelsListFromDB();
 }
+async function deleteMessageFromDB(messageId) {
+  console.log("MESSAGEIDDDDDD", messageId);
+  if (!isLoggedIn) return;
+  const messageToDelet = {
+    channelId: activeChannel,
+    messageId: Number(messageId),
+  };
+  const options = {
+    method: "DELETE",
+    body: JSON.stringify(messageToDelet),
+    headers: {
+      "Content-Type": "application/json",
+      authorization: loadJWT,
+    },
+  };
 
-function createChatElement(newMessage, user, timestamp) {
+  const response = await fetch("/api/channels/", options);
+  if (response.status === 401) {
+    console.log("Unathorised to Delete");
+    return;
+  }
+  if (response.status === 200) {
+    console.log("Message Deleted");
+    await updateChatMessages();
+    return;
+  }
+}
+
+function createChatElement(newMessage, user, timestamp, messageId) {
   const message = document.createElement("li");
   message.className = "message";
+  message.accessKey = messageId;
 
   const messageboxLeft = document.createElement("div");
   messageboxLeft.className = "messagebox-left";
@@ -505,6 +534,7 @@ function signOut() {
 
   updateChatMessages();
   setAuthBackPage();
+  setBackChatButton();
 }
 function newChannelSecureStatusToBoolean(secureStatus) {
   if (secureStatus === "private") {
@@ -538,6 +568,8 @@ function updateEventListenerMessages() {
       .querySelector(".messagebox-right-delete")
       .addEventListener("click", (e) => {
         console.log("delete", i, e);
+        console.log(list[i].accessKey);
+        deleteMessageFromDB(list[i].accessKey);
       });
   }
   console.log("Event Listener Edit Updated");

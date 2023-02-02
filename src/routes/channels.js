@@ -89,8 +89,13 @@ router.post("/", async (req, res) => {
     return;
   }
 
-  addMessageToChannel(channelIndex, uuid, message, timestamp);
-  res.sendStatus(201);
+  const nextMessageId = addMessageToChannel(
+    channelIndex,
+    uuid,
+    message,
+    timestamp
+  );
+  res.status(201).send(nextMessageId);
 });
 
 router.put("/", (req, res) => {
@@ -126,10 +131,12 @@ router.put("/", (req, res) => {
 });
 
 router.delete("/", (req, res) => {
-  const channelId = req.body.channelid;
-  const messageid = req.body.messageid;
+  const channelId = req.body.channelId;
+  const messageid = req.body.messageId;
   const jwt = req.headers["authorization"];
   const channelIndex = channelExistsID(channelId);
+  console.log("ChannelINDEXXXXXXXX", channelIndex);
+  console.log("MESSAGEIDDDDDDDDDD", messageid);
   if (
     correctChannelId(channelId) === false ||
     correctMessageIdInput(messageid) === false ||
@@ -146,10 +153,9 @@ router.delete("/", (req, res) => {
     res.sendStatus(401);
     return;
   }
-
   console.log("DELETED ");
   deleteMessage(channelIndex, chatIndex, messageid, uuid);
-  res.status(200).send(db_channels.data);
+  res.sendStatus(200);
 });
 
 router.post("/newchannel/", (req, res) => {
@@ -327,6 +333,7 @@ async function addMessageToChannel(channelIndex, uuid, message, timestamp) {
     timestamp: timestamp,
   });
   await db_channels.write(), db_nextMessageId.write();
+  return nextMessageID;
 }
 async function editMessage(channelIndex, chatIndex, uuid, newmessage) {
   const db = db_channels.data[channelIndex].chat[chatIndex];
