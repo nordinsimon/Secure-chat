@@ -35,19 +35,7 @@
         <div class="sub-header">
           <h3>Channels</h3>
         </div>
-        <ul id="channels-list" class="channels-list">
-          <li>
-            <label id="public-chat" class="channels-item-box">
-              <span>Public</span>
-            </label>
-          </li>
-          <li>
-            <label id="private-chat" class="channels-item-box">
-              <span>Private</span>
-              <div class="locked-status">🔒</div>
-            </label>
-          </li>
-        </ul>
+        <ul id="channels-list" class="channels-list"></ul>
         <div>
           <div class="new-chat">
             <button class="hide" id="public-or-private-button">Public</button>
@@ -63,13 +51,11 @@
           </div>
         </div>
       </div>
-
       <div class="chat">
         <div class="sub-header">
           <h3 id="selected-channel">Public</h3>
         </div>
         <div id="chat-messege-list" class="chat-message"></div>
-
         <div class="chat-input">
           <input
             id="input-new-message"

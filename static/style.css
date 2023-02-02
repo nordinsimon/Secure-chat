@@ -98,6 +98,8 @@ main > * {
   margin: 0;
   padding: 0;
   margin-top: 0.5em;
+  height: calc(100vh - 300px - 100px);
+  overflow: scroll;
 }
 .channels-list li {
   background-color: #7fb06f;

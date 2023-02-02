@@ -65,22 +65,13 @@ router.post("/JWT", async (req, res) => {
     token = x.substring(7);
   }
 
-  console.log("Token: ", token);
-  if (token) {
-    let decoded;
-    try {
-      decoded = jwt.verify(token, process.env.SECRET);
-    } catch (error) {
-      console.log("Catch! Felaktig token!!");
-      res.sendStatus(401);
-      return;
-    }
-    console.log("decoded: ", decoded);
-    res.status(200).send(decoded);
-  } else {
-    console.log("Ingen token");
-    res.sendStatus(401); // Unauthorized
+  let decoded = decodeToken(token);
+
+  if (decoded === false) {
+    res.sendStatus(401);
+    return;
   }
+  res.status(200).send(decoded);
 });
 
 function createToken(name) {
@@ -92,4 +83,21 @@ function createToken(name) {
   return user;
 }
 
+function decodeToken(token) {
+  if (token) {
+    let decoded;
+    try {
+      decoded = jwt.verify(token, process.env.SECRET);
+    } catch (error) {
+      console.log("Catch! Felaktig token!!");
+      return false;
+    }
+    console.log("decoded: ", decoded);
+    return decoded;
+  } else {
+    console.log("Ingen token");
+    return false;
+  }
+}
+export { decodeToken };
 export default router;

@@ -51,12 +51,6 @@
         "uuid": 5,
         "message": "Gött",
         "timestamp": "Jan 31 2023 23:17:48"
-      },
-      {
-        "messageid": 16,
-        "uuid": 6,
-        "message": "Vädret är fint",
-        "timestamp": "Jan 31 2023 23:19:11"
       }
     ]
   },
@@ -108,17 +102,5 @@
         "timestamp": "Jan 31 2023 23:10:21"
       }
     ]
-  },
-  {
-    "channel_name": "Öppen",
-    "secure_status": "public",
-    "channelid": 9,
-    "chat": []
-  },
-  {
-    "channel_name": "Stängd",
-    "secure_status": "private",
-    "channelid": 10,
-    "chat": []
   }
 ]

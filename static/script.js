@@ -17,8 +17,7 @@ const inputNewMessage = document.querySelector("#input-new-message");
 const newMessageButton = document.querySelector("#new-message-button");
 
 const channelsList = document.querySelector("#channels-list");
-const publicChat = document.querySelector("#public-chat");
-const privateChat = document.querySelector("#private-chat");
+
 const inputNewChannel = document.querySelector("#input-new-channel");
 const publicOrPrivareButton = document.querySelector(
   "#public-or-private-button"
@@ -39,13 +38,13 @@ const selectedChannel = document.querySelector("#selected-channel");
 const JWT_KEY = "login-jwt";
 let isLoggedIn = false;
 let loggedinUser = "";
-let activeChannel = "Public";
+let activeChannel = 1;
 let uuidToUsers = [];
 let authPage = "";
 
 let newChannelSecureStatus = "public";
 
-const loadJWT = getJWT();
+let loadJWT = getJWT();
 
 updateUuidToUsername();
 updateChatMessages(activeChannel);
@@ -90,17 +89,6 @@ inputNewMessage.addEventListener("keyup", (e) => {
   let isItOkToSendMessage =
     isInputFieldNotEmpty(inputNewMessage) || !isLoggedIn;
   newMessageButton.disabled = isItOkToSendMessage;
-});
-
-//To choose channel
-publicChat.addEventListener("click", () => {
-  activeChannel = "Public";
-  updateChatMessages();
-});
-privateChat.addEventListener("click", () => {
-  if (isLoggedIn === false) return;
-  activeChannel = "Private";
-  updateChatMessages();
 });
 
 //To navigate to create new channe
@@ -176,9 +164,10 @@ async function signIn() {
   };
   const response = await fetch("/api/login/", options);
   if (response.status === 200) {
-    const userToken = await response.json();
+    let userToken = await response.json();
 
     localStorage.setItem(JWT_KEY, userToken.token);
+    loadJWT = await userToken.token;
     isLoggedIn = true;
     loggedinUser = await inputauthUsername.value;
     inputNewMessage.placeholder = "New message...";
@@ -207,9 +196,13 @@ async function getChatMessagesFromDB(db) {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
+      authorization: loadJWT,
     },
   };
   const response = await fetch(`/api/channels/${db}`, options);
+  if (response.status === 401) {
+    return false;
+  }
   if (response.status === 200) {
     const db = await response.json();
     return db;
@@ -217,6 +210,7 @@ async function getChatMessagesFromDB(db) {
 }
 async function addMessageToChatFromDB(dbInput) {
   await updateUuidToUsername();
+  if (dbInput === false) return;
   const db = await dbInput;
   db.forEach(async (data) => {
     const message = await data.message;
@@ -240,7 +234,7 @@ async function addNewMessageToDB(newMessage, timestamp) {
   const uuid = uuidObject.uuid;
   console.log(uuid);
   const message = {
-    channel_name: activeChannel,
+    channelId: activeChannel,
     uuid: uuid,
     message: newMessage,
     timestamp: timestamp,
@@ -264,7 +258,6 @@ async function addNewMessageToDB(newMessage, timestamp) {
 async function addNewMessage() {
   const newMessage = inputNewMessage.value;
   const timestamp = new Date().toString().slice(4, 24);
-
   const element = createChatElement(newMessage, loggedinUser, timestamp);
   chatMessageList.appendChild(element);
 
@@ -275,7 +268,6 @@ async function addNewMessage() {
 }
 async function updateChatMessages() {
   chatMessageList.innerHTML = "";
-  selectedChannel.innerText = activeChannel;
   await addMessageToChatFromDB(await getChatMessagesFromDB(activeChannel));
   setTimeout(() => {
     updateScroll();
@@ -310,19 +302,21 @@ async function getAllChannelsFromDB() {
   const response = await fetch("/api/channels/", options);
   if (response.status === 200) {
     const allChannels = await response.json();
-    console.log(allChannels);
     return allChannels;
   }
 }
 async function addChannelsToChannelsListFromDB() {
+  channelsList.innerHTML = "";
   const channels = await getAllChannelsFromDB();
   channels.forEach((channel) => {
     const element = createChannelElement(
       channel.channel_name,
-      channel.secure_status
+      channel.secure_status,
+      channel.channelid
     );
     channelsList.appendChild(element);
   });
+  updateEventListenerChannels();
 }
 async function addNewChannelToDb(channel, secure) {
   const newChannel = {
@@ -347,14 +341,15 @@ async function addNewChannel() {
   const newChannel = inputNewChannel.value;
   const secureStatus = newChannelSecureStatus;
 
-  const element = createChannelElement(newChannel, secureStatus);
-  channelsList.appendChild(element);
+  /*   const element = createChannelElement(newChannel, secureStatus);
+  channelsList.appendChild(element); */
   inputNewChannel.value = "";
   addChatButton.disabled = true;
   setBackChatButton();
 
-  addNewChannelToDb(newChannel, secureStatus);
+  await addNewChannelToDb(newChannel, secureStatus);
   console.log("addNewchannel");
+  await addChannelsToChannelsListFromDB();
 }
 
 function createChatElement(newMessage, user, timestamp) {
@@ -412,8 +407,11 @@ function createChatElement(newMessage, user, timestamp) {
 
   return message;
 }
-function createChannelElement(channelName, secureStatus) {
+function createChannelElement(channelName, secureStatus, channelid) {
   const li = document.createElement("li");
+  li.name = channelName;
+  li.accessKey = channelid;
+  li.id = `channelid-${channelid}`;
   const label = document.createElement("label");
   label.className = "channels-item-box";
   const span = document.createElement("span");
@@ -492,13 +490,15 @@ function setBackChatButton() {
 function signOut() {
   isLoggedIn = false;
   loggedinUser = "";
-  activeChannel = "Public";
+  activeChannel = 1;
   localStorage.removeItem(JWT_KEY);
+  loadJWT = "";
   inputNewMessage.placeholder = "Sign in to send message!";
   inputNewMessage.disabled = true;
   authUserBox.className = "header-is-loggedin-box";
   headerIsLoggedinBox.className = "hide";
   newChatButton.disabled = true;
+  selectedChannel.innerText = "Public";
 
   updateChatMessages();
   setAuthBackPage();
@@ -507,4 +507,17 @@ function newChannelSecureStatusToBoolean(secureStatus) {
   if (secureStatus === "private") {
     return true;
   } else return false;
+}
+
+function updateEventListenerChannels() {
+  let list = channelsList.getElementsByTagName("li");
+  for (let i = 0; i < list.length; i++) {
+    list[i].addEventListener("click", async (e) => {
+      const element = list[i].accessKey;
+      activeChannel = element;
+      await updateChatMessages();
+      selectedChannel.innerText = list[i].name;
+    });
+  }
+  console.log("Event Listener Updated");
 }

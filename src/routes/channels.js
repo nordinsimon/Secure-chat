@@ -4,6 +4,7 @@ import { join, dirname } from "path";
 import { fileURLToPath } from "url";
 import { Low } from "lowdb";
 import { JSONFile } from "lowdb/node";
+import { decodeToken } from "./login.js";
 
 //Vet inte varför det paketet är importerat
 //import { channel } from "diagnostics_channel";
@@ -43,34 +44,45 @@ router.get("/", async (req, res) => {
   res.status(200).send(allChannels);
 });
 
-router.get("/:channel", (req, res) => {
-  console.log("FELGETREQUEST");
-  const channelName = req.params.channel;
-  console.log(channelName);
-  const channelIndex = channelExists(channelName);
+router.get("/:channelid", (req, res) => {
+  const channelId = req.params.channelid;
+  const jwt = req.headers["authorization"];
+
+  console.log("jwt", jwt);
+  console.log(channelId);
+
   if (
-    correctChannelInput(channelName) === false ||
-    channelExists(channelName) === false
+    correctChannelId(channelId) === false ||
+    channelExistsID(channelId) === false
   ) {
     res.sendStatus(400);
+    return;
+  }
+  const channelIndex = channelExistsID(channelId);
+  if (db_channels.data[channelIndex].secure_status === "public") {
+    res.status(200).send(db_channels.data[channelIndex].chat);
+    return;
+  }
+  if (decodeToken(jwt) === false) {
+    res.sendStatus(401);
     return;
   }
   res.status(200).send(db_channels.data[channelIndex].chat);
 });
 
 router.post("/", async (req, res) => {
-  await updateDataFromAllDB();
-  const channelName = req.body.channel_name;
-  const channelIndex = await channelExists(channelName);
+  await db_channels.read(), db_users.read();
+  const channelId = req.body.channelId;
+  const channelIndex = await channelExistsID(channelId);
   const uuid = req.body.uuid;
   const message = req.body.message;
   const timestamp = req.body.timestamp;
 
   if (
-    correctChannelInput(channelName) === false ||
+    correctChannelId(channelId) === false ||
     correctUuidInput(uuid) === false ||
     correctMessageInput(message) == false ||
-    (await channelExists(channelName)) === false ||
+    channelIndex === false ||
     (await userExists(uuid)) === false
   ) {
     res.sendStatus(400);
@@ -178,6 +190,18 @@ function channelExists(channelname) {
     return false;
   }
 }
+function channelExistsID(channelid) {
+  let findchannel = db_channels.data.findIndex(
+    (channel) => channel.channelid === Number(channelid)
+  );
+  if (findchannel >= 0) {
+    console.log("channelExists");
+    return findchannel;
+  } else {
+    console.log("Channel not exist");
+    return false;
+  }
+}
 function messageidExists(channelIndex, messageid) {
   let chatIndex = db_channels.data[channelIndex].chat.findIndex(
     (chat) => chat.messageid === messageid
@@ -195,7 +219,6 @@ function correctChannelInput(channelName) {
     console.log("Channel is undefined");
     return false;
   } else {
-    console.log("FUKTION KÖRS");
     console.log("correctChannelInput");
     return true;
   }
@@ -242,6 +265,15 @@ function correctNewChannelName(newChannelName) {
     return false;
   } else {
     console.log("correctNewChannelName");
+    return true;
+  }
+}
+function correctChannelId(channelId) {
+  if (channelId === undefined) {
+    console.log("ChannelId is undefined");
+    return false;
+  } else {
+    console.log("correctChannelId");
     return true;
   }
 }
