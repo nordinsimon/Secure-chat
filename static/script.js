@@ -355,7 +355,6 @@ async function addNewChannel() {
   await addChannelsToChannelsListFromDB();
 }
 async function deleteMessageFromDB(messageId) {
-  console.log("MESSAGEIDDDDDD", messageId);
   if (!isLoggedIn) return;
   const messageToDelet = {
     channelId: activeChannel,
@@ -377,6 +376,33 @@ async function deleteMessageFromDB(messageId) {
   }
   if (response.status === 200) {
     console.log("Message Deleted");
+    await updateChatMessages();
+    return;
+  }
+}
+async function editMessageFromDB(newMessage, messageId) {
+  if (!isLoggedIn) return;
+  const messageToEdit = {
+    channelId: activeChannel,
+    messageId: Number(messageId),
+    newMessage: newMessage,
+  };
+  const options = {
+    method: "PUT",
+    body: JSON.stringify(messageToEdit),
+    headers: {
+      "Content-Type": "application/json",
+      authorization: loadJWT,
+    },
+  };
+
+  const response = await fetch("/api/channels/", options);
+  if (response.status === 401) {
+    console.log("Unathorised to edit");
+    return;
+  }
+  if (response.status === 200) {
+    console.log("Message EDITED");
     await updateChatMessages();
     return;
   }
@@ -560,8 +586,8 @@ function updateEventListenerMessages() {
     list[i]
       .querySelector(".messagebox-right-edit")
       .addEventListener("click", (e) => {
-        //EDIT
         console.log("edit", i, e);
+        editMessageFromDB(inputNewMessage.value, list[i].accessKey);
       });
 
     list[i]

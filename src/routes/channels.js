@@ -99,35 +99,31 @@ router.post("/", async (req, res) => {
 });
 
 router.put("/", (req, res) => {
-  const channelName = req.body.channel_name;
-  const uuid = req.body.uuid;
-  const messageid = req.body.messageid;
+  const channelId = req.body.channelId;
+  const messageid = req.body.messageId;
   const newMessage = req.body.newMessage;
-
+  const jwt = req.headers["authorization"];
+  const channelIndex = channelExistsID(channelId);
   if (
-    correctChannelInput(channelName) === false ||
-    correctUuidInput(uuid) === false ||
+    correctChannelId(channelId) === false ||
     correctMessageIdInput(messageid) === false ||
-    correctNewMessageInput(newMessage) === false ||
-    channelExists(channelName) === false ||
-    userExists(uuid) === false
+    correctMessageInput(newMessage) === false ||
+    channelIndex === false ||
+    messageidExists(channelIndex, messageid) === false
   ) {
     res.sendStatus(400);
     return;
   }
-  const channelIndex = channelExists(channelName);
-  if (messageidExists(channelIndex, messageid) === false) {
-    res.sendStatus(400);
-    return;
-  }
+  const token = decodeToken(jwt);
+  const uuid = token.uuid;
   const chatIndex = messageidExists(channelIndex, messageid);
-  if (isUuidEqual(channelIndex, chatIndex, uuid) === false) {
+  if (token === false || isUuidEqual(channelIndex, chatIndex, uuid) === false) {
     res.sendStatus(401);
     return;
   }
-
+  console.log("EDITED ");
   editMessage(channelIndex, chatIndex, uuid, newMessage);
-  res.status(200).send(db_channels.data);
+  res.sendStatus(200);
 });
 
 router.delete("/", (req, res) => {
@@ -135,8 +131,6 @@ router.delete("/", (req, res) => {
   const messageid = req.body.messageId;
   const jwt = req.headers["authorization"];
   const channelIndex = channelExistsID(channelId);
-  console.log("ChannelINDEXXXXXXXX", channelIndex);
-  console.log("MESSAGEIDDDDDDDDDD", messageid);
   if (
     correctChannelId(channelId) === false ||
     correctMessageIdInput(messageid) === false ||

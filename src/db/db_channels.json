@@ -73,8 +73,10 @@
       {
         "messageid": 38,
         "uuid": 5,
-        "message": "test",
-        "timestamp": "Feb 02 2023 21:20:48"
+        "message": "EDIT",
+        "timestamp": "Feb 02 2023 21:20:48",
+        "ischanged": "yes",
+        "changedtime": "2023-02-02T23:23:21.655Z"
       },
       {
         "messageid": 39,
