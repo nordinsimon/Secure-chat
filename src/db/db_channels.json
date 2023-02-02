@@ -37,8 +37,10 @@
       {
         "messageid": 6,
         "uuid": 2,
-        "message": "Bra här med hur är det med dig?",
-        "timestamp": "Jan 31 2023 23:08:37"
+        "message": "Message DELETED",
+        "timestamp": "Jan 31 2023 23:08:37",
+        "isdeleted": "yes",
+        "deletedtime": "2023-02-02T22:07:46.557Z"
       },
       {
         "messageid": 7,

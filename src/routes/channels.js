@@ -126,31 +126,28 @@ router.put("/", (req, res) => {
 });
 
 router.delete("/", (req, res) => {
-  const channelName = req.body.channel_name;
-  const uuid = req.body.uuid;
+  const channelId = req.body.channelid;
   const messageid = req.body.messageid;
-
+  const jwt = req.headers["authorization"];
+  const channelIndex = channelExistsID(channelId);
   if (
-    correctChannelInput(channelName) === false ||
-    correctUuidInput(uuid) === false ||
+    correctChannelId(channelId) === false ||
     correctMessageIdInput(messageid) === false ||
-    channelExists(channelName) === false ||
-    userExists(uuid) === false
+    channelIndex === false ||
+    messageidExists(channelIndex, messageid) === false
   ) {
     res.sendStatus(400);
     return;
   }
-  const channelIndex = channelExists(channelName);
-  if (messageidExists(channelIndex, messageid) === false) {
-    res.sendStatus(400);
-    return;
-  }
+  const token = decodeToken(jwt);
+  const uuid = token.uuid;
   const chatIndex = messageidExists(channelIndex, messageid);
-  if (isUuidEqual(channelIndex, chatIndex, uuid) === false) {
+  if (token === false || isUuidEqual(channelIndex, chatIndex, uuid) === false) {
     res.sendStatus(401);
     return;
   }
 
+  console.log("DELETED ");
   deleteMessage(channelIndex, chatIndex, messageid, uuid);
   res.status(200).send(db_channels.data);
 });

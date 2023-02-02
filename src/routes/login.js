@@ -47,7 +47,9 @@ router.post("/", async (req, res) => {
     res.sendStatus(401);
     return;
   }
-  const userToken = createToken(username);
+  const uuid = await db_users.data[userIndex].uuid;
+  const userObject = { name: username, uuid: uuid };
+  const userToken = createToken(userObject);
   res.status(200).send(userToken);
 });
 
@@ -74,12 +76,12 @@ router.post("/JWT", async (req, res) => {
   res.status(200).send(decoded);
 });
 
-function createToken(name) {
-  const user = { name: name };
+function createToken(user) {
   const token = jwt.sign(user, process.env.SECRET, {
     expiresIn: process.env.JWTTIME,
   });
   user.token = token;
+  console.log("NEWJWT", user);
   return user;
 }
 
