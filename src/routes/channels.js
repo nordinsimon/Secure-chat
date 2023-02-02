@@ -29,12 +29,24 @@ const db_nextChannelId = new Low(adapter4);
 const router = express.Router();
 await updateDataFromAllDB();
 
-router.get("/", (req, res) => {
-  res.status(200).send(db_channels.data);
+router.get("/", async (req, res) => {
+  await updateDataFromAllDB();
+  const allChannels = [];
+  db_channels.data.forEach((channel) => {
+    const object = {
+      channel_name: channel.channel_name,
+      secure_status: channel.secure_status,
+      channelid: channel.channelid,
+    };
+    allChannels.push(object);
+  });
+  res.status(200).send(allChannels);
 });
 
 router.get("/:channel", (req, res) => {
+  console.log("FELGETREQUEST");
   const channelName = req.params.channel;
+  console.log(channelName);
   const channelIndex = channelExists(channelName);
   if (
     correctChannelInput(channelName) === false ||
@@ -183,6 +195,7 @@ function correctChannelInput(channelName) {
     console.log("Channel is undefined");
     return false;
   } else {
+    console.log("FUKTION KÖRS");
     console.log("correctChannelInput");
     return true;
   }

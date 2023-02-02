@@ -49,6 +49,7 @@ const loadJWT = getJWT();
 
 updateUuidToUsername();
 updateChatMessages(activeChannel);
+addChannelsToChannelsListFromDB();
 checkIfJWTMatch(loadJWT);
 
 // to set stages of login header
@@ -299,6 +300,30 @@ async function createNewUser() {
   }
   inputauthPassword.value = "";
 }
+async function getAllChannelsFromDB() {
+  const options = {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+  const response = await fetch("/api/channels/", options);
+  if (response.status === 200) {
+    const allChannels = await response.json();
+    console.log(allChannels);
+    return allChannels;
+  }
+}
+async function addChannelsToChannelsListFromDB() {
+  const channels = await getAllChannelsFromDB();
+  channels.forEach((channel) => {
+    const element = createChannelElement(
+      channel.channel_name,
+      channel.secure_status
+    );
+    channelsList.appendChild(element);
+  });
+}
 async function addNewChannelToDb(channel, secure) {
   const newChannel = {
     new_channel_name: channel,
@@ -330,19 +355,6 @@ async function addNewChannel() {
 
   addNewChannelToDb(newChannel, secureStatus);
   console.log("addNewchannel");
-}
-async function getAllChannelsFromDB() {
-  const options = {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  };
-  const response = await fetch("/api/channels/getallchannels", options);
-  if (response.status === 200) {
-    const db = await response.json();
-    return db;
-  }
 }
 
 function createChatElement(newMessage, user, timestamp) {
@@ -491,8 +503,8 @@ function signOut() {
   updateChatMessages();
   setAuthBackPage();
 }
-function newChannelSecureStatusToBoolean() {
-  if (newChannelSecureStatus === "private") {
+function newChannelSecureStatusToBoolean(secureStatus) {
+  if (secureStatus === "private") {
     return true;
   } else return false;
 }
