@@ -121,7 +121,6 @@ router.put("/", async (req, res) => {
     res.sendStatus(401);
     return;
   }
-
   if (await isDeleted(channelIndex, chatIndex)) {
     res.sendStatus(403);
     return;

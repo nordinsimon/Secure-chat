@@ -42,6 +42,8 @@ let activeChannel = 1;
 let uuidToUsers = [];
 let authPage = "";
 
+let scrollposition;
+
 let newChannelSecureStatus = "public";
 
 let loadJWT = getJWT();
@@ -269,7 +271,6 @@ async function addNewMessageToDB(newMessage, timestamp) {
 
     return;
   }
-  updateScroll();
 }
 async function addNewMessage() {
   const newMessage = inputNewMessage.value;
@@ -281,12 +282,12 @@ async function addNewMessage() {
   inputNewMessage.value = "";
   newMessageButton.disabled = true;
 }
-async function updateChatMessages() {
+async function updateChatMessages(scrollStatus) {
   chatMessageList.innerHTML = "";
   await addMessageToChatFromDB(await getChatMessagesFromDB(activeChannel));
   setTimeout(() => {
-    updateScroll();
     updateEventListenerMessages();
+    updateScroll(scrollStatus);
   }, 0);
 }
 async function createNewUser() {
@@ -367,7 +368,7 @@ async function addNewChannel() {
   console.log("addNewchannel");
   await addChannelsToChannelsListFromDB();
 }
-async function deleteMessageFromDB(messageId) {
+async function deleteMessageFromDB(messageId, scrollStatus) {
   if (!isLoggedIn) return;
   const messageToDelet = {
     channelId: activeChannel,
@@ -389,11 +390,11 @@ async function deleteMessageFromDB(messageId) {
   }
   if (response.status === 200) {
     console.log("Message Deleted");
-    await updateChatMessages();
+    await updateChatMessages(scrollStatus);
     return;
   }
 }
-async function editMessageFromDB(newMessage, messageId) {
+async function editMessageFromDB(newMessage, messageId, scrollStatus) {
   if (!isLoggedIn) return;
   const messageToEdit = {
     channelId: activeChannel,
@@ -416,7 +417,7 @@ async function editMessageFromDB(newMessage, messageId) {
   }
   if (response.status === 200) {
     console.log("Message EDITED");
-    await updateChatMessages();
+    await updateChatMessages(scrollStatus);
     return;
   }
 }
@@ -428,8 +429,6 @@ function createChatElement(
   messageId,
   updatedTime
 ) {
-  console.log("Först", "messageID: ", messageId, "newMessage: ", newMessage);
-
   const message = document.createElement("li");
   message.className = "message";
   message.accessKey = messageId;
@@ -483,7 +482,7 @@ function createChatElement(
 
   message.appendChild(messageboxLeft);
   message.appendChild(messageboxRight);
-  console.log(message);
+
   return message;
 }
 function createChannelElement(channelName, secureStatus, channelid) {
@@ -506,8 +505,12 @@ function createChannelElement(channelName, secureStatus, channelid) {
   li.appendChild(label);
   return li;
 }
-function updateScroll() {
-  chatMessageList.scrollTop = chatMessageList.scrollHeight;
+function updateScroll(scrollStatus) {
+  let scrollTo = chatMessageList.scrollHeight;
+  if (scrollStatus === false) {
+    scrollTo = scrollposition;
+  }
+  chatMessageList.scrollTop = scrollTo;
 }
 function generateGoodDate() {
   return (date = new Date().toString().slice(4, 24));
@@ -606,16 +609,15 @@ function updateEventListenerMessages() {
     list[i]
       .querySelector(".messagebox-right-edit")
       .addEventListener("click", (e) => {
-        console.log("edit", i, e);
-        editMessageFromDB(inputNewMessage.value, list[i].accessKey);
+        scrollposition = chatMessageList.scrollTop;
+        editMessageFromDB(inputNewMessage.value, list[i].accessKey, false);
       });
 
     list[i]
       .querySelector(".messagebox-right-delete")
       .addEventListener("click", (e) => {
-        console.log("delete", i, e);
-        console.log(list[i].accessKey);
-        deleteMessageFromDB(list[i].accessKey);
+        scrollposition = chatMessageList.scrollTop;
+        deleteMessageFromDB(list[i].accessKey, false);
       });
   }
   console.log("Event Listener Edit Updated");
