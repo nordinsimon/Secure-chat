@@ -342,15 +342,15 @@ async function editMessage(channelIndex, chatIndex, uuid, newmessage) {
 
   db.message = newmessage;
   db.ischanged = true;
-  db.changedtime = new Date();
+  db.updatedtime = new Date();
 
   await db_channels.write();
 }
 async function deleteMessage(channelIndex, chatIndex, uuid) {
   const db = db_channels.data[channelIndex].chat[chatIndex];
-  db.message = "";
+  db.message = "Meddelande borttaget";
   db.isdeleted = true;
-  db.deletedtime = new Date();
+  db.updatedtime = new Date();
 
   await db_channels.write();
 }

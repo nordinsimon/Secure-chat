@@ -222,15 +222,13 @@ async function addMessageToChatFromDB(dbInput) {
     const messageid = await data.messageid;
     const isChanged = await data.ischanged;
     const isDeleted = await data.isdeleted;
-    let messageStatus = false;
-    let newTimestamp = false;
 
-    if (await isDeleted) {
-      newTimestamp = await data.deletedtime;
-      messageStatus = "  Deleted: ";
-    } else if (await isChanged) {
-      newTimestamp = await data.changedtime;
-      messageStatus = "  Edited: ";
+    let updatedTime = "";
+
+    if (isDeleted) {
+      updatedTime = `  Deleted:  ${data.updatedtime}`;
+    } else if (isChanged) {
+      updatedTime = `  Edited:  ${data.updatedtime}`;
     }
 
     const element = createChatElement(
@@ -238,8 +236,7 @@ async function addMessageToChatFromDB(dbInput) {
       username,
       timestamp,
       messageid,
-      messageStatus,
-      newTimestamp
+      updatedTime
     );
     chatMessageList.appendChild(element);
   });
@@ -434,14 +431,9 @@ function createChatElement(
   user,
   timestamp,
   messageId,
-  messageStatus,
-  messageStatusTimestamp
+  updatedTime
 ) {
-  let updateInfo = "";
-  if (messageStatus !== false && messageStatusTimestamp !== false) {
-    updateInfo = messageStatus + messageStatusTimestamp;
-    console.log("UPDATEINFO", updateInfo);
-  }
+  console.log("Först", "messageID: ", messageId, "newMessage: ", newMessage);
 
   const message = document.createElement("li");
   message.className = "message";
@@ -459,7 +451,7 @@ function createChatElement(
 
   const messageTimestamp = document.createElement("p");
   messageTimestamp.className = "message-timestamp";
-  messageTimestamp.innerText = timestamp + updateInfo;
+  messageTimestamp.innerText = timestamp + updatedTime;
 
   const messageMain = document.createElement("div");
   messageMain.className = "message-main";
@@ -496,7 +488,7 @@ function createChatElement(
 
   message.appendChild(messageboxLeft);
   message.appendChild(messageboxRight);
-
+  console.log(message);
   return message;
 }
 function createChannelElement(channelName, secureStatus, channelid) {
