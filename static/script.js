@@ -14,7 +14,10 @@ const authBack = document.querySelector("#auth-back");
 const chatMessageList = document.querySelector("#chat-messege-list");
 
 const inputNewMessage = document.querySelector("#input-new-message");
+const editMessageInput = document.querySelector("#edit-message-input");
 const newMessageButton = document.querySelector("#new-message-button");
+const editMessageButton = document.querySelector("#edit-message-button");
+const cancelMessageButton = document.querySelector("#cancel-message-button");
 
 const channelsList = document.querySelector("#channels-list");
 
@@ -237,7 +240,8 @@ async function addMessageToChatFromDB(dbInput) {
       username,
       timestamp,
       messageid,
-      updatedTime
+      updatedTime,
+      isDeleted
     );
     chatMessageList.appendChild(element);
   });
@@ -418,17 +422,40 @@ async function editMessageFromDB(newMessage, messageId, scrollStatus) {
     return;
   }
 }
+async function editMessage(oldMessage, messageId, scrollStatus) {
+  setEditMessageButton(oldMessage);
+
+  editMessageButton.addEventListener("click", async () => {
+    const newMessage = editMessageInput.value;
+    await editMessageFromDB(newMessage, messageId, scrollStatus);
+
+    setCancelMessageButton();
+  });
+  editMessageInput.addEventListener("keyup", async (e) => {
+    //If enter is pressed send new message to chat
+    if (e.key === "Enter") {
+      const newMessage = editMessageInput.value;
+      await editMessageFromDB(newMessage, messageId, scrollStatus);
+
+      setCancelMessageButton();
+    }
+  });
+  cancelMessageButton.addEventListener("click", setCancelMessageButton);
+}
 
 function createChatElement(
   newMessage,
   user,
   timestamp,
   messageId,
-  updatedTime
+  updatedTime,
+  isDeleted
 ) {
   const message = document.createElement("li");
   message.className = "message";
   message.accessKey = messageId;
+  message.data = newMessage;
+  message.deleted = isDeleted;
 
   const messageboxLeft = document.createElement("div");
   messageboxLeft.className = "messagebox-left";
@@ -604,8 +631,11 @@ function updateEventListenerMessages() {
     list[i]
       .querySelector(".messagebox-right-edit")
       .addEventListener("click", (e) => {
+        console.log(list[i].deleted);
+        if (list[i].deleted) return;
+
         scrollposition = chatMessageList.scrollTop;
-        editMessageFromDB(inputNewMessage.value, list[i].accessKey, false);
+        editMessage(list[i].data, list[i].accessKey, false);
       });
 
     list[i]
@@ -616,4 +646,22 @@ function updateEventListenerMessages() {
       });
   }
   console.log("Event Listener Edit Updated");
+}
+function setCancelMessageButton() {
+  newMessageButton.className = "";
+  inputNewMessage.className = "";
+  editMessageInput.className = "hide";
+  editMessageButton.className = "hide";
+  cancelMessageButton.className = "hide";
+  inputNewMessage.value = "";
+  inputNewMessage.placeholder = "New message...";
+}
+function setEditMessageButton(oldMessage) {
+  newMessageButton.className = "hide";
+  inputNewMessage.className = "hide";
+  editMessageInput.className = "";
+  editMessageButton.className = "";
+  cancelMessageButton.className = "";
+  inputNewMessage.placeholder = "Edit message...";
+  editMessageInput.value = oldMessage;
 }

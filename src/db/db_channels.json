@@ -106,10 +106,11 @@
       {
         "messageid": 13,
         "uuid": 5,
-        "message": "13",
+        "message": "Meddelande borttaget",
         "timestamp": "2023-02-03 11:35:57",
-        "ischanged": false,
-        "isdeleted": false
+        "ischanged": true,
+        "isdeleted": true,
+        "updatedtime": "2023-02-03 12:57:23"
       },
       {
         "messageid": 14,
@@ -139,25 +140,87 @@
       {
         "messageid": 17,
         "uuid": 6,
-        "message": "456",
+        "message": "",
         "timestamp": "2023-02-03 11:40:46",
         "ischanged": true,
         "isdeleted": false,
-        "updatedtime": "2023-02-03 11:40:57"
+        "updatedtime": "2023-02-03 12:16:21"
       },
       {
         "messageid": 18,
         "uuid": 6,
-        "message": "hej",
+        "message": "",
         "timestamp": "2023-02-03 11:40:47",
-        "ischanged": false,
-        "isdeleted": false
+        "ischanged": true,
+        "isdeleted": false,
+        "updatedtime": "2023-02-03 12:10:16"
       },
       {
         "messageid": 19,
         "uuid": 6,
-        "message": "allt är bra",
+        "message": "",
         "timestamp": "2023-02-03 11:40:49",
+        "ischanged": true,
+        "isdeleted": false,
+        "updatedtime": "2023-02-03 12:14:20"
+      },
+      {
+        "messageid": 20,
+        "uuid": 6,
+        "message": "",
+        "timestamp": "2023-02-03 12:16:27",
+        "ischanged": true,
+        "isdeleted": false,
+        "updatedtime": "2023-02-03 12:16:28"
+      },
+      {
+        "messageid": 21,
+        "uuid": 6,
+        "message": "",
+        "timestamp": "2023-02-03 12:30:18",
+        "ischanged": true,
+        "isdeleted": false,
+        "updatedtime": "2023-02-03 12:30:29"
+      },
+      {
+        "messageid": 22,
+        "uuid": 6,
+        "message": "aefwef",
+        "timestamp": "2023-02-03 12:30:19",
+        "ischanged": true,
+        "isdeleted": false,
+        "updatedtime": "2023-02-03 12:31:56"
+      },
+      {
+        "messageid": 23,
+        "uuid": 6,
+        "message": "fqwffqwefqwfeqwfeqwfqfwefefwqff",
+        "timestamp": "2023-02-03 12:33:11",
+        "ischanged": true,
+        "isdeleted": false,
+        "updatedtime": "2023-02-03 12:39:18"
+      },
+      {
+        "messageid": 24,
+        "uuid": 6,
+        "message": "wef",
+        "timestamp": "2023-02-03 12:33:13",
+        "ischanged": false,
+        "isdeleted": false
+      },
+      {
+        "messageid": 25,
+        "uuid": 5,
+        "message": "13 ny",
+        "timestamp": "2023-02-03 12:44:07",
+        "ischanged": false,
+        "isdeleted": false
+      },
+      {
+        "messageid": 26,
+        "uuid": 5,
+        "message": "13efw",
+        "timestamp": "2023-02-03 12:45:00",
         "ischanged": false,
         "isdeleted": false
       }
