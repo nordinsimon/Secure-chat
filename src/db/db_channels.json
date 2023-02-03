@@ -5,213 +5,161 @@
     "channelid": 1,
     "chat": [
       {
-        "messageid": 20,
-        "uuid": 1,
+        "messageid": 1,
+        "uuid": 5,
         "message": "1",
-        "timestamp": "Feb 03 2023 10:35:33",
+        "timestamp": "2023-02-03 11:35:47",
         "ischanged": false,
         "isdeleted": false
       },
       {
-        "messageid": 21,
-        "uuid": 2,
-        "message": "2",
-        "timestamp": "Feb 03 2023 10:35:34",
-        "ischanged": false,
-        "isdeleted": false
-      },
-      {
-        "messageid": 22,
+        "messageid": 2,
         "uuid": 5,
         "message": "Meddelande borttaget",
-        "timestamp": "Feb 03 2023 10:35:34",
-        "ischanged": true,
+        "timestamp": "2023-02-03 11:35:48",
+        "ischanged": false,
         "isdeleted": true,
-        "updatedtime": "2023-02-03T09:46:07.399Z"
+        "updatedtime": "2023-02-03 11:36:41"
       },
       {
-        "messageid": 23,
+        "messageid": 3,
+        "uuid": 5,
+        "message": "3",
+        "timestamp": "2023-02-03 11:35:49",
+        "ischanged": false,
+        "isdeleted": false
+      },
+      {
+        "messageid": 4,
+        "uuid": 5,
+        "message": "4",
+        "timestamp": "2023-02-03 11:35:49",
+        "ischanged": false,
+        "isdeleted": false
+      },
+      {
+        "messageid": 5,
+        "uuid": 5,
+        "message": "5",
+        "timestamp": "2023-02-03 11:35:50",
+        "ischanged": false,
+        "isdeleted": false
+      },
+      {
+        "messageid": 6,
         "uuid": 5,
         "message": "Meddelande borttaget",
-        "timestamp": "Feb 03 2023 10:35:36",
-        "ischanged": true,
+        "timestamp": "2023-02-03 11:35:51",
+        "ischanged": false,
         "isdeleted": true,
-        "updatedtime": "2023-02-03T10:06:57.264Z"
+        "updatedtime": "2023-02-03 11:36:43"
       },
       {
-        "messageid": 24,
-        "uuid": 3,
-        "message": "6",
-        "timestamp": "Feb 03 2023 10:35:36",
-        "ischanged": false,
-        "isdeleted": false
-      },
-      {
-        "messageid": 25,
-        "uuid": 1,
-        "message": "7",
-        "timestamp": "Feb 03 2023 10:35:37",
-        "ischanged": false,
-        "isdeleted": false
-      },
-      {
-        "messageid": 26,
-        "uuid": 4,
-        "message": "8",
-        "timestamp": "Feb 03 2023 10:35:42",
-        "ischanged": false,
-        "isdeleted": false
-      },
-      {
-        "messageid": 27,
-        "uuid": 2,
-        "message": "10",
-        "timestamp": "Feb 03 2023 10:35:51",
-        "ischanged": false,
-        "isdeleted": false
-      },
-      {
-        "messageid": 28,
-        "uuid": 4,
-        "message": "11",
-        "timestamp": "Feb 03 2023 10:35:52",
-        "ischanged": false,
-        "isdeleted": false
-      },
-      {
-        "messageid": 29,
+        "messageid": 7,
         "uuid": 5,
-        "message": "Meddelande borttaget",
-        "timestamp": "Feb 03 2023 10:35:53",
-        "ischanged": true,
-        "isdeleted": true,
-        "updatedtime": "2023-02-03T09:46:37.981Z"
-      },
-      {
-        "messageid": 30,
-        "uuid": 5,
-        "message": "",
-        "timestamp": "Feb 03 2023 10:35:54",
+        "message": "EDIT",
+        "timestamp": "2023-02-03 11:35:51",
         "ischanged": true,
         "isdeleted": false,
-        "updatedtime": "2023-02-03T10:08:30.936Z"
+        "updatedtime": "2023-02-03 11:36:51"
       },
       {
-        "messageid": 31,
-        "uuid": 1,
+        "messageid": 8,
+        "uuid": 5,
+        "message": "8",
+        "timestamp": "2023-02-03 11:35:52",
+        "ischanged": false,
+        "isdeleted": false
+      },
+      {
+        "messageid": 9,
+        "uuid": 5,
+        "message": "9",
+        "timestamp": "2023-02-03 11:35:53",
+        "ischanged": false,
+        "isdeleted": false
+      },
+      {
+        "messageid": 10,
+        "uuid": 5,
+        "message": "10",
+        "timestamp": "2023-02-03 11:35:54",
+        "ischanged": false,
+        "isdeleted": false
+      },
+      {
+        "messageid": 11,
+        "uuid": 5,
+        "message": "11",
+        "timestamp": "2023-02-03 11:35:55",
+        "ischanged": false,
+        "isdeleted": false
+      },
+      {
+        "messageid": 12,
+        "uuid": 5,
+        "message": "12",
+        "timestamp": "2023-02-03 11:35:56",
+        "ischanged": false,
+        "isdeleted": false
+      },
+      {
+        "messageid": 13,
+        "uuid": 5,
+        "message": "13",
+        "timestamp": "2023-02-03 11:35:57",
+        "ischanged": false,
+        "isdeleted": false
+      },
+      {
+        "messageid": 14,
+        "uuid": 5,
         "message": "14",
-        "timestamp": "Feb 03 2023 10:35:56",
+        "timestamp": "2023-02-03 11:35:58",
         "ischanged": false,
         "isdeleted": false
       },
       {
-        "messageid": 47,
+        "messageid": 15,
         "uuid": 5,
+        "message": "15",
+        "timestamp": "2023-02-03 11:35:59",
+        "ischanged": false,
+        "isdeleted": false
+      },
+      {
+        "messageid": 16,
+        "uuid": 6,
         "message": "Meddelande borttaget",
-        "timestamp": "Feb 03 2023 10:42:07",
+        "timestamp": "2023-02-03 11:40:44",
+        "ischanged": false,
+        "isdeleted": true,
+        "updatedtime": "2023-02-03 11:41:10"
+      },
+      {
+        "messageid": 17,
+        "uuid": 6,
+        "message": "456",
+        "timestamp": "2023-02-03 11:40:46",
         "ischanged": true,
-        "isdeleted": true,
-        "updatedtime": "2023-02-03T09:59:26.773Z"
+        "isdeleted": false,
+        "updatedtime": "2023-02-03 11:40:57"
       },
       {
-        "messageid": 48,
-        "uuid": 5,
-        "message": "Meddelande borttaget",
-        "timestamp": "Feb 03 2023 10:42:36",
-        "ischanged": true,
-        "isdeleted": true,
-        "updatedtime": "2023-02-03T10:08:55.588Z"
-      },
-      {
-        "messageid": 49,
-        "uuid": 5,
-        "message": "Meddelande borttaget",
-        "timestamp": "Feb 03 2023 10:46:02",
-        "ischanged": false,
-        "isdeleted": true,
-        "updatedtime": "2023-02-03T10:12:06.869Z"
-      },
-      {
-        "messageid": 50,
-        "uuid": 5,
-        "message": "nytt",
-        "timestamp": "Feb 03 2023 10:52:20",
+        "messageid": 18,
+        "uuid": 6,
+        "message": "hej",
+        "timestamp": "2023-02-03 11:40:47",
         "ischanged": false,
         "isdeleted": false
       },
       {
-        "messageid": 51,
-        "uuid": 5,
-        "message": "wefqe",
-        "timestamp": "Feb 03 2023 10:56:15",
+        "messageid": 19,
+        "uuid": 6,
+        "message": "allt är bra",
+        "timestamp": "2023-02-03 11:40:49",
         "ischanged": false,
         "isdeleted": false
-      },
-      {
-        "messageid": 52,
-        "uuid": 5,
-        "message": "wefw",
-        "timestamp": "Feb 03 2023 10:56:34",
-        "ischanged": false,
-        "isdeleted": false
-      },
-      {
-        "messageid": 53,
-        "uuid": 5,
-        "message": "fewq",
-        "timestamp": "Feb 03 2023 10:57:01",
-        "ischanged": false,
-        "isdeleted": false
-      },
-      {
-        "messageid": 54,
-        "uuid": 5,
-        "message": "wefe",
-        "timestamp": "Feb 03 2023 10:58:25",
-        "ischanged": false,
-        "isdeleted": false
-      },
-      {
-        "messageid": 55,
-        "uuid": 5,
-        "message": "fwewfe",
-        "timestamp": "Feb 03 2023 10:58:28",
-        "ischanged": false,
-        "isdeleted": false
-      },
-      {
-        "messageid": 56,
-        "uuid": 5,
-        "message": "Meddelande borttaget",
-        "timestamp": "Feb 03 2023 10:58:31",
-        "ischanged": false,
-        "isdeleted": true,
-        "updatedtime": "2023-02-03T10:07:13.068Z"
-      },
-      {
-        "messageid": 57,
-        "uuid": 5,
-        "message": "agera",
-        "timestamp": "Feb 03 2023 11:07:00",
-        "ischanged": false,
-        "isdeleted": false
-      },
-      {
-        "messageid": 58,
-        "uuid": 5,
-        "message": "123",
-        "timestamp": "2023-02-03T10:19:13.286Z",
-        "ischanged": false,
-        "isdeleted": false
-      },
-      {
-        "messageid": 59,
-        "uuid": 5,
-        "message": "Meddelande borttaget",
-        "timestamp": "2023-02-03 10:33:45",
-        "ischanged": false,
-        "isdeleted": true,
-        "updatedtime": "2023-02-03 10:33:49"
       }
     ]
   },
@@ -219,130 +167,6 @@
     "channel_name": "Private",
     "secure_status": "private",
     "channelid": 2,
-    "chat": [
-      {
-        "messageid": 32,
-        "uuid": 1,
-        "message": "1",
-        "timestamp": "Feb 03 2023 10:36:01",
-        "ischanged": false,
-        "isdeleted": false
-      },
-      {
-        "messageid": 33,
-        "uuid": 5,
-        "message": "",
-        "timestamp": "Feb 03 2023 10:36:06",
-        "ischanged": true,
-        "isdeleted": false,
-        "updatedtime": "2023-02-03T10:12:46.168Z"
-      },
-      {
-        "messageid": 34,
-        "uuid": 3,
-        "message": "p2",
-        "timestamp": "Feb 03 2023 10:36:07",
-        "ischanged": false,
-        "isdeleted": false
-      },
-      {
-        "messageid": 35,
-        "uuid": 2,
-        "message": "p3",
-        "timestamp": "Feb 03 2023 10:36:08",
-        "ischanged": false,
-        "isdeleted": false
-      },
-      {
-        "messageid": 36,
-        "uuid": 5,
-        "message": "Meddelande borttaget",
-        "timestamp": "Feb 03 2023 10:36:09",
-        "ischanged": false,
-        "isdeleted": true,
-        "updatedtime": "2023-02-03T10:12:43.150Z"
-      },
-      {
-        "messageid": 37,
-        "uuid": 5,
-        "message": "p5",
-        "timestamp": "Feb 03 2023 10:36:10",
-        "ischanged": false,
-        "isdeleted": false
-      },
-      {
-        "messageid": 38,
-        "uuid": 4,
-        "message": "p6",
-        "timestamp": "Feb 03 2023 10:36:12",
-        "ischanged": false,
-        "isdeleted": false
-      },
-      {
-        "messageid": 39,
-        "uuid": 4,
-        "message": "p7",
-        "timestamp": "Feb 03 2023 10:36:13",
-        "ischanged": false,
-        "isdeleted": false
-      },
-      {
-        "messageid": 40,
-        "uuid": 2,
-        "message": "p8",
-        "timestamp": "Feb 03 2023 10:36:13",
-        "ischanged": false,
-        "isdeleted": false
-      },
-      {
-        "messageid": 41,
-        "uuid": 5,
-        "message": "",
-        "timestamp": "Feb 03 2023 10:36:15",
-        "ischanged": true,
-        "isdeleted": false,
-        "updatedtime": "2023-02-03T10:12:50.567Z"
-      },
-      {
-        "messageid": 42,
-        "uuid": 1,
-        "message": "p10",
-        "timestamp": "Feb 03 2023 10:36:17",
-        "ischanged": false,
-        "isdeleted": false
-      },
-      {
-        "messageid": 43,
-        "uuid": 4,
-        "message": "p11",
-        "timestamp": "Feb 03 2023 10:36:18",
-        "ischanged": false,
-        "isdeleted": false
-      },
-      {
-        "messageid": 44,
-        "uuid": 5,
-        "message": "p12",
-        "timestamp": "Feb 03 2023 10:36:19",
-        "ischanged": false,
-        "isdeleted": false
-      },
-      {
-        "messageid": 45,
-        "uuid": 5,
-        "message": "p13",
-        "timestamp": "Feb 03 2023 10:36:21",
-        "ischanged": false,
-        "isdeleted": false
-      },
-      {
-        "messageid": 46,
-        "uuid": 1,
-        "message": "p14",
-        "timestamp": "Feb 03 2023 10:36:22",
-        "ischanged": false,
-        "isdeleted": false
-      }
-    ]
+    "chat": []
   }
 ]

@@ -23,5 +23,10 @@
     "uuid": 5,
     "username": "Simon",
     "password": "$2a$10$QI5DADycsSNMvGRDHZI3GeibqFFTGN.lxTI8AlZuRWN.wqCidS9lq"
+  },
+  {
+    "uuid": 6,
+    "username": "Mamma",
+    "password": "$2a$10$QI5DADycsSNMvGRDHZI3GekGq8CkoTH2n3ERQMpi./9DdoISy4bHi"
   }
 ]

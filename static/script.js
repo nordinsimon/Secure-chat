@@ -569,6 +569,7 @@ function signOut() {
   activeChannel = 1;
   localStorage.removeItem(JWT_KEY);
   loadJWT = "";
+  inputNewMessage.value = "";
   inputNewMessage.placeholder = "Sign in to send message!";
   inputNewMessage.disabled = true;
   authUserBox.className = "header-is-loggedin-box";
