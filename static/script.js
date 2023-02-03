@@ -181,7 +181,6 @@ async function signIn() {
     updateHeader();
   }
   inputauthPassword.value = "";
-  updateChatMessages();
 }
 async function updateUuidToUsername() {
   const options = {

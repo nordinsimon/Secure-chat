@@ -45,7 +45,8 @@ router.get("/", async (req, res) => {
   res.status(200).send(allChannels);
 });
 
-router.get("/:channelid", (req, res) => {
+router.get("/:channelid", async (req, res) => {
+  await updateDataFromAllDB();
   const channelId = req.params.channelid;
   const jwt = req.headers["authorization"];
 
@@ -72,7 +73,7 @@ router.get("/:channelid", (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-  await db_channels.read(), db_users.read();
+  await updateDataFromAllDB();
   const channelId = req.body.channelId;
   const channelIndex = await channelExistsID(channelId);
   const uuid = req.body.uuid;
@@ -94,6 +95,7 @@ router.post("/", async (req, res) => {
 });
 
 router.put("/", async (req, res) => {
+  await updateDataFromAllDB();
   const channelId = req.body.channelId;
   const messageid = req.body.messageId;
   const newMessage = req.body.newMessage;
@@ -127,6 +129,7 @@ router.put("/", async (req, res) => {
 });
 
 router.delete("/", async (req, res) => {
+  await updateDataFromAllDB();
   const channelId = req.body.channelId;
   const messageid = req.body.messageId;
   const jwt = req.headers["authorization"];
@@ -156,7 +159,8 @@ router.delete("/", async (req, res) => {
   res.sendStatus(200);
 });
 
-router.post("/newchannel/", (req, res) => {
+router.post("/newchannel/", async (req, res) => {
+  await updateDataFromAllDB();
   const newChannelName = req.body.new_channel_name;
   const secureStatus = req.body.secure_status;
 
@@ -313,7 +317,6 @@ function generateDate() {
   return newDateAndTime;
 }
 async function userExists(uuid) {
-  db_users.read;
   let findUser = await db_users.data.findIndex((user) => user.uuid === uuid);
   if (findUser >= 0) {
     console.log("uuidExists");
@@ -324,13 +327,12 @@ async function userExists(uuid) {
   }
 }
 async function updateDataFromAllDB() {
-  await db_users.read(),
-    db_channels.read(),
-    db_nextMessageId.read(),
-    db_nextChannelId.read();
+  await db_users.read();
+  await db_channels.read();
+  await db_nextMessageId.read();
+  await db_nextChannelId.read();
 }
 async function addMessageToChannel(channelIndex, uuid, message) {
-  await db_channels.read(), db_nextMessageId.read();
   let nextMessageID = db_nextMessageId.data.nextmessageid++;
   db_channels.data[channelIndex].chat.push({
     messageid: nextMessageID,
@@ -344,7 +346,6 @@ async function addMessageToChannel(channelIndex, uuid, message) {
   return nextMessageID;
 }
 async function editMessage(channelIndex, chatIndex, uuid, newmessage) {
-  await db_channels.read();
   const db = db_channels.data[channelIndex].chat[chatIndex];
 
   db.message = newmessage;
@@ -354,7 +355,6 @@ async function editMessage(channelIndex, chatIndex, uuid, newmessage) {
   await db_channels.write();
 }
 async function deleteMessage(channelIndex, chatIndex, uuid) {
-  await db_channels.read();
   const db = db_channels.data[channelIndex].chat[chatIndex];
   db.message = "Meddelande borttaget";
   db.isdeleted = true;
@@ -363,13 +363,15 @@ async function deleteMessage(channelIndex, chatIndex, uuid) {
   await db_channels.write();
 }
 async function isDeleted(channelIndex, chatIndex) {
-  await db_channels.read();
   const db = db_channels.data[channelIndex].chat[chatIndex];
-  if (db.isdeleted) return true;
+  if (db.isdeleted) {
+    console.log("Is deleted", true);
+    return true;
+  }
+  console.log("Is deleted", false);
   return false;
 }
 async function addNewChannel(chanelName, secureStatus) {
-  await db_channels.read(), db_nextChannelId.read();
   let nextchannelID = db_nextChannelId.data.nextchannelid++;
   console.log(nextchannelID);
   db_channels.data.push({

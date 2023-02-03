@@ -89,7 +89,6 @@ function correctPasswordInput(password) {
   }
 }
 async function addUser(username, password) {
-  await db_nextUuId.read();
   let nextuuid = db_nextUuId.data.nextuuid++;
   let hashedPassword = bcrypt.hashSync(password, SALT);
   db_users.data.push({
@@ -101,7 +100,8 @@ async function addUser(username, password) {
   await db_users.write();
 }
 async function updateAllDB() {
-  await db_users.read(), db_nextUuId.read();
+  await db_users.read();
+  await db_nextUuId.read();
 }
 export default router;
 export { usernameExists, correctUsernameInput, correctPasswordInput };
