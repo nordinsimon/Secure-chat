@@ -98,7 +98,7 @@ router.post("/", async (req, res) => {
   res.status(201).send(nextMessageId);
 });
 
-router.put("/", (req, res) => {
+router.put("/", async (req, res) => {
   const channelId = req.body.channelId;
   const messageid = req.body.messageId;
   const newMessage = req.body.newMessage;
@@ -107,7 +107,7 @@ router.put("/", (req, res) => {
   if (
     correctChannelId(channelId) === false ||
     correctMessageIdInput(messageid) === false ||
-    correctMessageInput(newMessage) === false ||
+    correctNewMessageInput(newMessage) === false ||
     channelIndex === false ||
     messageidExists(channelIndex, messageid) === false
   ) {
@@ -121,6 +121,12 @@ router.put("/", (req, res) => {
     res.sendStatus(401);
     return;
   }
+  console.log("Isdeleted", await isDeleted(channelIndex, chatIndex));
+  if (await isDeleted(channelIndex, chatIndex)) {
+    res.sendStatus(403);
+    return;
+  }
+
   console.log("EDITED ");
   editMessage(channelIndex, chatIndex, uuid, newMessage);
   res.sendStatus(200);
@@ -325,25 +331,33 @@ async function addMessageToChannel(channelIndex, uuid, message, timestamp) {
     uuid: uuid,
     message: message,
     timestamp: timestamp,
+    ischanged: false,
+    isdeleted: false,
   });
   await db_channels.write(), db_nextMessageId.write();
   return nextMessageID;
 }
 async function editMessage(channelIndex, chatIndex, uuid, newmessage) {
   const db = db_channels.data[channelIndex].chat[chatIndex];
+
   db.message = newmessage;
-  db.ischanged = "yes";
+  db.ischanged = true;
   db.changedtime = new Date();
 
   await db_channels.write();
 }
 async function deleteMessage(channelIndex, chatIndex, uuid) {
   const db = db_channels.data[channelIndex].chat[chatIndex];
-  db.message = "Message DELETED";
-  db.isdeleted = "yes";
+  db.message = "";
+  db.isdeleted = true;
   db.deletedtime = new Date();
 
   await db_channels.write();
+}
+async function isDeleted(channelIndex, chatIndex) {
+  const db = db_channels.data[channelIndex].chat[chatIndex];
+  if (db.isdeleted) return true;
+  return false;
 }
 async function addNewChannel(chanelName, secureStatus) {
   let nextchannelID = db_nextChannelId.data.nextchannelid++;

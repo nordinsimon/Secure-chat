@@ -5,102 +5,148 @@
     "channelid": 1,
     "chat": [
       {
-        "messageid": 1,
+        "messageid": 61,
         "uuid": 5,
-        "message": "Hej",
-        "timestamp": "Jan 31 2023 23:07:33"
+        "message": "",
+        "timestamp": "Feb 03 2023 01:33:20",
+        "ischanged": false,
+        "isdeleted": true,
+        "deletedtime": "2023-02-03T00:35:02.513Z"
       },
       {
-        "messageid": 2,
-        "uuid": 2,
-        "message": "Hej",
-        "timestamp": "Jan 31 2023 23:07:35"
-      },
-      {
-        "messageid": 3,
-        "uuid": 3,
-        "message": "Tjena!",
-        "timestamp": "Jan 31 2023 23:07:44"
-      },
-      {
-        "messageid": 4,
-        "uuid": 1,
-        "message": "Tjena, allt bra med er?😊",
-        "timestamp": "Jan 31 2023 23:08:11"
-      },
-      {
-        "messageid": 5,
+        "messageid": 62,
         "uuid": 5,
-        "message": "Jadå bara bra",
-        "timestamp": "Jan 31 2023 23:08:21"
+        "message": "",
+        "timestamp": "Feb 03 2023 01:33:21",
+        "ischanged": false,
+        "isdeleted": true,
+        "deletedtime": "2023-02-03T00:35:11.380Z"
       },
       {
-        "messageid": 6,
-        "uuid": 2,
-        "message": "Message DELETED",
-        "timestamp": "Jan 31 2023 23:08:37",
-        "isdeleted": "yes",
-        "deletedtime": "2023-02-02T22:07:46.557Z"
-      },
-      {
-        "messageid": 7,
-        "uuid": 1,
-        "message": "Det är toppen 😍",
-        "timestamp": "Jan 31 2023 23:08:56"
-      },
-      {
-        "messageid": 15,
+        "messageid": 63,
         "uuid": 5,
-        "message": "Message DELETED",
-        "timestamp": "Jan 31 2023 23:17:48",
-        "isdeleted": "yes",
-        "deletedtime": "2023-02-02T23:10:22.557Z"
+        "message": "",
+        "timestamp": "Feb 03 2023 01:33:21",
+        "ischanged": true,
+        "isdeleted": false,
+        "changedtime": "2023-02-03T00:42:01.862Z"
       },
       {
-        "messageid": 36,
+        "messageid": 64,
         "uuid": 5,
-        "message": "Message DELETED",
-        "timestamp": "Feb 02 2023 20:53:22",
-        "isdeleted": "yes",
-        "deletedtime": "2023-02-02T23:11:28.292Z"
+        "message": "few",
+        "timestamp": "Feb 03 2023 01:33:22",
+        "ischanged": true,
+        "isdeleted": false,
+        "changedtime": "2023-02-03T00:42:22.046Z"
       },
       {
-        "messageid": 37,
+        "messageid": 65,
         "uuid": 5,
-        "message": "nytt",
-        "timestamp": "Feb 02 2023 21:19:56"
+        "message": "5",
+        "timestamp": "Feb 03 2023 01:33:22",
+        "ischanged": false,
+        "isdeleted": false
       },
       {
-        "messageid": 38,
+        "messageid": 66,
         "uuid": 5,
-        "message": "EDIT",
-        "timestamp": "Feb 02 2023 21:20:48",
-        "ischanged": "yes",
-        "changedtime": "2023-02-02T23:23:21.655Z"
+        "message": "",
+        "timestamp": "Feb 03 2023 01:33:23",
+        "ischanged": false,
+        "isdeleted": true,
+        "deletedtime": "2023-02-03T00:42:45.928Z"
       },
       {
-        "messageid": 39,
+        "messageid": 67,
         "uuid": 5,
-        "message": "nytt medelande",
-        "timestamp": "Feb 02 2023 21:22:33"
+        "message": "",
+        "timestamp": "Feb 03 2023 01:33:23",
+        "ischanged": true,
+        "isdeleted": false,
+        "changedtime": "2023-02-03T00:42:57.595Z"
       },
       {
-        "messageid": 41,
+        "messageid": 68,
         "uuid": 5,
-        "message": "det blir nog fel nu",
-        "timestamp": "Feb 02 2023 23:56:49"
+        "message": "8",
+        "timestamp": "Feb 03 2023 01:33:24",
+        "ischanged": false,
+        "isdeleted": false
       },
       {
-        "messageid": 42,
-        "uuid": 5,
-        "message": "nu då",
-        "timestamp": "Feb 02 2023 23:57:26"
+        "messageid": 88,
+        "uuid": 42,
+        "message": "",
+        "timestamp": "Feb 03 2023 01:46:32",
+        "ischanged": false,
+        "isdeleted": true,
+        "deletedtime": "2023-02-03T00:54:36.530Z"
       },
       {
-        "messageid": 43,
-        "uuid": 5,
-        "message": "rgd",
-        "timestamp": "Feb 02 2023 23:57:34"
+        "messageid": 89,
+        "uuid": 42,
+        "message": "r",
+        "timestamp": "Feb 03 2023 01:46:33",
+        "ischanged": false,
+        "isdeleted": false
+      },
+      {
+        "messageid": 90,
+        "uuid": 42,
+        "message": "r",
+        "timestamp": "Feb 03 2023 01:46:33",
+        "ischanged": false,
+        "isdeleted": false
+      },
+      {
+        "messageid": 91,
+        "uuid": 42,
+        "message": "r",
+        "timestamp": "Feb 03 2023 01:46:33",
+        "ischanged": false,
+        "isdeleted": false
+      },
+      {
+        "messageid": 94,
+        "uuid": 42,
+        "message": "",
+        "timestamp": "Feb 03 2023 01:47:29",
+        "ischanged": false,
+        "isdeleted": true,
+        "deletedtime": "2023-02-03T00:54:54.076Z"
+      },
+      {
+        "messageid": 95,
+        "uuid": 42,
+        "message": "r",
+        "timestamp": "Feb 03 2023 01:47:30",
+        "ischanged": false,
+        "isdeleted": false
+      },
+      {
+        "messageid": 96,
+        "uuid": 42,
+        "message": "r",
+        "timestamp": "Feb 03 2023 01:47:30",
+        "ischanged": false,
+        "isdeleted": false
+      },
+      {
+        "messageid": 97,
+        "uuid": 42,
+        "message": "r",
+        "timestamp": "Feb 03 2023 01:47:31",
+        "ischanged": false,
+        "isdeleted": false
+      },
+      {
+        "messageid": 98,
+        "uuid": 42,
+        "message": "r",
+        "timestamp": "Feb 03 2023 01:47:31",
+        "ischanged": false,
+        "isdeleted": false
       }
     ]
   },
@@ -110,85 +156,337 @@
     "channelid": 2,
     "chat": [
       {
-        "messageid": 8,
-        "uuid": 4,
-        "message": "Här kan vi skriva hemliga saker",
-        "timestamp": "Jan 31 2023 23:09:06"
-      },
-      {
-        "messageid": 9,
-        "uuid": 3,
-        "message": "Ja, det kan vi",
-        "timestamp": "Jan 31 2023 23:09:12"
-      },
-      {
-        "messageid": 10,
-        "uuid": 2,
-        "message": "Vad ska ni göra på fredag?",
-        "timestamp": "Jan 31 2023 23:09:39"
-      },
-      {
-        "messageid": 11,
-        "uuid": 2,
-        "message": "Sugna på att käka middag och dricka öl?",
-        "timestamp": "Jan 31 2023 23:09:50"
-      },
-      {
-        "messageid": 12,
+        "messageid": 69,
         "uuid": 5,
-        "message": "Gärna!",
-        "timestamp": "Jan 31 2023 23:09:56"
+        "message": "9",
+        "timestamp": "Feb 03 2023 01:33:30",
+        "ischanged": false,
+        "isdeleted": false
       },
       {
-        "messageid": 13,
-        "uuid": 1,
-        "message": "Ja! Toppen ide ",
-        "timestamp": "Jan 31 2023 23:10:06"
+        "messageid": 70,
+        "uuid": 5,
+        "message": "",
+        "timestamp": "Feb 03 2023 01:33:31",
+        "ischanged": false,
+        "isdeleted": true,
+        "deletedtime": "2023-02-03T00:35:15.445Z"
       },
       {
-        "messageid": 14,
-        "uuid": 1,
-        "message": "🍻🍻",
-        "timestamp": "Jan 31 2023 23:10:21"
+        "messageid": 71,
+        "uuid": 5,
+        "message": "7",
+        "timestamp": "Feb 03 2023 01:33:31",
+        "ischanged": false,
+        "isdeleted": false
+      },
+      {
+        "messageid": 72,
+        "uuid": 5,
+        "message": "6",
+        "timestamp": "Feb 03 2023 01:33:32",
+        "ischanged": false,
+        "isdeleted": false
+      },
+      {
+        "messageid": 73,
+        "uuid": 5,
+        "message": "5",
+        "timestamp": "Feb 03 2023 01:33:32",
+        "ischanged": false,
+        "isdeleted": false
+      },
+      {
+        "messageid": 74,
+        "uuid": 5,
+        "message": "4",
+        "timestamp": "Feb 03 2023 01:33:33",
+        "ischanged": false,
+        "isdeleted": false
+      },
+      {
+        "messageid": 75,
+        "uuid": 5,
+        "message": "3",
+        "timestamp": "Feb 03 2023 01:33:33",
+        "ischanged": false,
+        "isdeleted": false
+      },
+      {
+        "messageid": 76,
+        "uuid": 5,
+        "message": "simon",
+        "timestamp": "Feb 03 2023 01:35:38",
+        "ischanged": false,
+        "isdeleted": false
       }
     ]
   },
   {
-    "channel_name": "Pappa",
+    "channel_name": "MAMMA",
     "secure_status": "private",
-    "channelid": 19,
+    "channelid": 23,
     "chat": [
       {
-        "messageid": 35,
-        "uuid": 5,
-        "message": "Pappas kanal",
-        "timestamp": "Feb 02 2023 20:30:45"
+        "messageid": 77,
+        "uuid": 42,
+        "message": "Hej",
+        "timestamp": "Feb 03 2023 01:43:47",
+        "ischanged": false,
+        "isdeleted": false
+      },
+      {
+        "messageid": 78,
+        "uuid": 42,
+        "message": "",
+        "timestamp": "Feb 03 2023 01:43:47",
+        "ischanged": true,
+        "isdeleted": false,
+        "changedtime": "2023-02-03T00:51:00.528Z"
+      },
+      {
+        "messageid": 79,
+        "uuid": 42,
+        "message": "",
+        "timestamp": "Feb 03 2023 01:43:48",
+        "ischanged": false,
+        "isdeleted": true,
+        "deletedtime": "2023-02-03T00:44:03.560Z"
+      },
+      {
+        "messageid": 80,
+        "uuid": 42,
+        "message": "",
+        "timestamp": "Feb 03 2023 01:43:48",
+        "ischanged": false,
+        "isdeleted": true,
+        "deletedtime": "2023-02-03T00:50:58.985Z"
+      },
+      {
+        "messageid": 81,
+        "uuid": 42,
+        "message": "efef",
+        "timestamp": "Feb 03 2023 01:43:48",
+        "ischanged": false,
+        "isdeleted": false
       }
     ]
   },
   {
-    "channel_name": "Mamma",
+    "channel_name": "nu",
     "secure_status": "public",
-    "channelid": 20,
+    "channelid": 24,
     "chat": [
       {
-        "messageid": 40,
-        "uuid": 5,
-        "message": "Mamma",
-        "timestamp": "Feb 02 2023 21:24:23"
+        "messageid": 82,
+        "uuid": 42,
+        "message": "1",
+        "timestamp": "Feb 03 2023 01:46:07",
+        "ischanged": false,
+        "isdeleted": false
+      },
+      {
+        "messageid": 83,
+        "uuid": 42,
+        "message": "2",
+        "timestamp": "Feb 03 2023 01:46:08",
+        "ischanged": false,
+        "isdeleted": false
+      },
+      {
+        "messageid": 84,
+        "uuid": 42,
+        "message": "3",
+        "timestamp": "Feb 03 2023 01:46:08",
+        "ischanged": false,
+        "isdeleted": false
+      },
+      {
+        "messageid": 85,
+        "uuid": 42,
+        "message": "56",
+        "timestamp": "Feb 03 2023 01:46:09",
+        "ischanged": false,
+        "isdeleted": false
+      },
+      {
+        "messageid": 86,
+        "uuid": 42,
+        "message": "78",
+        "timestamp": "Feb 03 2023 01:46:09",
+        "ischanged": false,
+        "isdeleted": false
+      },
+      {
+        "messageid": 87,
+        "uuid": 42,
+        "message": "9",
+        "timestamp": "Feb 03 2023 01:46:09",
+        "ischanged": false,
+        "isdeleted": false
+      },
+      {
+        "messageid": 92,
+        "uuid": 42,
+        "message": "fe",
+        "timestamp": "Feb 03 2023 01:47:20",
+        "ischanged": false,
+        "isdeleted": false
+      },
+      {
+        "messageid": 93,
+        "uuid": 42,
+        "message": "effe",
+        "timestamp": "Feb 03 2023 01:47:20",
+        "ischanged": false,
+        "isdeleted": false
+      },
+      {
+        "messageid": 99,
+        "uuid": 42,
+        "message": "q",
+        "timestamp": "Feb 03 2023 01:47:48",
+        "ischanged": false,
+        "isdeleted": false
+      },
+      {
+        "messageid": 100,
+        "uuid": 42,
+        "message": "w",
+        "timestamp": "Feb 03 2023 01:47:49",
+        "ischanged": false,
+        "isdeleted": false
+      },
+      {
+        "messageid": 101,
+        "uuid": 42,
+        "message": "e",
+        "timestamp": "Feb 03 2023 01:47:49",
+        "ischanged": false,
+        "isdeleted": false
+      },
+      {
+        "messageid": 102,
+        "uuid": 42,
+        "message": "r",
+        "timestamp": "Feb 03 2023 01:47:49",
+        "ischanged": false,
+        "isdeleted": false
+      },
+      {
+        "messageid": 103,
+        "uuid": 42,
+        "message": "ty",
+        "timestamp": "Feb 03 2023 01:47:50",
+        "ischanged": false,
+        "isdeleted": false
       }
     ]
   },
   {
-    "channel_name": "test",
-    "secure_status": "private",
-    "channelid": 21,
-    "chat": []
+    "channel_name": "fe",
+    "secure_status": "public",
+    "channelid": 25,
+    "chat": [
+      {
+        "messageid": 104,
+        "uuid": 42,
+        "message": "",
+        "timestamp": "Feb 03 2023 01:48:31",
+        "ischanged": false,
+        "isdeleted": true,
+        "deletedtime": "2023-02-03T00:48:48.444Z"
+      },
+      {
+        "messageid": 105,
+        "uuid": 42,
+        "message": "",
+        "timestamp": "Feb 03 2023 01:48:32",
+        "ischanged": true,
+        "isdeleted": true,
+        "changedtime": "2023-02-03T00:48:50.612Z",
+        "deletedtime": "2023-02-03T00:51:08.724Z"
+      },
+      {
+        "messageid": 106,
+        "uuid": 42,
+        "message": "",
+        "timestamp": "Feb 03 2023 01:48:32",
+        "ischanged": false,
+        "isdeleted": true,
+        "deletedtime": "2023-02-03T00:48:36.578Z"
+      },
+      {
+        "messageid": 107,
+        "uuid": 42,
+        "message": "",
+        "timestamp": "Feb 03 2023 01:48:33",
+        "ischanged": true,
+        "isdeleted": true,
+        "changedtime": "2023-02-03T00:48:44.167Z",
+        "deletedtime": "2023-02-03T00:51:07.226Z"
+      },
+      {
+        "messageid": 108,
+        "uuid": 42,
+        "message": "",
+        "timestamp": "Feb 03 2023 01:48:33",
+        "ischanged": false,
+        "isdeleted": true,
+        "deletedtime": "2023-02-03T00:51:03.114Z"
+      },
+      {
+        "messageid": 109,
+        "uuid": 42,
+        "message": "",
+        "timestamp": "Feb 03 2023 01:48:33",
+        "ischanged": false,
+        "isdeleted": true,
+        "deletedtime": "2023-02-03T00:49:05.931Z"
+      },
+      {
+        "messageid": 110,
+        "uuid": 42,
+        "message": "",
+        "timestamp": "Feb 03 2023 01:51:15",
+        "ischanged": false,
+        "isdeleted": true,
+        "deletedtime": "2023-02-03T00:51:35.443Z"
+      },
+      {
+        "messageid": 111,
+        "uuid": 42,
+        "message": "ny",
+        "timestamp": "Feb 03 2023 01:51:16",
+        "ischanged": true,
+        "isdeleted": false,
+        "changedtime": "2023-02-03T00:51:32.677Z"
+      },
+      {
+        "messageid": 112,
+        "uuid": 42,
+        "message": "ny",
+        "timestamp": "Feb 03 2023 01:51:18",
+        "ischanged": true,
+        "isdeleted": false,
+        "changedtime": "2023-02-03T00:51:27.841Z"
+      }
+    ]
   },
   {
-    "channel_name": "few",
-    "secure_status": "public",
-    "channelid": 22,
-    "chat": []
+    "channel_name": "123",
+    "secure_status": "private",
+    "channelid": 26,
+    "chat": [
+      {
+        "messageid": 113,
+        "uuid": 42,
+        "message": "Gammal",
+        "timestamp": "Feb 03 2023 01:51:47",
+        "ischanged": true,
+        "isdeleted": false,
+        "changedtime": "2023-02-03T00:51:53.208Z"
+      }
+    ]
   }
 ]

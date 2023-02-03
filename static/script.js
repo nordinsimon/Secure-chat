@@ -211,20 +211,41 @@ async function getChatMessagesFromDB(db) {
 async function addMessageToChatFromDB(dbInput) {
   await updateUuidToUsername();
   if (dbInput === false) return;
+  chatMessageList.innerHTML = "";
   const db = await dbInput;
   db.forEach(async (data) => {
     const message = await data.message;
     const uuid = await data.uuid;
-    const user = uuidToUsers.find((user) => user.uuid === Number(uuid));
-    const username = user.username;
+    const user = await uuidToUsers.find((user) => user.uuid === Number(uuid));
+    const username = await user.username;
     const timestamp = await data.timestamp;
     const messageid = await data.messageid;
+    const isChanged = await data.ischanged;
+    const isDeleted = await data.isdeleted;
+    let messageStatus = false;
+    let newTimestamp = false;
 
-    const element = createChatElement(message, username, timestamp, messageid);
+    if (await isDeleted) {
+      newTimestamp = await data.deletedtime;
+      messageStatus = "  Deleted: ";
+    } else if (await isChanged) {
+      newTimestamp = await data.changedtime;
+      messageStatus = "  Edited: ";
+    }
+
+    const element = createChatElement(
+      message,
+      username,
+      timestamp,
+      messageid,
+      messageStatus,
+      newTimestamp
+    );
     chatMessageList.appendChild(element);
   });
   setTimeout(() => {
     updateScroll();
+    updateEventListenerMessages();
   }, 0);
 }
 async function addNewMessageToDB(newMessage, timestamp) {
@@ -408,7 +429,20 @@ async function editMessageFromDB(newMessage, messageId) {
   }
 }
 
-function createChatElement(newMessage, user, timestamp, messageId) {
+function createChatElement(
+  newMessage,
+  user,
+  timestamp,
+  messageId,
+  messageStatus,
+  messageStatusTimestamp
+) {
+  let updateInfo = "";
+  if (messageStatus !== false && messageStatusTimestamp !== false) {
+    updateInfo = messageStatus + messageStatusTimestamp;
+    console.log("UPDATEINFO", updateInfo);
+  }
+
   const message = document.createElement("li");
   message.className = "message";
   message.accessKey = messageId;
@@ -425,7 +459,7 @@ function createChatElement(newMessage, user, timestamp, messageId) {
 
   const messageTimestamp = document.createElement("p");
   messageTimestamp.className = "message-timestamp";
-  messageTimestamp.innerText = timestamp;
+  messageTimestamp.innerText = timestamp + updateInfo;
 
   const messageMain = document.createElement("div");
   messageMain.className = "message-main";
@@ -579,7 +613,6 @@ function updateEventListenerChannels() {
   }
   console.log("Event Listener Channels Updated");
 }
-
 function updateEventListenerMessages() {
   let list = chatMessageList.getElementsByTagName("li");
   for (let i = 0; i < list.length; i++) {
