@@ -7,11 +7,11 @@
       {
         "messageid": 1,
         "uuid": 2,
-        "message": "EDIT",
+        "message": "",
         "timestamp": "Feb 03 2023 02:49:36",
         "ischanged": true,
         "isdeleted": false,
-        "updatedtime": "2023-02-03T01:50:04.917Z"
+        "updatedtime": "2023-02-03T01:57:18.711Z"
       },
       {
         "messageid": 2,
@@ -25,19 +25,20 @@
       {
         "messageid": 3,
         "uuid": 2,
-        "message": "3",
+        "message": "Meddelande borttaget",
         "timestamp": "Feb 03 2023 02:49:37",
         "ischanged": false,
-        "isdeleted": false
+        "isdeleted": true,
+        "updatedtime": "2023-02-03T01:57:29.331Z"
       },
       {
         "messageid": 4,
         "uuid": 2,
-        "message": "EDIT",
+        "message": "Meddelande borttaget",
         "timestamp": "Feb 03 2023 02:49:38",
         "ischanged": true,
-        "isdeleted": false,
-        "updatedtime": "2023-02-03T01:50:06.383Z"
+        "isdeleted": true,
+        "updatedtime": "2023-02-03T01:57:44.352Z"
       },
       {
         "messageid": 5,
@@ -60,6 +61,56 @@
         "uuid": 2,
         "message": "7",
         "timestamp": "Feb 03 2023 02:49:39",
+        "ischanged": false,
+        "isdeleted": false
+      },
+      {
+        "messageid": 14,
+        "uuid": 5,
+        "message": "1",
+        "timestamp": "Feb 03 2023 03:04:08",
+        "ischanged": false,
+        "isdeleted": false
+      },
+      {
+        "messageid": 15,
+        "uuid": 5,
+        "message": "2",
+        "timestamp": "Feb 03 2023 03:04:09",
+        "ischanged": false,
+        "isdeleted": false
+      },
+      {
+        "messageid": 16,
+        "uuid": 5,
+        "message": "Meddelande borttaget",
+        "timestamp": "Feb 03 2023 03:04:09",
+        "ischanged": false,
+        "isdeleted": true,
+        "updatedtime": "2023-02-03T02:04:13.315Z"
+      },
+      {
+        "messageid": 17,
+        "uuid": 5,
+        "message": "fefsfsag",
+        "timestamp": "Feb 03 2023 03:04:10",
+        "ischanged": true,
+        "isdeleted": false,
+        "updatedtime": "2023-02-03T02:04:31.663Z"
+      },
+      {
+        "messageid": 18,
+        "uuid": 5,
+        "message": "5",
+        "timestamp": "Feb 03 2023 03:04:10",
+        "ischanged": false,
+        "isdeleted": false
+      },
+      {
+        "messageid": 19,
+        "uuid": 5,
+        "message": "6",
+        "timestamp": "Feb 03 2023 03:04:11",
         "ischanged": false,
         "isdeleted": false
       }

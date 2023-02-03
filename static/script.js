@@ -240,10 +240,6 @@ async function addMessageToChatFromDB(dbInput) {
     );
     chatMessageList.appendChild(element);
   });
-  setTimeout(() => {
-    updateScroll();
-    updateEventListenerMessages();
-  }, 0);
 }
 async function addNewMessageToDB(newMessage, timestamp) {
   await updateUuidToUsername();
@@ -281,8 +277,7 @@ async function addNewMessage() {
 
   await addNewMessageToDB(newMessage, timestamp);
 
-  chatMessageList.innerHTML = "";
-  await addMessageToChatFromDB(await getChatMessagesFromDB(activeChannel));
+  await updateChatMessages();
   inputNewMessage.value = "";
   newMessageButton.disabled = true;
 }
