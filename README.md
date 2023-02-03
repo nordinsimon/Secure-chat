@@ -1,21 +1,23 @@
 # Secure-chat
 
+Har användt liknande lösenord för att det ska vara lätt att skriva in vid testning
+
 Användare 1:
 Användarnamn : Peter
-Lösenord: mittlösenord123
+Lösenord: p123
 
 Användare 2:
-Användarnamn : Ask
-Lösenord: dåligtlösenord88
+Användarnamn : Thea
+Lösenord: t123
 
 Användare 3:
 Användarnamn : Elin
-Lösenord: 313GrymtLösenord/!56
+Lösenord: e123
 
 Användare 4:
-Användarnamn : Rasmus
-Lösenord: hej123
+Användarnamn : Catarina
+Lösenord: c123
 
 Användare 5:
 Användarnamn : Simon
-Lösenord: hemligt98
+Lösenord: s123

@@ -2,31 +2,26 @@
   {
     "uuid": 1,
     "username": "Peter",
-    "password": "$2a$10$QI5DADycsSNMvGRDHZI3GeUy0I.i.xq8RK/p82QY2n7ywiDdCEHjC"
+    "password": "$2a$10$QI5DADycsSNMvGRDHZI3GeE41puwdvYkk9dB991yNHLymgO6Is7f."
   },
   {
     "uuid": 2,
-    "username": "Ask",
-    "password": "$2a$10$QI5DADycsSNMvGRDHZI3GeodvmRvcbD2xOhNcPXpRsd.3keQpl.FC"
+    "username": "Thea",
+    "password": "$2a$10$QI5DADycsSNMvGRDHZI3GeLh7WwVBy5C.YSnWM1bMGTRxTTlzbfrS"
   },
   {
     "uuid": 3,
     "username": "Elin",
-    "password": "$2a$10$QI5DADycsSNMvGRDHZI3Gej.c7s0wH9JEEXmH3BSjJnToywvUH6o6"
+    "password": "$2a$10$QI5DADycsSNMvGRDHZI3Ge48dg3NExKc4eML4KFuwUoW3VjPfWzJu"
   },
   {
     "uuid": 4,
-    "username": "Rasmus",
-    "password": "$2a$10$QI5DADycsSNMvGRDHZI3GeNm60rIL9XF4c7iQpS4IMd1PBPERDN76"
+    "username": "Catarina",
+    "password": "$2a$10$QI5DADycsSNMvGRDHZI3GeifW70HM0zebI2FHQcIqlOON/hosPotO"
   },
   {
     "uuid": 5,
     "username": "Simon",
-    "password": "$2a$10$QI5DADycsSNMvGRDHZI3GeibqFFTGN.lxTI8AlZuRWN.wqCidS9lq"
-  },
-  {
-    "uuid": 6,
-    "username": "Mamma",
-    "password": "$2a$10$QI5DADycsSNMvGRDHZI3GekGq8CkoTH2n3ERQMpi./9DdoISy4bHi"
+    "password": "$2a$10$QI5DADycsSNMvGRDHZI3Geco5IvlL251wYbP.ZxQM0bLRNFZ/yvna"
   }
 ]

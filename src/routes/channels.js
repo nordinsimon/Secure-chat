@@ -330,6 +330,7 @@ async function updateDataFromAllDB() {
     db_nextChannelId.read();
 }
 async function addMessageToChannel(channelIndex, uuid, message) {
+  await db_channels.read(), db_nextMessageId.read();
   let nextMessageID = db_nextMessageId.data.nextmessageid++;
   db_channels.data[channelIndex].chat.push({
     messageid: nextMessageID,
@@ -343,6 +344,7 @@ async function addMessageToChannel(channelIndex, uuid, message) {
   return nextMessageID;
 }
 async function editMessage(channelIndex, chatIndex, uuid, newmessage) {
+  await db_channels.read();
   const db = db_channels.data[channelIndex].chat[chatIndex];
 
   db.message = newmessage;
@@ -352,6 +354,7 @@ async function editMessage(channelIndex, chatIndex, uuid, newmessage) {
   await db_channels.write();
 }
 async function deleteMessage(channelIndex, chatIndex, uuid) {
+  await db_channels.read();
   const db = db_channels.data[channelIndex].chat[chatIndex];
   db.message = "Meddelande borttaget";
   db.isdeleted = true;
@@ -360,11 +363,13 @@ async function deleteMessage(channelIndex, chatIndex, uuid) {
   await db_channels.write();
 }
 async function isDeleted(channelIndex, chatIndex) {
+  await db_channels.read();
   const db = db_channels.data[channelIndex].chat[chatIndex];
   if (db.isdeleted) return true;
   return false;
 }
 async function addNewChannel(chanelName, secureStatus) {
+  await db_channels.read(), db_nextChannelId.read();
   let nextchannelID = db_nextChannelId.data.nextchannelid++;
   console.log(nextchannelID);
   db_channels.data.push({
@@ -376,8 +381,5 @@ async function addNewChannel(chanelName, secureStatus) {
   await db_channels.write();
   await db_nextChannelId.write();
 }
-
-console.log(generateDate());
-
 //
 export default router;

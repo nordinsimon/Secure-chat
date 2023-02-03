@@ -89,6 +89,7 @@ function correctPasswordInput(password) {
   }
 }
 async function addUser(username, password) {
+  await db_nextUuId.read();
   let nextuuid = db_nextUuId.data.nextuuid++;
   let hashedPassword = bcrypt.hashSync(password, SALT);
   db_users.data.push({

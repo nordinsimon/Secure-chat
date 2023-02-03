@@ -238,6 +238,7 @@ async function addMessageToChatFromDB(dbInput) {
     const element = createChatElement(
       message,
       username,
+      uuid,
       timestamp,
       messageid,
       updatedTime,
@@ -446,6 +447,7 @@ async function editMessage(oldMessage, messageId, scrollStatus) {
 function createChatElement(
   newMessage,
   user,
+  uuid,
   timestamp,
   messageId,
   updatedTime,
@@ -456,6 +458,8 @@ function createChatElement(
   message.accessKey = messageId;
   message.data = newMessage;
   message.deleted = isDeleted;
+  message.uuid = uuid;
+  message.user = user;
 
   const messageboxLeft = document.createElement("div");
   messageboxLeft.className = "messagebox-left";
@@ -623,7 +627,6 @@ function updateEventListenerChannels() {
       selectedChannel.innerText = list[i].name;
     });
   }
-  console.log("Event Listener Channels Updated");
 }
 function updateEventListenerMessages() {
   let list = chatMessageList.getElementsByTagName("li");
@@ -631,7 +634,10 @@ function updateEventListenerMessages() {
     list[i]
       .querySelector(".messagebox-right-edit")
       .addEventListener("click", (e) => {
-        console.log(list[i].deleted);
+        if (list[i].user !== loggedinUser) {
+          console.log("Unauthorised to edit");
+          return;
+        }
         if (list[i].deleted) return;
 
         scrollposition = chatMessageList.scrollTop;
@@ -641,11 +647,14 @@ function updateEventListenerMessages() {
     list[i]
       .querySelector(".messagebox-right-delete")
       .addEventListener("click", (e) => {
+        if (list[i].user !== loggedinUser) {
+          console.log("Unauthorised to delete");
+          return;
+        }
         scrollposition = chatMessageList.scrollTop;
         deleteMessageFromDB(list[i].accessKey, false);
       });
   }
-  console.log("Event Listener Edit Updated");
 }
 function setCancelMessageButton() {
   newMessageButton.className = "";
