@@ -121,7 +121,7 @@ router.put("/", async (req, res) => {
     res.sendStatus(401);
     return;
   }
-  console.log("Isdeleted", await isDeleted(channelIndex, chatIndex));
+
   if (await isDeleted(channelIndex, chatIndex)) {
     res.sendStatus(403);
     return;
@@ -132,7 +132,7 @@ router.put("/", async (req, res) => {
   res.sendStatus(200);
 });
 
-router.delete("/", (req, res) => {
+router.delete("/", async (req, res) => {
   const channelId = req.body.channelId;
   const messageid = req.body.messageId;
   const jwt = req.headers["authorization"];
@@ -151,6 +151,10 @@ router.delete("/", (req, res) => {
   const chatIndex = messageidExists(channelIndex, messageid);
   if (token === false || isUuidEqual(channelIndex, chatIndex, uuid) === false) {
     res.sendStatus(401);
+    return;
+  }
+  if (await isDeleted(channelIndex, chatIndex)) {
+    res.sendStatus(403);
     return;
   }
   console.log("DELETED ");
