@@ -1,5 +1,6 @@
 # Secure-chat
 
+Servern Körs på Localhost80
 Har användt liknande lösenord för att det ska vara lätt att skriva in vid testning
 
 Användare 1:

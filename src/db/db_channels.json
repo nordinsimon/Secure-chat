@@ -392,5 +392,21 @@
         "isdeleted": false
       }
     ]
+  },
+  {
+    "channel_name": "123",
+    "secure_status": "private",
+    "channelid": 5,
+    "chat": [
+      {
+        "messageid": 45,
+        "uuid": 8,
+        "message": "Meddelande borttaget",
+        "timestamp": "2023-02-03 15:14:25",
+        "ischanged": true,
+        "isdeleted": true,
+        "updatedtime": "2023-02-03 15:14:34"
+      }
+    ]
   }
 ]
