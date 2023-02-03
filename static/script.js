@@ -43,7 +43,6 @@ let uuidToUsers = [];
 let authPage = "";
 
 let scrollposition;
-
 let newChannelSecureStatus = "public";
 
 let loadJWT = getJWT();
@@ -228,9 +227,9 @@ async function addMessageToChatFromDB(dbInput) {
     let updatedTime = "";
 
     if (isDeleted) {
-      updatedTime = `  Deleted:  ${data.updatedtime}`;
+      updatedTime = ` - Deleted:  ${data.updatedtime}`;
     } else if (isChanged) {
-      updatedTime = `  Edited:  ${data.updatedtime}`;
+      updatedTime = ` - Edited:  ${data.updatedtime}`;
     }
 
     const element = createChatElement(
@@ -243,7 +242,7 @@ async function addMessageToChatFromDB(dbInput) {
     chatMessageList.appendChild(element);
   });
 }
-async function addNewMessageToDB(newMessage, timestamp) {
+async function addNewMessageToDB(newMessage) {
   await updateUuidToUsername();
   const userAddMessage = loggedinUser;
   const uuidObject = uuidToUsers.find(
@@ -255,7 +254,6 @@ async function addNewMessageToDB(newMessage, timestamp) {
     channelId: activeChannel,
     uuid: uuid,
     message: newMessage,
-    timestamp: timestamp,
   };
   const options = {
     method: "POST",
@@ -274,9 +272,8 @@ async function addNewMessageToDB(newMessage, timestamp) {
 }
 async function addNewMessage() {
   const newMessage = inputNewMessage.value;
-  const timestamp = new Date().toString().slice(4, 24);
 
-  await addNewMessageToDB(newMessage, timestamp);
+  await addNewMessageToDB(newMessage);
 
   await updateChatMessages();
   inputNewMessage.value = "";
@@ -511,9 +508,6 @@ function updateScroll(scrollStatus) {
     scrollTo = scrollposition;
   }
   chatMessageList.scrollTop = scrollTo;
-}
-function generateGoodDate() {
-  return (date = new Date().toString().slice(4, 24));
 }
 function isInputFieldNotEmpty(inputField) {
   let data = inputField.value;

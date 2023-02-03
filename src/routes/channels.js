@@ -5,6 +5,7 @@ import { fileURLToPath } from "url";
 import { Low } from "lowdb";
 import { JSONFile } from "lowdb/node";
 import { decodeToken } from "./login.js";
+import { Console } from "console";
 
 //Vet inte varför det paketet är importerat
 //import { channel } from "diagnostics_channel";
@@ -76,7 +77,6 @@ router.post("/", async (req, res) => {
   const channelIndex = await channelExistsID(channelId);
   const uuid = req.body.uuid;
   const message = req.body.message;
-  const timestamp = req.body.timestamp;
 
   if (
     correctChannelId(channelId) === false ||
@@ -89,12 +89,7 @@ router.post("/", async (req, res) => {
     return;
   }
 
-  const nextMessageId = addMessageToChannel(
-    channelIndex,
-    uuid,
-    message,
-    timestamp
-  );
+  const nextMessageId = addMessageToChannel(channelIndex, uuid, message);
   res.status(201).send(nextMessageId);
 });
 
@@ -310,6 +305,13 @@ function isValidSecureChatStatus(status) {
   console.log("Secure status incorrect value");
   return false;
 }
+function generateDate() {
+  const dateAndTime = new Date().toISOString();
+  const date = dateAndTime.slice(0, 10);
+  const time = dateAndTime.slice(11, 19);
+  const newDateAndTime = `${date} ${time}`;
+  return newDateAndTime;
+}
 async function userExists(uuid) {
   db_users.read;
   let findUser = await db_users.data.findIndex((user) => user.uuid === uuid);
@@ -327,13 +329,13 @@ async function updateDataFromAllDB() {
     db_nextMessageId.read(),
     db_nextChannelId.read();
 }
-async function addMessageToChannel(channelIndex, uuid, message, timestamp) {
+async function addMessageToChannel(channelIndex, uuid, message) {
   let nextMessageID = db_nextMessageId.data.nextmessageid++;
   db_channels.data[channelIndex].chat.push({
     messageid: nextMessageID,
     uuid: uuid,
     message: message,
-    timestamp: timestamp,
+    timestamp: generateDate(),
     ischanged: false,
     isdeleted: false,
   });
@@ -345,7 +347,7 @@ async function editMessage(channelIndex, chatIndex, uuid, newmessage) {
 
   db.message = newmessage;
   db.ischanged = true;
-  db.updatedtime = new Date();
+  db.updatedtime = generateDate();
 
   await db_channels.write();
 }
@@ -353,7 +355,7 @@ async function deleteMessage(channelIndex, chatIndex, uuid) {
   const db = db_channels.data[channelIndex].chat[chatIndex];
   db.message = "Meddelande borttaget";
   db.isdeleted = true;
-  db.updatedtime = new Date();
+  db.updatedtime = generateDate();
 
   await db_channels.write();
 }
@@ -374,6 +376,8 @@ async function addNewChannel(chanelName, secureStatus) {
   await db_channels.write();
   await db_nextChannelId.write();
 }
+
+console.log(generateDate());
 
 //
 export default router;

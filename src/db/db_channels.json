@@ -195,6 +195,23 @@
         "timestamp": "Feb 03 2023 11:07:00",
         "ischanged": false,
         "isdeleted": false
+      },
+      {
+        "messageid": 58,
+        "uuid": 5,
+        "message": "123",
+        "timestamp": "2023-02-03T10:19:13.286Z",
+        "ischanged": false,
+        "isdeleted": false
+      },
+      {
+        "messageid": 59,
+        "uuid": 5,
+        "message": "Meddelande borttaget",
+        "timestamp": "2023-02-03 10:33:45",
+        "ischanged": false,
+        "isdeleted": true,
+        "updatedtime": "2023-02-03 10:33:49"
       }
     ]
   },
